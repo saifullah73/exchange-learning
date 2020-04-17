@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "693247281901",
+    "firebase_url": "https://exchange-learning-2c934.firebaseio.com",
+    "project_id": "exchange-learning-2c934",
+    "storage_bucket": "exchange-learning-2c934.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693247281901:android:a875a7835215fc49e71ae4",
+        "android_client_info": {
+          "package_name": "com.company.exchange_learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693247281901-rvcncmku4b1gqlrku7mgl4c0pp5kj2uj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.exchange_learning",
+            "certificate_hash": "3c858eafb0e7a432820e54ad72fb5c71095dfcaa"
+          }
+        },
+        {
+          "client_id": "693247281901-4d1grpmpe6hkg59mkbjsljahbo45u8c5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKEkU8596Um_THWFc7iApnk2gHkYY1pS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693247281901-4d1grpmpe6hkg59mkbjsljahbo45u8c5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
