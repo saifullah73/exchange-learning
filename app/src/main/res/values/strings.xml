@@ -9,4 +9,29 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+
+    <string name="category_arch">Architecture</string>
+    <string name="category_bioSci">Biosciences</string>
+    <string name="category_chemEng">Chemical Engineering</string>
+    <string name="category_chem">Chemistry</string>
+    <string name="category_civil">Civil Engineering</string>
+    <string name="category_cs">Computer Science</string>
+    <string name="category_bioTech">Department of Biotechnology</string>
+    <string name="category_devStd">Development Studies</string>
+    <string name="category_earthSci">Earth Sciences</string>
+    <string name="category_econ">Economics</string>
+    <string name="category_elecAndCom">Electrical and Computer Engineering</string>
+    <string name="category_envSci">Environmental Sciences</string>
+    <string name="category_healthInfo">Health Informatics</string>
+    <string name="category_humanities">Humanities</string>
+    <string name="category_mgtSci">Management Sciences</string>
+    <string name="category_math">Mathematics</string>
+    <string name="category_mechEng">Mechanical Engineering</string>
+    <string name="category_meteorology">Meteorology</string>
+    <string name="category_pharm">Pharmacy</string>
+    <string name="category_physics">Physics</string>
+    <string name="category_stats">Statistics</string>
+    <string name="postedInText">Posted in:</string>
 </resources>

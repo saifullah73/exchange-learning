@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:layout_centerInParent="true"
+        android:id="@+id/avi"
+        android:elevation="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicatorName="BallClipRotateMultipleIndicator"
+        app:indicatorColor="@color/hamburger"
+        android:visibility="visible"
+        style="@style/AVLoadingIndicatorView" />
+
+    <androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/main_header"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:focusable="true"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/pic_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/main_user_img_imgView"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/main_user_profile_avatar"
+                            app:civ_border_color="@color/hamburger"
+                            app:civ_border_width="2dp" />
+
+                        <TextView
+                            android:id="@+id/main_welcome_txtView"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/montserrat"
+                            android:text="Welcome, Logged In User!"
+                            android:textColor="@color/darkGray"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.2dp"
+                        android:layout_below="@id/pic_text"
+                        android:background="@color/lessGray" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/view1">
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="0.2dp"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/lessGray" />
+
+                        <LinearLayout
+                            android:id="@+id/main_create_post_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toStartOf="@id/view2"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/main_create_post_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:text="Create Post"
+                                android:textColor="@color/lessGray" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/main_upload_image_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@id/view2"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/main_upload_photo_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:text="Upload Image"
+                                android:textColor="@color/lessGray" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:gravity="center_horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/empty_msg"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:alpha="0.7"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/main_empty_msg_icon" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/lessGray"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Nothing to show here!" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:clickable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:focusable="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Create Post"
+                            android:textColor="@color/hamburger"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lessGray"
+                            android:text="OR" />
+
+                        <TextView
+                            android:clickable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:focusable="true"
+                            android:textColor="@color/hamburger"
+                            android:textSize="17sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Upload Image" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginBottom="48dp"
+                    android:id="@+id/posts_recylerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        android:id="@+id/postSelectorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="0dp"
+        app:cardCornerRadius="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/main_all_post_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/postSelectorBtnColor"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:text="All Posts"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/main_community_post_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:text="My Community"
+                android:textColor="@color/darkGray"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
