@@ -7,9 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -34,9 +32,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class signupActivity extends AppCompatActivity {
     private static final String TAG = "signupActivity";
     private TextInputEditText fname_v,lname_v,city_v,password_v,email_v;
@@ -57,13 +52,13 @@ public class signupActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
-        fname_v = findViewById(R.id.FNametextInputEditText);
+        fname_v = findViewById(R.id.TitletextInputEditText);
         lname_v = findViewById(R.id.LNametextInputEditText);
-        city_v = findViewById(R.id.city_signup);
-        signUp = findViewById(R.id.signupButton);
+        city_v = findViewById(R.id.overviewInputEditText);
+        signUp = findViewById(R.id.editProfileScreenBtn);
         progressBar = findViewById(R.id.signup_prog);
-        password_v = findViewById(R.id.PasswordtextInputEditText);
-        email_v = findViewById(R.id.EmailtextInputEditText);
+        password_v = findViewById(R.id.skillstextInputEditText);
+        email_v = findViewById(R.id.DepartmenttextInputEditText);
         countrySpinner = findViewById(R.id.country_spinner);
         communitySpinner = findViewById(R.id.community_spinner);
         rgroup = findViewById(R.id.signup_rg);
@@ -214,13 +209,7 @@ public class signupActivity extends AppCompatActivity {
     }
 
     private void populateCommunity(){
-        List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("...");
-        spinnerArray.add("Computer Science");
-        spinnerArray.add("Maths");
-        spinnerArray.add("Physics");
-        spinnerArray.add("Electronics");
-        spinnerArray.add("Machine Learning");
+        String[] spinnerArray = getResources().getStringArray(R.array.community_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -228,15 +217,7 @@ public class signupActivity extends AppCompatActivity {
     }
 
     private void populateCountry(){
-        List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("...");
-        spinnerArray.add("Pakistan");
-        spinnerArray.add("Australia");
-        spinnerArray.add("Spain");
-        spinnerArray.add("France");
-        spinnerArray.add("USA");
-        spinnerArray.add("UK");
-        spinnerArray.add("India");
+        String[] spinnerArray = getResources().getStringArray(R.array.country_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

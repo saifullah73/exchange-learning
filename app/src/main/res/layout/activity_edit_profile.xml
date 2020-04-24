@@ -19,6 +19,31 @@
             android:layout_height="match_parent"
             android:background="@color/background">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/edit_profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/default_avatar"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_profile_header" />
+
+            <ImageView
+                android:id="@+id/editProfileImagebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_edit_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_profile_image"
+                app:layout_constraintStart_toEndOf="@+id/edit_profile_image"
+                app:layout_constraintTop_toTopOf="@+id/edit_profile_image"
+                app:layout_constraintVertical_bias="0.13999999" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TitletextInputLayout"
                 style="@style/TextInputLayout"
@@ -27,12 +52,12 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:hint="First Name"
+                android:hint="Title"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_profile_header">
+                app:layout_constraintTop_toBottomOf="@+id/edit_profile_image">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TitletextInputEditText"
@@ -40,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/inputHintColor"
                     android:drawablePadding="20dp"
+                    android:maxLength="100"
                     android:inputType="text"
                     android:textColor="@color/inputHintColor"
                     android:textColorHighlight="@color/inputHintColor"
@@ -56,7 +82,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:hint="Last Name"
+                android:hint="University"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,12 +90,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/TitletextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/LNametextInputEditText"
+                    android:id="@+id/UniversityInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/inputHintColor"
                     android:drawablePadding="20dp"
                     android:inputType="text"
+                    android:maxLength="100"
                     android:textColor="@color/inputHintColor"
                     android:textColorHighlight="@color/inputHintColor"
                     android:textColorLink="@color/inputHintColor" />
@@ -85,7 +112,8 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:hint="Email"
+
+                android:hint="Department"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +127,7 @@
                     android:backgroundTint="@color/inputHintColor"
                     android:drawablePadding="20dp"
                     android:inputType="text"
+                    android:maxLength="100"
                     android:textColor="@color/inputHintColor"
                     android:textColorHighlight="@color/inputHintColor"
                     android:textColorLink="@color/inputHintColor" />
@@ -114,7 +143,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="40dp"
-                android:hint="City"
+                android:hint="Overview"
                 android:textAlignment="center"
                 android:textColorHint="@color/inputHintColor"
                 app:hintAnimationEnabled="true"
@@ -122,7 +151,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/DepartmenttextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewInputEditText"
@@ -130,6 +159,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/inputHintColor"
                     android:drawablePadding="20dp"
+                    android:maxLength="200"
                     android:inputType="text"
                     android:textColor="@color/inputHintColor"
                     android:textColorHighlight="@color/inputHintColor"
@@ -146,7 +176,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:hint="Password"
+                android:hint="Skills"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -158,137 +188,18 @@
                     android:id="@+id/skillstextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="100"
                     android:backgroundTint="@color/inputHintColor"
                     android:drawablePadding="20dp"
-                    android:inputType="text|textPassword"
+                    android:inputType="text"
                     android:textColor="@color/inputHintColor"
                     android:textColorHighlight="@color/inputHintColor"
                     android:textColorLink="@color/inputHintColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <Button
-                android:id="@+id/editProfileScreenBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="40dp"
-                android:background="@color/colorPrimary"
-                android:text="Register"
-                android:textColor="@color/fullwhite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/skillstextInputLayout" />
-
-            <ProgressBar
-                android:id="@+id/signup_prog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="40dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/skillstextInputLayout" />
-
-            <TextView
-                android:id="@+id/edit_profile_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Sign Up"
-                android:textColor="@color/colorPrimary"
-                android:textSize="44sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DepartmenttextInputLayout">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gender"
-                    android:textSize="20sp" />
-
-                <RadioGroup
-                    android:id="@+id/signup_rg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/male_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Male" />
-
-                    <RadioButton
-                        android:id="@+id/female_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="Female" />
-
-                </RadioGroup>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="40dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="4"
-                    android:gravity="center_vertical"
-                    android:text="Country"
-                    android:textSize="22sp" />
-
-                <Spinner
-                    android:id="@+id/country_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="6"
-                    android:foreground="@drawable/background_rectangle_ouline" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
+                android:id="@+id/edit_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="40dp"
@@ -297,7 +208,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                app:layout_constraintTop_toBottomOf="@+id/skillstextInputLayout">
 
                 <TextView
                     android:layout_width="0dp"
@@ -309,7 +220,7 @@
                     android:textSize="20sp" />
 
                 <Spinner
-                    android:id="@+id/community_spinner"
+                    android:id="@+id/edit_community_spinner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
@@ -319,41 +230,50 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/linearLayout4"
+
+            <Button
+                android:id="@+id/editProfileScreenBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/colorPrimary"
+                android:text="Done"
+                android:textColor="@color/fullwhite"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editProfileScreenBtn">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_linear_layout" />
 
-                <TextView
-                    android:id="@+id/textView55"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Already have an account?"
-                    android:textColor="@color/inputHintColor"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.314"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+            <ProgressBar
+                android:id="@+id/edit_prof_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="40dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_linear_layout" />
 
-
-                <TextView
-                    android:id="@+id/goBackToLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Log In"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/edit_profile_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Edit Profile"
+                android:textColor="@color/colorPrimary"
+                android:textSize="44sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

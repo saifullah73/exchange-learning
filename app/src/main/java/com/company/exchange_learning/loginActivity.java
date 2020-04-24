@@ -82,6 +82,13 @@ public class loginActivity extends AppCompatActivity {
 
             }
         });
+        loginbtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                quickLogin("saifullahnust@gmail.com","123456");
+                return false;
+            }
+        });
         goToSignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +112,10 @@ public class loginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithEmail:success");
-                            Intent i = new Intent(loginActivity.this,MainActivity.class);
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent i = new Intent(loginActivity.this, ProfileActivity.class);
+                            Constants.uid = user.getUid();
+                            i.putExtra("uid",user.getUid());
                             startActivity(i);
                             finish();
                         }
@@ -151,8 +161,10 @@ public class loginActivity extends AppCompatActivity {
                                     editor.putString("password", password);
                                     editor.apply();
                                 }
-                                Intent i = new Intent(loginActivity.this,MainActivity.class);
+                                Intent i = new Intent(loginActivity.this, ProfileActivity.class);
                                 startActivity(i);
+                                Constants.uid = user.getUid();
+                                i.putExtra("uid",user.getUid());
                                 finish();
                             }
                             else {
@@ -270,4 +282,6 @@ public class loginActivity extends AppCompatActivity {
 
         builder.show();
     }
+    //TODO: Remeber me enable
+    //TODO: disable long click login
 }

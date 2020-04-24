@@ -1,14 +1,21 @@
 package com.company.exchange_learning;
 
-public class BasicUser {
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
+
+public class BasicUser implements Serializable {
     private String name;
     private String gender;
     private String country_name;
     private String city_name;
     private String community;
     private String email;
-    private boolean email_verified;
+    private String email_verified;
     private String android_device_token;
+
+    public BasicUser(){
+    }
 
     public BasicUser(String name, String gender, String country_name, String city_name, String community, String email, String android_device_token) {
         this.name = name;
@@ -17,11 +24,11 @@ public class BasicUser {
         this.city_name = city_name;
         this.community = community;
         this.email = email;
-        this.email_verified = false;
+        this.email_verified = "false";
         this.android_device_token = android_device_token;
     }
 
-    public BasicUser(String name, String gender, String country_name, String city_name, String community, String email, boolean email_verified, String android_device_token) {
+    public BasicUser(String name, String gender, String country_name, String city_name, String community, String email, String email_verified, String android_device_token) {
         this.name = name;
         this.gender = gender;
         this.country_name = country_name;
@@ -56,7 +63,7 @@ public class BasicUser {
         return email;
     }
 
-    public boolean getEmail_verified() {
+    public String getEmail_verified() {
         return email_verified;
     }
 
@@ -88,11 +95,18 @@ public class BasicUser {
         this.email = email;
     }
 
-    public void setEmail_verified(boolean email_verified) {
+    public void setEmail_verified(String email_verified) {
         this.email_verified = email_verified;
     }
 
     public void setAndroid_device_token(String android_device_token) {
         this.android_device_token = android_device_token;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String abc = "Name: "+name+" Community: "+community+" Gender: "+gender+" Email: "+email+" City: "+city_name+" Country: "+country_name+" Android tokern: "+android_device_token;
+        return abc;
     }
 }

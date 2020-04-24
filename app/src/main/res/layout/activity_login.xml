@@ -18,7 +18,7 @@
         android:textColor="@color/fullwhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordtextInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/skillstextInputLayout" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -37,7 +37,7 @@
 
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/edit_profile_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -55,7 +55,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EmailtextInputLayout"
+        android:id="@+id/DepartmenttextInputLayout"
         style="@style/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_header">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
@@ -83,7 +83,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/PasswordtextInputLayout"
+        android:id="@+id/skillstextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -96,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailtextInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/DepartmenttextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
@@ -167,5 +167,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordtextInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/skillstextInputLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,4 +8,10 @@
     <color name="inputHintColor">#7d7c7c</color>
     <color name="fullwhite">#ffffff</color>
     <color name="fullBlack">#000</color>
+    <color name="profilePrimaryDark">#FF3B30</color>
+    <color name="profileAccentColor">#F7F7F7</color>
+    <color name="whiteTextColor">#fff</color>
+    <color name="profileBackground">#fff</color>
+    <color name="blackTextColor">#000</color>
+    <color name="profileEditTextColor">#707070</color>
 </resources>
