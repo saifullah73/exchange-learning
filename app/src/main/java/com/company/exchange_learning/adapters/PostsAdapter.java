@@ -1,6 +1,7 @@
 package com.company.exchange_learning.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.company.exchange_learning.ImageDetailActivity;
 import com.company.exchange_learning.R;
 import com.company.exchange_learning.model.PostModel;
 
@@ -85,87 +88,26 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private int randomizeColor() {
-        int[] colors = {R.color.category_arch, R.color.category_bioSci, R.color.category_chem, R.color.category_chemEng
+        int[] colors = {R.color.category_bioSci, R.color.category_chem, R.color.category_chemEng
                 , R.color.category_civil, R.color.category_cs, R.color.category_devStd, R.color.category_math, R.color.category_pharm};
         return ContextCompat.getColor(this.mContex, colors[new Random().nextInt(colors.length)]);
     }
 
-//    private String handleCategoryColor(String category, TextView textView) {
-//        switch (category) {
-//            case "Architecture":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Biosciences":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Chemical Engineering":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Chemistry":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Civil Engineering":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Computer Science":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Department of Biotechnology":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Development Studies":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Earth Sciences":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Economics":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Electrical and Computer Engineering":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Environmental Sciences":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Health Informatics":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Humanities":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Management Sciences":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Mathematics":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Mechanical Engineering":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Meteorology":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Pharmacy":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Physics":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//            case "Statistics":
-//                textView.getBackground().setColorFilter(ContextCompat.getColor(this.mContex, R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-//                break;
-//        }
-//    }
-
-    private void handlePostWithImage(RecyclerView.ViewHolder holder, PostModel post) {
+    private void handlePostWithImage(final RecyclerView.ViewHolder holder, final PostModel post) {
         ((PostsWithImageViewHolder) holder).postImageItemImageInfo.setText(post.getPostImageInfo());
         ((PostsWithImageViewHolder) holder).postImageItemType.setText(post.getPostType());
         ((PostsWithImageViewHolder) holder).postImageItemCategory.setText(post.getPostCategory());
         ((PostsWithImageViewHolder) holder).postImageItemCategory.getBackground().setColorFilter(randomizeColor(), PorterDuff.Mode.SRC_ATOP);
         ((PostsWithImageViewHolder) holder).postImageItemDate.setText(post.getPostDate());
         ((PostsWithImageViewHolder) holder).postImageItemUserName.setText(post.getPostUserPostedName());
-        Glide.with(((PostsWithImageViewHolder) holder).itemView.getContext()).load(post.getPostImage()).placeholder(R.drawable.main_post_image_avatart).into(((PostsWithImageViewHolder) holder).postImageMainImage);
+        Glide.with(((PostsWithImageViewHolder) holder).itemView.getContext()).load(post.getPostImage()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.main_post_image_avatart).into(((PostsWithImageViewHolder) holder).postImageMainImage);
+
+        ((PostsWithImageViewHolder) holder).postImageMainImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((PostsWithImageViewHolder) holder).itemView.getContext().startActivity(new Intent(((PostsWithImageViewHolder) holder).itemView.getContext(), ImageDetailActivity.class).putExtra("imageUrl", post.getPostImage()));
+            }
+        });
     }
 
     @Override

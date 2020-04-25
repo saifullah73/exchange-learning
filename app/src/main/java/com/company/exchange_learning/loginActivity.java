@@ -1,9 +1,5 @@
 package com.company.exchange_learning;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,13 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,16 +32,17 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class loginActivity extends AppCompatActivity {
     private static final String TAG = "loginActivity";
-    private Button loginbtn;
+    private CardView loginbtn;
     private TextView goToSignUpBtn;
     private EditText passwordView,emailView;
-    private ProgressBar progressBar;
+    private AVLoadingIndicatorView progressBar;
     private TextView forgetPass;
     private CheckBox rememberMe_v;
     private SharedPreferences prefs;
@@ -64,7 +64,9 @@ public class loginActivity extends AppCompatActivity {
     private void setViews(){
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         loginbtn = findViewById(R.id.loginBtn);
         forgetPass = findViewById(R.id.forgetPass);
         rememberMe_v = findViewById(R.id.rememberMe);
@@ -119,7 +121,7 @@ public class loginActivity extends AppCompatActivity {
     private void login(final String email, final String password){
         hideKeyboard(loginActivity.this);
         loginbtn.setEnabled(false);
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.show();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -129,7 +131,7 @@ public class loginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user.isEmailVerified())
                             {
-                                progressBar.setVisibility(View.GONE);
+                                progressBar.hide();
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference("User_Information").child(user.getUid());
                                 Map<String, Object> updates = new HashMap<>();
@@ -160,7 +162,7 @@ public class loginActivity extends AppCompatActivity {
                                 FirebaseAuth.getInstance().signOut();
                             }
                         } else {
-                            progressBar.setVisibility(View.GONE);
+                            progressBar.hide();
                             Toast.makeText(loginActivity.this,"Error logging in", Toast.LENGTH_SHORT).show();
                         }
                         loginbtn.setEnabled(true);
@@ -192,7 +194,7 @@ public class loginActivity extends AppCompatActivity {
     }
 
     private void showVerificationFailDialog(final FirebaseUser user){
-        progressBar.setVisibility(View.GONE);
+        progressBar.hide();
         new AlertDialog.Builder(loginActivity.this)
                 .setTitle("Email not verified")
                 .setMessage("Please verify email before logging in, if you did not receive verification email, please use the option below")

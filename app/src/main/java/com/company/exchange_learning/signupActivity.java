@@ -1,31 +1,29 @@
 package com.company.exchange_learning;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import com.company.exchange_learning.model.BasicUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,29 +31,30 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class signupActivity extends AppCompatActivity {
     private static final String TAG = "signupActivity";
-    private TextInputEditText fname_v,lname_v,city_v,password_v,email_v;
-    private Spinner countrySpinner,communitySpinner;
-    private Button signUp;
+    private EditText fname_v, lname_v, city_v, password_v, email_v;
+    private Spinner countrySpinner, communitySpinner;
+    private CardView signUp;
     private TextView goToLogin;
-    private ProgressBar progressBar;
+    private AVLoadingIndicatorView progressBar;
     private RadioGroup rgroup;
     private FirebaseAuth mAuth;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_signup2);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mAuth = FirebaseAuth.getInstance();
         fname_v = findViewById(R.id.FNametextInputEditText);
         lname_v = findViewById(R.id.LNametextInputEditText);
@@ -97,25 +96,25 @@ public class signupActivity extends AppCompatActivity {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-    private String getGender(){
+
+    private String getGender() {
 
         try {
             int selectedId = rgroup.getCheckedRadioButtonId();
-            RadioButton radioButton = (RadioButton) findViewById(selectedId);
+            RadioButton radioButton = findViewById(selectedId);
             return radioButton.getText().toString();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
 
     public void signup() {
-        final String fname=fname_v.getText().toString().trim();
+        final String fname = fname_v.getText().toString().trim();
 
-        final String lname=lname_v.getText().toString().trim();
+        final String lname = lname_v.getText().toString().trim();
 
-        final String email=email_v.getText().toString().trim();
+        final String email = email_v.getText().toString().trim();
 
         String password = password_v.getText().toString().trim();
 
@@ -127,26 +126,24 @@ public class signupActivity extends AppCompatActivity {
         final String gender = getGender();
 
 
-        if (fname.length() ==0 || email.length() == 0 || lname.length() == 0 || city.length() == 0 || countrySpinner.getSelectedItemPosition() == 0 || communitySpinner.getSelectedItemPosition() == 0 || gender == null
-        ){
-            Toast.makeText(this,"Please fill all fields",Toast.LENGTH_SHORT).show();
-        }
-        else if (password.length() == 0){
-            Toast.makeText(this,"Please enter a password",Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Log.d(TAG,"fName "+fname);
-            Log.d(TAG,"lName "+lname);
-            Log.d(TAG,"email "+email);
-            Log.d(TAG,"password "+password);
-            Log.d(TAG,"city "+city);
-            Log.d(TAG,"country "+country);
-            Log.d(TAG,"community "+community);
-            Log.d(TAG,"Gender "+gender);
+        if (fname.length() == 0 || email.length() == 0 || lname.length() == 0 || city.length() == 0 || gender == null
+        ) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        } else if (password.length() == 0) {
+            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show();
+        } else {
+            Log.d(TAG, "fName " + fname);
+            Log.d(TAG, "lName " + lname);
+            Log.d(TAG, "email " + email);
+            Log.d(TAG, "password " + password);
+            Log.d(TAG, "city " + city);
+            Log.d(TAG, "country " + country);
+            Log.d(TAG, "community " + community);
+            Log.d(TAG, "Gender " + gender);
 
-            signUp.setVisibility(View.GONE);
+            signUp.setVisibility(View.INVISIBLE);
             hideKeyboard(signupActivity.this);
-            progressBar.setVisibility(View.VISIBLE);
+            progressBar.show();
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -156,7 +153,7 @@ public class signupActivity extends AppCompatActivity {
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(fname + " "+ lname)
+                                        .setDisplayName(fname + " " + lname)
                                         .build();
                                 user.updateProfile(profileUpdates)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -172,11 +169,9 @@ public class signupActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Log.d(TAG,"Verfication Email sent");
-                                                }
-                                                else
-                                                {
-                                                    Log.d(TAG,"Unable to send verfication email");
+                                                    Log.d(TAG, "Verfication Email sent");
+                                                } else {
+                                                    Log.d(TAG, "Unable to send verfication email");
                                                 }
                                             }
                                         });
@@ -188,19 +183,18 @@ public class signupActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                                             if (databaseError != null) {
-                                                Log.d(TAG, "Error entering data "+ databaseError.getMessage());
+                                                Log.d(TAG, "Error entering data " + databaseError.getMessage());
                                                 Toast.makeText(signupActivity.this, "Some Error occurred while signing up", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 Log.d(TAG, "Data inserted successfully");
                                                 signUp.setVisibility(View.VISIBLE);
-                                                progressBar.setVisibility(View.GONE);
+                                                progressBar.hide();
                                                 showDialog();
                                             }
                                         }
                                     });
-                                }
-                                catch (Exception e){
-                                    Log.d(TAG,e.toString());
+                                } catch (Exception e) {
+                                    Log.d(TAG, e.toString());
                                 }
                                 FirebaseAuth.getInstance().signOut();
                             } else {
@@ -213,9 +207,8 @@ public class signupActivity extends AppCompatActivity {
         }
     }
 
-    private void populateCommunity(){
-        List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("...");
+    private void populateCommunity() {
+        List<String> spinnerArray = new ArrayList<String>();
         spinnerArray.add("Computer Science");
         spinnerArray.add("Maths");
         spinnerArray.add("Physics");
@@ -227,9 +220,8 @@ public class signupActivity extends AppCompatActivity {
         communitySpinner.setAdapter(adapter);
     }
 
-    private void populateCountry(){
-        List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("...");
+    private void populateCountry() {
+        List<String> spinnerArray = new ArrayList<String>();
         spinnerArray.add("Pakistan");
         spinnerArray.add("Australia");
         spinnerArray.add("Spain");
@@ -243,7 +235,7 @@ public class signupActivity extends AppCompatActivity {
         countrySpinner.setAdapter(adapter);
     }
 
-    private void showDialog(){
+    private void showDialog() {
         new AlertDialog.Builder(signupActivity.this)
                 .setTitle("SignUp successful")
                 .setMessage("A verfication email has been sent to your email, please verify your account before logging in.")

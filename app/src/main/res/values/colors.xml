@@ -17,7 +17,6 @@
 
     <!--Categories colors-->
     <color name="category_cs">#1E8FFF</color>
-    <color name="category_arch">#945f94</color>
     <color name="category_bioSci">#58A674</color>
     <color name="category_chemEng">#A5037C</color>
     <color name="category_chem">#458381</color>
@@ -26,9 +25,14 @@
     <color name="category_math">#F57C00</color>
     <color name="category_pharm">#d63b27</color>
 
-
+    <!--Saif's Color-->
+    <!--    <color name="colorPrimary">#0486CC</color>-->
+    <!--    <color name="colorPrimaryDark">#001E8C</color>-->
+    <!--    &lt;!&ndash;    <color name="colorAccent">#c7c006</color>&ndash;&gt;-->
+    <!--    <color name="colorAccent">#001E8C</color>-->
     <color name="background">#f8f9fa</color>
     <color name="inputHintColor">#7d7c7c</color>
     <color name="fullwhite">#ffffff</color>
     <color name="fullBlack">#000</color>
+    <color name="loginSignUpBackground">#F3F7F8</color>
 </resources>

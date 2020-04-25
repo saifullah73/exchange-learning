@@ -1,4 +1,4 @@
-package com.company.exchange_learning;
+package com.company.exchange_learning.model;
 
 public class BasicUser {
     private String name;

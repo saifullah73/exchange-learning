@@ -21,8 +21,21 @@
         <item name="colorAccent">@color/darkGray</item>
     </style>
 
+    <style name="LoginEditTextStyle" parent="AppTheme">
+        <item name="colorAccent">@color/hamburger</item>
+    </style>
+
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="LoginInCheckBoxStyle" parent="AppTheme">
+        <item name="colorAccent">@color/hamburger</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="LoginSignUpProgressBar" parent="AppTheme">
+        <item name="colorAccent">@color/hamburger</item>
     </style>
 
 </resources>
