@@ -25,7 +25,7 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/default_avatar"
+                android:src="@drawable/main_user_profile_avatar"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp"
                 app:layout_constraintEnd_toEndOf="parent"

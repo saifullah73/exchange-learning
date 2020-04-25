@@ -117,6 +117,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         if (profile.getUser() != null ) {
+            communityContainer.setVisibility(View.VISIBLE);
+            email_container.setVisibility(View.VISIBLE);
+            nameView.setVisibility(View.VISIBLE);
+            genderImage.setVisibility(View.VISIBLE);
             String location = profile.getUser().getCity_name()+","+profile.getUser().getCountry_name();
             locationView.setText(location);
             communityView.setText(profile.getUser().getCommunity());
@@ -135,30 +139,35 @@ public class ProfileActivity extends AppCompatActivity {
             genderImage.setVisibility(View.GONE);
         }
         if (profile.getMy_overview() != null && !profile.getMy_overview().equals("")){
+            overviewView.setVisibility(View.VISIBLE);
             overviewView.setText(profile.getMy_overview());
         }
         else{
             overviewView.setVisibility(View.GONE);
         }
         if(profile.getMy_department() != null && !profile.getMy_department().equals("")){
+            departmentContainer.setVisibility(View.VISIBLE);
             departmentView.setText(profile.getMy_department());
         }
         else{
             departmentContainer.setVisibility(View.GONE);
         }
         if(profile.getMy_title() != null && !profile.getMy_title().equals("")){
+            titleContainer.setVisibility(View.VISIBLE);
             titleView.setText(profile.getMy_title());
         }
         else{
             titleContainer.setVisibility(View.GONE);
         }
         if (profile.getMy_university() != null && !profile.getMy_university().equals("")){
+            universityContainer.setVisibility(View.VISIBLE);
             universityView.setText(profile.getMy_university());
         }
         else{
             universityContainer.setVisibility(View.GONE);
         }
         if (profile.getMy_skills() != null && !profile.getMy_skills().equals("")){
+            skill_container.setVisibility(View.VISIBLE);
             skillView.setText(profile.getMy_skills());
         }
         else{
