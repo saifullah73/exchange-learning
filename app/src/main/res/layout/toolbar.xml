@@ -13,14 +13,33 @@
         android:background="?attr/colorPrimary"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Exchange Learning"
-            android:fontFamily="@font/basic"
+        <LinearLayout
             android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="#000"
-            android:textSize="25sp" />
+            android:id="@+id/appTitle"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/hamburger"
+                android:id="@+id/exchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginEnd="1dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/basic"
+                android:text="EXCHANGE" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/drawer_orange"
+                android:layout_marginStart="1dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/allerta"
+                android:text="learning" />
+        </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 </com.google.android.material.appbar.AppBarLayout>
