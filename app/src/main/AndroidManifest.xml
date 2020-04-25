@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ImageDetailActivity" />
-        <activity android:name=".Profile.EditProfile"></activity>
+        <activity android:name=".Profile.EditProfile"
+            android:theme="@style/EditTheme">
+        </activity>
         <activity android:name=".Login.signupActivity" />
         <activity android:name=".Login.loginActivity">
             <intent-filter>
@@ -25,15 +27,14 @@
         </activity>
         <activity
             android:name=".Profile.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ProfileTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/MainActivityStyle">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

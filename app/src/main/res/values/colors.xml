@@ -38,12 +38,11 @@
     <color name="category_physics">#3D07B3</color>
     <color name="category_stats">#0B509F</color>
 
+    <color name="colorPrimary2">#0486CC</color>
+    <color name="colorPrimaryDark2">#001E8C</color>
+    <color name="colorAccent2">#001E8C</color>
 
-    <!--Saif's Color-->
-    <!--    <color name="colorPrimary">#0486CC</color>-->
-    <!--    <color name="colorPrimaryDark">#001E8C</color>-->
-    <!--    &lt;!&ndash;    <color name="colorAccent">#c7c006</color>&ndash;&gt;-->
-    <!--    <color name="colorAccent">#001E8C</color>-->
+
     <color name="background">#f8f9fa</color>
     <color name="inputHintColor">#7d7c7c</color>
     <color name="fullwhite">#ffffff</color>

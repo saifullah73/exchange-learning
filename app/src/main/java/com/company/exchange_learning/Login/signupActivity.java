@@ -62,6 +62,7 @@ public class signupActivity extends AppCompatActivity {
         countrySpinner = findViewById(R.id.country_spinner);
         communitySpinner = findViewById(R.id.community_spinner);
         rgroup = findViewById(R.id.signup_rg);
+        signUp = findViewById(R.id.signupButton);
 //        RadioButton rb = findViewById(R.id.male_button);
 //        rb.setSelected(true);
         populateCommunity();

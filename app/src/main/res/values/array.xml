@@ -2,7 +2,6 @@
 <resources>
 
     <string-array name="community_list">
-        <item>...</item>
         <item>Architecture</item>
         <item>Biosciences</item>
         <item>Chemical Engineering</item>
@@ -56,7 +55,6 @@
 
     <string-array name="country_list">
 
-        <item>...</item>
         <item>Afghanistan</item>
         <item>land Islands</item>
         <item>Albania</item>
