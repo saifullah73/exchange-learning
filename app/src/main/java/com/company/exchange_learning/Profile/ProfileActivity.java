@@ -1,14 +1,14 @@
-package com.company.exchange_learning;
+package com.company.exchange_learning.Profile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -17,7 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.company.exchange_learning.BasicUser;
+import com.company.exchange_learning.Constants;
+import com.company.exchange_learning.R;
+import com.company.exchange_learning.UserProfile;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
-    private static final String TAG = "ProfileActivity";
+    private static final String TAG = "ProfileActivityTAG";
     private String uid;
     private boolean mode = false;
     private UserProfile profile = null;
@@ -103,7 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ProfileActivity.this,EditProfile.class);
+                Intent i = new Intent(ProfileActivity.this, EditProfile.class);
                 i.putExtra("profile", profile);
                 startActivity(i);
             }
@@ -161,11 +166,23 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void loadImage(){
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/"+ uid);
-        Glide.with(this /* context */)
-                .using(new FirebaseImageLoader())
-                .load(storageReference)
-                .placeholder(R.drawable.default_avatar)
-                .into(profileImage);
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Log.d(TAG,"Starting Load");
+                String imageURL = uri.toString();
+                Glide.with(getApplicationContext())
+                        .load(imageURL)
+                        .dontAnimate()
+                        .placeholder(R.drawable.default_avatar)
+                        .into(profileImage);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.e(TAG,"Error Loading Image");
+            }
+        });
     }
 
     private void loadData(final boolean mode) {

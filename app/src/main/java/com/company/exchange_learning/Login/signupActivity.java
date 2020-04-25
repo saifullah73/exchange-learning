@@ -1,4 +1,4 @@
-package com.company.exchange_learning;
+package com.company.exchange_learning.Login;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +21,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.company.exchange_learning.BasicUser;
+import com.company.exchange_learning.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;

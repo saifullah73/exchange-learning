@@ -1,4 +1,4 @@
-package com.company.exchange_learning;
+package com.company.exchange_learning.Login;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +25,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.company.exchange_learning.Constants;
+import com.company.exchange_learning.Profile.ProfileActivity;
+import com.company.exchange_learning.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -92,7 +95,7 @@ public class loginActivity extends AppCompatActivity {
         goToSignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(loginActivity.this,signupActivity.class);
+                Intent i = new Intent(loginActivity.this, signupActivity.class);
                 startActivity(i);
             }
         });
