@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0486CC</color>
-    <color name="colorPrimaryDark">#001E8C</color>
-    <!--    <color name="colorAccent">#c7c006</color>-->
-    <color name="colorAccent">#001E8C</color>
+    <color name="colorPrimary">#FAFAFB</color>
+    <color name="colorPrimaryDark">#FAFAFB</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="hamburger">#1976D2</color>
+    <color name="lessGray">#D9DDDD</color>
+    <color name="darkGray">#9A9A9C</color>
+
+    <color name="add_post_blue">#8FCCF4</color>
+    <color name="drawer_orange">#f5a86c</color>
+    <color name="drawerMenuGray">#BFBFBF</color>
+    <color name="btnUnselectedColor">#fafafa</color>
+    <color name="defaultWhite">#f4f4f4</color>
+    <color name="redBorderColor">#D32F2F</color>
+    <color name="postSelectorBtnColor">#5EE15A</color>
+
+    <!--Categories colors-->
+    <color name="category_cs">#1E8FFF</color>
+    <color name="category_arch">#945f94</color>
+    <color name="category_bioSci">#58A674</color>
+    <color name="category_chemEng">#A5037C</color>
+    <color name="category_chem">#458381</color>
+    <color name="category_civil">#738052</color>
+    <color name="category_devStd">#3c7b8c</color>
+    <color name="category_math">#F57C00</color>
+    <color name="category_pharm">#d63b27</color>
+
+
     <color name="background">#f8f9fa</color>
     <color name="inputHintColor">#7d7c7c</color>
     <color name="fullwhite">#ffffff</color>
