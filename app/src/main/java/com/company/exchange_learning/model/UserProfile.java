@@ -1,6 +1,8 @@
-package com.company.exchange_learning;
+package com.company.exchange_learning.model;
 
 import androidx.annotation.NonNull;
+
+import com.company.exchange_learning.model.BasicUser;
 
 import java.io.Serializable;
 

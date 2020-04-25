@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FAFAFB</color>
-    <color name="colorPrimaryDark">#FAFAFB</color>
-    <color name="colorAccent">#D81B60</color>
+<!--    <color name="colorPrimary">#FAFAFB</color>-->
+<!--    <color name="colorPrimaryDark">#FAFAFB</color>-->
     <color name="hamburger">#1976D2</color>
     <color name="lessGray">#D9DDDD</color>
     <color name="darkGray">#9A9A9C</color>
+
+    <color name="colorPrimary">#0486CC</color>
+    <color name="colorPrimaryDark">#001E8C</color>
+    <!--    <color name="colorAccent">#c7c006</color>-->
+    <color name="colorAccent">#001E8C</color>
+
 
     <color name="add_post_blue">#8FCCF4</color>
     <color name="drawer_orange">#f5a86c</color>
@@ -16,15 +21,28 @@
     <color name="postSelectorBtnColor">#5EE15A</color>
 
     <!--Categories colors-->
-    <color name="category_cs">#1E8FFF</color>
     <color name="category_arch">#945f94</color>
     <color name="category_bioSci">#58A674</color>
     <color name="category_chemEng">#A5037C</color>
     <color name="category_chem">#458381</color>
     <color name="category_civil">#738052</color>
-    <color name="category_devStd">#3c7b8c</color>
+    <color name="category_cs">#1E8FFF</color>
+    <color name="category_dobt">#024237</color>
+    <color name="category_devStd">#232627</color>
+    <color name="category_es">#370611</color>
+    <color name="category_economics">#90AC43</color>
+    <color name="category_ece">#9C5423</color>
+    <color name="category_env_s">#38CA07</color>
+    <color name="category_health">#5C0491</color>
+    <color name="category_hum">#435A54</color>
+    <color name="category_ms">#EC77BD</color>
     <color name="category_math">#F57C00</color>
-    <color name="category_pharm">#d63b27</color>
+    <color name="category_me">#4A372E</color>
+    <color name="category_met">#02172B</color>
+    <color name="category_pharm">#570228</color>
+    <color name="category_physics">#3D07B3</color>
+    <color name="category_stats">#0B509F</color>
+
 
 
     <color name="background">#f8f9fa</color>

@@ -17,13 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.company.exchange_learning.BasicUser;
+import com.company.exchange_learning.model.BasicUser;
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
-import com.company.exchange_learning.UserProfile;
+import com.company.exchange_learning.model.UserProfile;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout data_holder, follow_followers_buttons;
     private AppBarLayout app_bar;
     private ProgressBar progressBar;
+    private CollapsingToolbarLayout toolbar;
     private Button followersButton, followingButton;
     private TextView followButton;
 
@@ -58,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
+        toolbar = findViewById(R.id.toolbar_layout);
         loadViews();
         data_holder.setVisibility(View.GONE);
         app_bar.setVisibility(View.GONE);
@@ -67,7 +70,6 @@ public class ProfileActivity extends AppCompatActivity {
             mode = true;
         }
         loadData(mode);
-
     }
 
     public void loadViews(){
@@ -98,6 +100,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void populateViews(final UserProfile profile, boolean mode){
         data_holder.setVisibility(View.VISIBLE);
         app_bar.setVisibility(View.VISIBLE);
+        toolbar.setTitle(profile.getUser().getName());
         progressBar.setVisibility(View.GONE);
         if (!mode){
             editBtn.setVisibility(View.GONE);
@@ -174,7 +177,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext())
                         .load(imageURL)
                         .dontAnimate()
-                        .placeholder(R.drawable.default_avatar)
+                        .placeholder(R.drawable.main_user_profile_avatar)
                         .into(profileImage);
             }
         }).addOnFailureListener(new OnFailureListener() {

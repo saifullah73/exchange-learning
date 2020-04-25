@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.exchange_learning.Constants;
+import com.company.exchange_learning.MainActivity;
 import com.company.exchange_learning.Profile.ProfileActivity;
 import com.company.exchange_learning.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,19 +56,21 @@ public class loginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        prefs = loginActivity.this.getPreferences(Context.MODE_PRIVATE);
+        prefs = getSharedPreferences("loginDetails",MODE_PRIVATE);
         String email = prefs.getString("email","none");
         String password = prefs.getString("password","none");
-//        if (!email.equals("none") && !password.equals("none")){
-//            quickLogin(email,password);
-//        }
-        setViews();
+        if (!email.equals("none") && !password.equals("none")){
+            quickLogin(email,password);
+        }
+        else {
+            setViews();
+        }
     }
 
     private void setViews(){
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         loginbtn = findViewById(R.id.loginBtn);
         forgetPass = findViewById(R.id.forgetPass);
         rememberMe_v = findViewById(R.id.rememberMe);
@@ -116,9 +119,8 @@ public class loginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(loginActivity.this, ProfileActivity.class);
+                            Intent i = new Intent(loginActivity.this, MainActivity.class);
                             Constants.uid = user.getUid();
-                            i.putExtra("uid",user.getUid());
                             startActivity(i);
                             finish();
                         }
@@ -164,10 +166,9 @@ public class loginActivity extends AppCompatActivity {
                                     editor.putString("password", password);
                                     editor.apply();
                                 }
-                                Intent i = new Intent(loginActivity.this, ProfileActivity.class);
+                                Intent i = new Intent(loginActivity.this, MainActivity.class);
                                 startActivity(i);
                                 Constants.uid = user.getUid();
-                                i.putExtra("uid",user.getUid());
                                 finish();
                             }
                             else {

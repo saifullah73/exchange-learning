@@ -21,7 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.company.exchange_learning.BasicUser;
+import com.company.exchange_learning.model.BasicUser;
 import com.company.exchange_learning.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -52,7 +52,7 @@ public class signupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
         fname_v = findViewById(R.id.TitletextInputEditText);
         lname_v = findViewById(R.id.LNametextInputEditText);

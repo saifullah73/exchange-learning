@@ -95,6 +95,7 @@
                         android:background="@color/lessGray" />
 
                     <LinearLayout
+                        android:id="@+id/drawer_porfile"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
@@ -222,6 +223,7 @@
                 android:background="@color/lessGray" />
 
             <LinearLayout
+                android:id="@+id/drawer_logout"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"

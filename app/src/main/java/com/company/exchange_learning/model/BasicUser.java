@@ -1,4 +1,4 @@
-package com.company.exchange_learning;
+package com.company.exchange_learning.model;
 
 import androidx.annotation.NonNull;
 

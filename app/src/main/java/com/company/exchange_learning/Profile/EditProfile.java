@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
-import com.company.exchange_learning.UserProfile;
+import com.company.exchange_learning.model.UserProfile;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -219,7 +219,7 @@ public class EditProfile extends AppCompatActivity {
                 String imageURL = uri.toString();
                 Glide.with(getApplicationContext())
                         .load(imageURL)
-                        .placeholder(R.drawable.default_avatar)
+                        .placeholder(R.drawable.main_user_profile_avatar)
                         .into(profileImage);
             }
         }).addOnFailureListener(new OnFailureListener() {
