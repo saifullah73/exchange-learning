@@ -64,6 +64,10 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    public List<PostModel> getDataSet() {
+        return mPostsList;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         PostModel post = mPostsList.get(position);
@@ -85,12 +89,10 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ((PostsWithNoImageViewHolder) holder).postItemCategory.getBackground().setColorFilter(randomizeColor(), PorterDuff.Mode.SRC_ATOP);
         ((PostsWithNoImageViewHolder) holder).postItemDate.setText(post.getPostDate());
         ((PostsWithNoImageViewHolder) holder).postItemUserName.setText(post.getPostUserPostedName());
-    }
-
-    private int randomizeColor() {
-        int[] colors = {R.color.category_bioSci, R.color.category_chem, R.color.category_chemEng
-                , R.color.category_civil, R.color.category_cs, R.color.category_devStd, R.color.category_math, R.color.category_pharm};
-        return ContextCompat.getColor(this.mContex, colors[new Random().nextInt(colors.length)]);
+        if (post.getPostUserPostedImage() != null) {
+            Glide.with(((PostsWithNoImageViewHolder) holder).itemView.getContext()).load(post.getPostUserPostedImage()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.main_user_profile_avatar).into(((PostsWithNoImageViewHolder) holder).postItemUserImg);
+        } else {
+        }
     }
 
     private void handlePostWithImage(final RecyclerView.ViewHolder holder, final PostModel post) {
@@ -101,7 +103,10 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ((PostsWithImageViewHolder) holder).postImageItemDate.setText(post.getPostDate());
         ((PostsWithImageViewHolder) holder).postImageItemUserName.setText(post.getPostUserPostedName());
         Glide.with(((PostsWithImageViewHolder) holder).itemView.getContext()).load(post.getPostImage()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.main_post_image_avatart).into(((PostsWithImageViewHolder) holder).postImageMainImage);
-
+        if (post.getPostUserPostedImage() != null) {
+            Glide.with(((PostsWithImageViewHolder) holder).itemView.getContext()).load(post.getPostUserPostedImage()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.main_user_profile_avatar).into(((PostsWithImageViewHolder) holder).postImageItemUserImg);
+        } else {
+        }
         ((PostsWithImageViewHolder) holder).postImageMainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +114,19 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
         });
     }
+
+    public void notifyImageLoaded(int pos) {
+        notifyItemChanged(pos);
+    }
+
+
+    private int randomizeColor() {
+        int[] colors = {R.color.category_bioSci, R.color.category_chem, R.color.category_chemEng
+                , R.color.category_civil, R.color.category_cs, R.color.category_devStd, R.color.category_math, R.color.category_pharm};
+        return ContextCompat.getColor(this.mContex, colors[new Random().nextInt(colors.length)]);
+    }
+
+
 
     @Override
     public int getItemCount() {

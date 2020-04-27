@@ -75,10 +75,12 @@
             app:cardElevation="0dp">
 
             <EditText
-                android:id="@+id/FNametextInputEditText"
+                android:id="@+id/signUpFNametextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:lines="1"
+                android:maxLines="1"
                 android:backgroundTint="@color/fullwhite"
                 android:fontFamily="@font/montserrat"
                 android:hint="First Name"
@@ -106,10 +108,12 @@
             app:cardElevation="0dp">
 
             <EditText
-                android:id="@+id/LNametextInputEditText"
+                android:id="@+id/signUpLNametextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:lines="1"
+                android:maxLines="1"
                 android:backgroundTint="@color/fullwhite"
                 android:fontFamily="@font/montserrat"
                 android:hint="Last Name"
@@ -136,13 +140,15 @@
             app:cardElevation="0dp">
 
             <EditText
-                android:id="@+id/EmailtextInputEditText"
+                android:id="@+id/signUpEmailtextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:backgroundTint="@color/fullwhite"
                 android:fontFamily="@font/montserrat"
                 android:hint="Email"
+                android:lines="1"
+                android:maxLines="1"
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
@@ -162,10 +168,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/EmailtextInputLayout">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView2"
@@ -277,13 +280,15 @@
             app:cardElevation="0dp">
 
             <EditText
-                android:id="@+id/city_signup"
+                android:id="@+id/signUpCitySignup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:backgroundTint="@color/fullwhite"
                 android:fontFamily="@font/montserrat"
                 android:hint="City"
+                android:lines="1"
+                android:maxLines="1"
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
@@ -307,7 +312,7 @@
             app:cardElevation="0dp">
 
             <EditText
-                android:id="@+id/PasswordtextInputEditText"
+                android:id="@+id/signUpPasswordtextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -316,6 +321,8 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingStart="8dp"
+                android:lines="1"
+                android:maxLines="1"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
@@ -326,7 +333,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/signupButton"
+            android:id="@+id/signUpButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/PasswordtextInputLayout"
@@ -366,7 +373,7 @@
             app:indicatorName="BallClipRotateMultipleIndicator" />
 
         <LinearLayout
-            android:layout_below="@id/signupButton"
+            android:layout_below="@id/signUpButton"
             android:layout_marginTop="32dp"
             android:id="@+id/footer"
             android:layout_width="wrap_content"

@@ -1,10 +1,10 @@
-package com.company.exchange_learning.Login;
+package com.company.exchange_learning.loginsignup;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -21,9 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.company.exchange_learning.model.BasicUser;
-import com.company.exchange_learning.model.BasicUser;
 import com.company.exchange_learning.R;
+import com.company.exchange_learning.model.BasicUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,6 +33,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wang.avi.AVLoadingIndicatorView;
+
+import java.util.Objects;
 
 public class signupActivity extends AppCompatActivity {
     private static final String TAG = "signupActivity";
@@ -51,20 +52,17 @@ public class signupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
-        fname_v = findViewById(R.id.TitletextInputEditText);
-        lname_v = findViewById(R.id.LNametextInputEditText);
-        city_v = findViewById(R.id.overviewInputEditText);
+        fname_v = findViewById(R.id.signUpFNametextInputEditText);
+        lname_v = findViewById(R.id.signUpLNametextInputEditText);
+        city_v = findViewById(R.id.signUpCitySignup);
         progressBar = findViewById(R.id.signup_prog);
-        password_v = findViewById(R.id.skillstextInputEditText);
-        email_v = findViewById(R.id.DepartmenttextInputEditText);
+        password_v = findViewById(R.id.signUpPasswordtextInputEditText);
+        email_v = findViewById(R.id.signUpEmailtextInputEditText);
         countrySpinner = findViewById(R.id.country_spinner);
         communitySpinner = findViewById(R.id.community_spinner);
         rgroup = findViewById(R.id.signup_rg);
-        signUp = findViewById(R.id.signupButton);
-//        RadioButton rb = findViewById(R.id.male_button);
-//        rb.setSelected(true);
+        signUp = findViewById(R.id.signUpButton);
         populateCommunity();
         populateCountry();
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -180,31 +178,34 @@ public class signupActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                                             if (databaseError != null) {
-                                                Log.d(TAG, "Error entering data " + databaseError.getMessage());
-                                                Toast.makeText(signupActivity.this, "Some Error occurred while signing up", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Log.d(TAG, "Data inserted successfully");
                                                 signUp.setVisibility(View.VISIBLE);
                                                 progressBar.hide();
-                                                showDialog();
+                                                Toast.makeText(signupActivity.this, "Some Error occurred while signing up", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                signUp.setVisibility(View.VISIBLE);
+                                                progressBar.hide();
+                                                showEmailSentDialog();
                                             }
                                         }
                                     });
                                 } catch (Exception e) {
-                                    Log.d(TAG, e.toString());
+                                    signUp.setVisibility(View.VISIBLE);
+                                    progressBar.hide();
+                                    Toast.makeText(signupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                                 FirebaseAuth.getInstance().signOut();
                             } else {
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(signupActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                signUp.setVisibility(View.VISIBLE);
+                                progressBar.hide();
+                                Toast.makeText(signupActivity.this, Objects.requireNonNull(task.getException()).getLocalizedMessage(),
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
                     });
         }
     }
 
-    private void populateCommunity(){
+    private void populateCommunity() {
         String[] spinnerArray = getResources().getStringArray(R.array.community_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
@@ -212,7 +213,7 @@ public class signupActivity extends AppCompatActivity {
         communitySpinner.setAdapter(adapter);
     }
 
-    private void populateCountry(){
+    private void populateCountry() {
         String[] spinnerArray = getResources().getStringArray(R.array.country_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
@@ -220,18 +221,20 @@ public class signupActivity extends AppCompatActivity {
         countrySpinner.setAdapter(adapter);
     }
 
-    private void showDialog() {
-        new AlertDialog.Builder(signupActivity.this)
-                .setTitle("SignUp successful")
-                .setMessage("A verfication email has been sent to your email, please verify your account before logging in.")
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_info)
-                .show();
+
+    public void showEmailSentDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.verification_email_sent_layout, null, false);
+        builder.setView(view);
+        builder.setCancelable(false);
+        final AlertDialog dialog = builder.show();
+        CardView dismissBtn = view.findViewById(R.id.cancelDialog);
+        dismissBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                finish();
+            }
+        });
     }
 }

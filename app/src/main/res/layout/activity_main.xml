@@ -59,6 +59,7 @@
                             ads:civ_border_width="2dp" />
 
                         <TextView
+                            android:inputType="textCapWords"
                             android:id="@+id/drawer_user_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -69,7 +70,8 @@
                             android:text="Logged In User"
                             android:textColor="@android:color/black"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="TextViewEdits" />
 
                         <TextView
                             android:id="@+id/drawer_user_community"
@@ -125,6 +127,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/drawer_myPosts"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"

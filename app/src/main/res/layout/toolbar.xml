@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        app:theme="@style/ToolbarTheme">
 
         <LinearLayout
             android:gravity="center"
@@ -22,7 +22,7 @@
 
             <TextView
                 android:textColor="@color/hamburger"
-                android:id="@+id/exchange"
+                android:id="@+id/exchange_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -32,6 +32,8 @@
                 android:text="EXCHANGE" />
 
             <TextView
+                android:id="@+id/learning_txt"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/drawer_orange"

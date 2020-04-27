@@ -10,12 +10,21 @@ public class PostModel {
     public String user_id;
     public String post_image;
     public String post_image_info;
+    public String post_user_posted_image;
     public String post_user_posted_name;
 
     public PostModel() {
     }
 
-    public PostModel(String post_body, String post_date, String post_category, String post_title, String post_type, String show_skills, String user_id, String post_image, String post_image_info, String post_user_posted_name) {
+    public String getPostUserPostedImage() {
+        return post_user_posted_image;
+    }
+
+    public void setPostUserPostedImage(String post_user_posted_image) {
+        this.post_user_posted_image = post_user_posted_image;
+    }
+
+    public PostModel(String post_body, String post_date, String post_category, String post_title, String post_type, String show_skills, String user_id, String post_image, String post_image_info, String post_user_posted_image, String post_user_posted_name) {
         this.post_body = post_body;
         this.post_date = post_date;
         this.post_category = post_category;
@@ -25,6 +34,7 @@ public class PostModel {
         this.user_id = user_id;
         this.post_image = post_image;
         this.post_image_info = post_image_info;
+        this.post_user_posted_image = post_user_posted_image;
         this.post_user_posted_name = post_user_posted_name;
     }
 

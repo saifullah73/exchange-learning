@@ -5,6 +5,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.company.exchange_learning"
         minSdkVersion 23
         targetSdkVersion 29

@@ -12,6 +12,10 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/hamburger</item>
+    </style>
+
     <style name="EditTheme" parent="AppTheme">
             <item name="colorPrimary">#0486CC</item>
             <item name="colorPrimaryDark">#001E8C</item>
