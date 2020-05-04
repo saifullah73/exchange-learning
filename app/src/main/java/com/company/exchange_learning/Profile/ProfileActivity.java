@@ -1,12 +1,16 @@
 package com.company.exchange_learning.Profile;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.company.exchange_learning.FollowersActivity;
 import com.company.exchange_learning.model.BasicUser;
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
@@ -29,9 +34,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -95,6 +104,29 @@ public class ProfileActivity extends AppCompatActivity {
         data_holder = findViewById(R.id.profile_data_holder);
         app_bar = findViewById(R.id.app_bar);
         progressBar = findViewById(R.id.profile_progress_bar);
+        follow_followers_buttons = findViewById(R.id.follow_followers_buttons);
+        followButton = findViewById(R.id.followButton);
+        followersButton = findViewById(R.id.followers_button);
+        followingButton = findViewById(R.id.following_button);
+
+        followersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProfileActivity.this, FollowersActivity.class);
+                i.putExtra("uid",uid);
+                i.putExtra("mode",0);
+                startActivity(i);
+            }
+        });
+        followingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProfileActivity.this, FollowersActivity.class);
+                i.putExtra("uid",uid);
+                i.putExtra("mode",1);
+                startActivity(i);
+            }
+        });
     }
 
     public void populateViews(final UserProfile profile, boolean mode){
@@ -106,7 +138,20 @@ public class ProfileActivity extends AppCompatActivity {
             editBtn.setVisibility(View.GONE);
             follow_followers_buttons.setVisibility(View.GONE);
             followButton.setVisibility(View.VISIBLE);
+            setFollowButtonText();
+
         }
+        followButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (followButton.getText().equals("Follow")){
+                    followerAdded();
+                }
+                else{
+                    followerRemoved();
+                }
+            }
+        });
         editBtn.setClickable(true);
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,9 +211,13 @@ public class ProfileActivity extends AppCompatActivity {
         else{
             universityContainer.setVisibility(View.GONE);
         }
-        if (profile.getMy_skills() != null && !profile.getMy_skills().equals("")){
+        if (profile.getMy_skills() != null && profile.getMy_skills().size() != 0){
             skill_container.setVisibility(View.VISIBLE);
-            skillView.setText(profile.getMy_skills());
+            String output = "";
+            for (int x = 0 ; x < profile.getMy_skills().size(); x++){
+                output += profile.getMy_skills().get(x) + ", ";
+            }
+            skillView.setText(output.substring(0,output.length()-2));
         }
         else{
             skill_container.setVisibility(View.GONE);
@@ -244,6 +293,189 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("User_Information").child(uid);
         myRef.addListenerForSingleValueEvent(listener);
+    }
+
+    private void followerAdded(){
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                List following = dataSnapshot.getValue(t);
+                if (following == null){
+                    following = new ArrayList();
+                }
+                following.add(uid);
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                myRef.setValue(following, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null){
+                            Log.i(TAG,"Added following");
+                            followButton.setText("Following");
+                        }
+                        else{
+                            Log.i(TAG," Error Added following");
+                            Log.e(TAG, databaseError.getMessage());
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG," Error Added following");
+                Log.e(TAG,databaseError.getMessage());
+            }
+        });
+
+
+
+        myRef = database.getReference("Followers").child(uid).child("followers");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                List following = dataSnapshot.getValue(t);
+                if (following == null){
+                    following = new ArrayList();
+                }
+                following.add(Constants.uid);
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Followers").child(uid).child("followers");
+                myRef.setValue(following, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null){
+                            Log.i(TAG,"Added follower");
+                        }
+                        else{
+                            Log.i(TAG," Error Added follower");
+                            Log.e(TAG, databaseError.getMessage());
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG," Error Added follower");
+                Log.e(TAG,databaseError.getMessage());
+            }
+        });
+    }
+
+    private void followerRemoved(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.unfollow_layout, null, false);
+        builder.setView(view);
+        builder.setCancelable(true);
+        final AlertDialog dialog = builder.show();
+        CardView unfollow = view.findViewById(R.id.unfollow);
+        TextView cancel = view.findViewById(R.id.cancelDialog);
+        unfollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                        List following = dataSnapshot.getValue(t);
+                        if (following != null) {
+                            following.remove(uid);
+                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                            myRef.setValue(following, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                    if (databaseError == null) {
+                                        Log.i(TAG, "Removed following");
+                                        followButton.setText("Follow");
+                                        dialog.dismiss();
+
+                                    } else {
+                                        Log.i(TAG, " Error removing following");
+                                        Log.e(TAG, databaseError.getMessage());
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.i(TAG," Error removing following");
+                        Log.e(TAG,databaseError.getMessage());
+                    }
+                });
+
+
+
+                myRef = database.getReference("Followers").child(uid).child("followers");
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                        List following = dataSnapshot.getValue(t);
+                        if (following != null) {
+                            following.remove(Constants.uid);
+                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference("Followers").child(uid).child("followers");
+                            myRef.setValue(following, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                    if (databaseError == null) {
+                                        Log.i(TAG, "removed follower");
+                                    } else {
+                                        Log.i(TAG, " Error removing follower");
+                                        Log.e(TAG, databaseError.getMessage());
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.i(TAG," Error removing follower");
+                        Log.e(TAG,databaseError.getMessage());
+                    }
+                });
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void setFollowButtonText(){
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                List following = dataSnapshot.getValue(t);
+                if (following != null && following.contains(uid)){
+                    followButton.setText("Following");
+                }
+                else{
+                    followButton.setText("Follow");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

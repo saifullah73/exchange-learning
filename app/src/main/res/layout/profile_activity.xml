@@ -102,8 +102,8 @@
                         android:visibility="gone"
                         android:id="@+id/followButton"
                         style="@style/profileStyledBackButton"
-                        android:text="Following"
                         android:gravity="center"
+                        android:text="Follow"
                         android:textAlignment="center"
                         android:textSize="20sp"/>
                     <LinearLayout

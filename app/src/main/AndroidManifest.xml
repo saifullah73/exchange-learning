@@ -13,10 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Proposals.ProposalListActivity"
+            android:theme="@style/FollowersTheme"
+            ></activity>
+        <activity android:name=".Proposals.ViewProposalActivity" />
+        <activity
+            android:name=".FollowersActivity"
+            android:theme="@style/FollowersTheme" />
         <activity android:name=".ImageDetailActivity" />
-        <activity android:name=".Profile.EditProfile"
-            android:theme="@style/EditTheme">
-        </activity>
+        <activity
+            android:name=".Profile.EditProfile"
+            android:theme="@style/EditTheme" />
         <activity android:name=".loginsignup.signupActivity" />
         <activity android:name=".loginsignup.loginActivity">
             <intent-filter>
@@ -32,9 +39,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

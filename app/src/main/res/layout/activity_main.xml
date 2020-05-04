@@ -157,6 +157,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id = "@+id/drawer_notif"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
@@ -186,6 +187,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/drawer_settings"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"

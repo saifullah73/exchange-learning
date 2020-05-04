@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<PostModel> mPosts, mTempPosts, mAllPosts;
     PostsAdapter mAdapter;
-    LinearLayout goToProfile, logout, goToMyPosts;
+    LinearLayout goToProfile, logout, goToMyPosts, goToNotif,goToSettings;
 
     LinearLayout emptyMsgLayout, createPostBtn, uploadImgBtn;
 
@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
         aviLoadingView = findViewById(R.id.avi);
         goToProfile = findViewById(R.id.drawer_porfile);
         goToMyPosts = findViewById(R.id.drawer_myPosts);
+        goToNotif = findViewById(R.id.drawer_notif);
+        goToSettings = findViewById(R.id.drawer_settings);
         logout = findViewById(R.id.drawer_logout);
         mainHeader = findViewById(R.id.main_header);
         postSwitchBtn = findViewById(R.id.postSelectorLayout);
@@ -127,6 +129,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, ProfileActivity.class);
                 i.putExtra("uid", Constants.uid);
+                startActivity(i);
+            }
+        });
+
+        goToSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                i.putExtra("uid", "jgT7EMrWNFOdEx54tBpxUKwABOf2");
+                startActivity(i);
+            }
+        });
+
+        goToNotif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                i.putExtra("uid","8XekmtHBRRdq2CQHSBQEN4RWk9N2");
                 startActivity(i);
             }
         });
