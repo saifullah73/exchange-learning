@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.ImageDetailActivity" />
         <activity android:name=".activities.CreateImagePostActivity"></activity>
         <activity android:name=".activities.CreateNoImagePostActivity" />
         <activity android:name=".Proposals.ProposalListActivity"

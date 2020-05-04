@@ -43,7 +43,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import org.apache.commons.lang3.StringUtils;
+
+import org.apache.commons.text.WordUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -265,9 +266,9 @@ public class EditProfile extends AppCompatActivity {
     }
 
     private void updateData(String imageURL) {
-        String title = StringUtils.capitalize(titleView.getText().toString());
-        String dpt = StringUtils.capitalize(departmentView.getText().toString());
-        String uni = StringUtils.capitalize(universityView.getText().toString());
+        String title = WordUtils.capitalize(titleView.getText().toString());
+        String dpt = WordUtils.capitalize(departmentView.getText().toString());
+        String uni = WordUtils.capitalize(universityView.getText().toString());
         String overview = overviewView.getText().toString();
         List<String> skills = Arrays.asList(skillsView.getText().toString().trim().split(","));
 
@@ -311,16 +312,17 @@ public class EditProfile extends AppCompatActivity {
         } else {
             if (titleView.getText().toString().equalsIgnoreCase(profile.getMy_title()) && overviewView.getText().toString().equalsIgnoreCase(profile.getMy_overview())
                     && universityView.getText().toString().equalsIgnoreCase(profile.getMy_university()) && departmentView.getText().toString().equalsIgnoreCase(profile.getMy_department())
+                    && skillsView.getText().toString().trim().equalsIgnoreCase(convert())
             ) {
                 Toast.makeText(EditProfile.this, "No changes made", Toast.LENGTH_SHORT).show();
                 hideProgress();
             } else {
-                if (overviewView.getText().length() > 79) {
+                if (overviewView.getText().length() > 30) {
                     dbRef = FirebaseDatabase.getInstance().getReference("Profile_Information").child(Constants.uid);
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("my_title", titleView.getText().toString().trim());
                     updates.put("my_department", departmentView.getText().toString().trim());
-                    updates.put("my_skills", skillsView.getText().toString().trim());
+                    updates.put("my_skills", Arrays.asList(skillsView.getText().toString().trim().split(",")));
                     updates.put("my_overview", overviewView.getText().toString().trim());
                     updates.put("my_university", universityView.getText().toString().trim());
                     if (imageURL != null) {
@@ -353,12 +355,14 @@ public class EditProfile extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Toast.makeText(EditProfile.this, "Minimum 80 Characters required for overview", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditProfile.this, "Minimum 30 Characters required for overview", Toast.LENGTH_LONG).show();
                     hideProgress();
                 }
             }
         }
     }
+
+
 
     private void uploadAllData() {
         showProgress();
@@ -372,25 +376,23 @@ public class EditProfile extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Error While Uploading Profile Image", Toast.LENGTH_LONG).show();
                             hideProgress();
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(EditProfile.this, "Failed To upload Image", Toast.LENGTH_SHORT).show();
-                            updateData(null);
+                        return storageRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            updateData(task.getResult().toString());
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error While Uploading Profile Image", Toast.LENGTH_LONG).show();
+                            hideProgress();
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
-                        }
-                    });
-        }
-        else{
+                    }
+                });
+            } else {
+                updateData(null);
+            }
+        } else {
             updateData(null);
         }
     }
@@ -411,6 +413,15 @@ public class EditProfile extends AppCompatActivity {
             public void onFailure(@NonNull Exception exception) {
             }
         });
+    }
+
+
+    private String convert(){
+        String output = "";
+        for (int x = 0 ; x < profile.getMy_skills().size(); x++){
+            output += profile.getMy_skills().get(x) + ", ";
+        }
+         return output.substring(0,output.length()-2);
     }
 
 

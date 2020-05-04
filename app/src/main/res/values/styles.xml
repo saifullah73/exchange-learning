@@ -106,7 +106,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="drawerArrowStyle">@style/MainActivityDrawerArrowStyle</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="font">@font/allerta</item>
     </style>
@@ -114,6 +114,7 @@
     <style name="TransparentText" parent="@android:style/TextAppearance">
         <item name="android:textColor">#00000000</item>
     </style>
+
 
     <style name="parent">
         <item name="android:layout_width">match_parent</item>

@@ -197,7 +197,7 @@ public class CreateNoImagePostActivity extends AppCompatActivity {
                     if (mSelectedCommunities.size() == 0) {
                         Toast.makeText(this, "Please tag at least 1 community", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (postTitle.length() > 49 && postBody.length() > 59) {
+                        if (postTitle.length() > 10 && postBody.length() > 59) {
                             postRef = FirebaseDatabase.getInstance().getReference("Posts_Table");
                             showProgress();
                             post = PostModel.getPostMode(1);
@@ -354,6 +354,7 @@ public class CreateNoImagePostActivity extends AppCompatActivity {
                 for (int i = 0; i < post.getTagged_communities().size(); i++) {
                     int id = getCommunityID(post.getTagged_communities().get(i));
                     if (id != -1) {
+                        mSelectedCommunities.add(multiArrayList.get(id).getName());
                         mSelectedCommunitiesIDs.add(id);
                     }
                 }

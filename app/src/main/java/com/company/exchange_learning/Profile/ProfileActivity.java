@@ -23,6 +23,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.company.exchange_learning.FollowersActivity;
 import com.company.exchange_learning.model.BasicUser;
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
@@ -40,8 +41,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import org.apache.commons.lang3.StringUtils;
 
+import org.apache.commons.text.WordUtils;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +59,12 @@ public class ProfileActivity extends AppCompatActivity {
     private BasicUser basicUser = null;
     private CardView editBtn, followBtn, followerBtn;
     private CircleImageView profileImage;
+    private LinearLayout followersButtons;
+    private LinearLayout aboutContent;
+    private CardView singularFollowFollowingButton;
+    private LinearLayout singularFollowFollowingButtonLayout;
+    private ImageView follow_follower_indicator_view;
+    private TextView follow_follower_indicator_view_text;
     private RelativeLayout titleContainer, universityContainer, departmentContainer, communityContainer, location_container, skill_container, email_container;
     private TextView titleView, universityView, departmentView, communityView, locationView, skillView, emailView, nameView, overviewView, titleUpper;
     private LinearLayout data_holder;
@@ -84,6 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
         editBtn = findViewById(R.id.editProfilebtn);
         profileImage = findViewById(R.id.profile_image);
         nameView = findViewById(R.id.name_view);
+        aboutContent = findViewById(R.id.aboutContent);
         overviewView = findViewById(R.id.overview_view);
         titleView = findViewById(R.id.title_view);
         titleContainer = findViewById(R.id.title_container);
@@ -104,8 +114,32 @@ public class ProfileActivity extends AppCompatActivity {
         header = findViewById(R.id.frameLayout);
         backBtn = findViewById(R.id.backBtn);
         titleUpper = findViewById(R.id.titleViewUpper);
+        singularFollowFollowingButton = findViewById(R.id.singularFollowFollowingButton);
+        singularFollowFollowingButtonLayout = findViewById(R.id.singularFollowFollowingButtonLayout);
+        follow_follower_indicator_view = findViewById(R.id.follow_following_indicator);
+        follow_follower_indicator_view_text = findViewById(R.id.follow_following_indicator_text);
+        followersButtons = findViewById(R.id.followLayout);
         followBtn = findViewById(R.id.followBtn);
         followerBtn = findViewById(R.id.followersBtn);
+
+        followerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProfileActivity.this, FollowersActivity.class);
+                i.putExtra("uid",uid);
+                i.putExtra("mode",0);
+                startActivity(i);
+            }
+        });
+        followBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProfileActivity.this, FollowersActivity.class);
+                i.putExtra("uid",uid);
+                i.putExtra("mode",1);
+                startActivity(i);
+            }
+        });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,10 +150,31 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void populateViews(final UserProfile profile, boolean mode) {
-        toolbarTitle.setText(StringUtils.capitalize(profile.getUser().getName()));
+        toolbarTitle.setText(WordUtils.capitalize(profile.getUser().getName()));
+        aboutContent.setVisibility(View.VISIBLE);
+        Log.i("TESTABC", String.valueOf(mode));
         if (!mode) {
             editBtn.setVisibility(View.GONE);
+            followersButtons.setVisibility(View.GONE);
+            singularFollowFollowingButtonLayout.setVisibility(View.VISIBLE);
+            setFollowButtonText();
         }
+        else{
+            editBtn.setVisibility(View.VISIBLE);
+            followersButtons.setVisibility(View.VISIBLE);
+            singularFollowFollowingButtonLayout.setVisibility(View.GONE);
+        }
+        singularFollowFollowingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (follow_follower_indicator_view_text.getText().equals("Follow")){
+                    followerAdded();
+                }
+                else{
+                    followerRemoved();
+                }
+            }
+        });
         editBtn.setClickable(true);
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +191,7 @@ public class ProfileActivity extends AppCompatActivity {
             locationView.setText(location);
             communityView.setText(profile.getUser().getCommunity());
             emailView.setText(profile.getUser().getEmail());
-            nameView.setText(StringUtils.capitalize(profile.getUser().getName()));
+            nameView.setText(WordUtils.capitalize(profile.getUser().getName()));
         } else {
             communityContainer.setVisibility(View.GONE);
             email_container.setVisibility(View.GONE);
@@ -156,15 +211,15 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if (profile.getMy_title() != null && !profile.getMy_title().equals("")) {
             titleContainer.setVisibility(View.VISIBLE);
-            titleView.setText(StringUtils.capitalize(profile.getMy_title()));
-            titleUpper.setText(StringUtils.capitalize(profile.getMy_title()));
+            titleView.setText(WordUtils.capitalize(profile.getMy_title()));
+            titleUpper.setText(WordUtils.capitalize(profile.getMy_title()));
         } else {
             titleUpper.setVisibility(View.GONE);
             titleContainer.setVisibility(View.GONE);
         }
         if (profile.getMy_university() != null && !profile.getMy_university().equals("")) {
             universityContainer.setVisibility(View.VISIBLE);
-            universityView.setText(StringUtils.capitalize(profile.getMy_university()));
+            universityView.setText(WordUtils.capitalize(profile.getMy_university()));
         } else {
             universityContainer.setVisibility(View.GONE);
         }
@@ -286,7 +341,18 @@ public class ProfileActivity extends AppCompatActivity {
         followerBtn.setVisibility(View.VISIBLE);
         backBtn.setVisibility(View.VISIBLE);
         toolbarTitle.setVisibility(View.VISIBLE);
-        editBtn.setVisibility(View.VISIBLE);
+
+        if (!mode) {
+            editBtn.setVisibility(View.GONE);
+            followersButtons.setVisibility(View.GONE);
+            singularFollowFollowingButtonLayout.setVisibility(View.VISIBLE);
+            setFollowButtonText();
+        }
+        else{
+            editBtn.setVisibility(View.VISIBLE);
+            followersButtons.setVisibility(View.VISIBLE);
+            singularFollowFollowingButtonLayout.setVisibility(View.GONE);
+        }
     }
 
     private void followerAdded(){
@@ -308,7 +374,8 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         if (databaseError == null){
                             Log.i(TAG,"Added following");
-                            followButton.setText("Following");
+                            follow_follower_indicator_view_text.setText("Following");
+                            follow_follower_indicator_view.setVisibility(View.VISIBLE);
                         }
                         else{
                             Log.i(TAG," Error Added following");
@@ -388,7 +455,8 @@ public class ProfileActivity extends AppCompatActivity {
                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                                     if (databaseError == null) {
                                         Log.i(TAG, "Removed following");
-                                        followButton.setText("Follow");
+                                        follow_follower_indicator_view_text.setText("Follow");
+                                        follow_follower_indicator_view.setVisibility(View.GONE);
                                         dialog.dismiss();
 
                                     } else {
@@ -458,10 +526,12 @@ public class ProfileActivity extends AppCompatActivity {
                 GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
                 List following = dataSnapshot.getValue(t);
                 if (following != null && following.contains(uid)){
-                    followButton.setText("Following");
+                    follow_follower_indicator_view_text.setText("Following");
+                    follow_follower_indicator_view.setVisibility(View.VISIBLE);
                 }
                 else{
-                    followButton.setText("Follow");
+                    follow_follower_indicator_view_text.setText("Follow");
+                    follow_follower_indicator_view.setVisibility(View.GONE);
                 }
             }
 
