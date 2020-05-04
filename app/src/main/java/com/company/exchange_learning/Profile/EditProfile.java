@@ -1,38 +1,49 @@
 package com.company.exchange_learning.Profile;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
 import com.company.exchange_learning.model.UserProfile;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.wang.avi.AVLoadingIndicatorView;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -43,53 +54,134 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfile extends AppCompatActivity {
+
+    public static final int CHOOSE_FROM_GALLERY = 99;
+
     private static final String TAG = "EditProfile";
-    private final int PICK_IMAGE_REQUEST = 71;
-    private TextInputEditText titleView,universityView,departmentView,skillsView,overviewView;
-    private Button doneBtn;
-    private ProgressBar progressBar;
+    private EditText titleView, universityView, departmentView, skillsView, overviewView;
+    private CardView updateProfileBtn;
+    private TextView updateProfileBtnTxt;
+    private AVLoadingIndicatorView progressBar;
     private Spinner community_spinner;
     private List<String> spinnerArray;
     private UserProfile profile;
     private Uri filePath;
     private CircleImageView profileImage;
-    private ImageView editProfileBtn;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
+    private ImageView chooseImg;
+    private StorageReference storageRef;
+    private DatabaseReference dbRef;
+    private Toolbar toolbar;
+    private TextView exhangeTxt, learningTxt;
+    private boolean isProfileImgChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        titleView = findViewById(R.id.TitletextInputEditText);
-        universityView = findViewById(R.id.UniversityInputEditText);
-        departmentView = findViewById(R.id.DepartmenttextInputEditText);
-        skillsView = findViewById(R.id.skillstextInputEditText);
-        overviewView = findViewById(R.id.overviewInputEditText);
-        community_spinner = findViewById(R.id.edit_community_spinner);
-        editProfileBtn = findViewById(R.id.editProfileImagebtn);
-        profileImage = findViewById(R.id.edit_profile_image);
-        doneBtn = findViewById(R.id.editProfileScreenBtn);
-        progressBar = findViewById(R.id.edit_prof_progress);
-        progressBar.setVisibility(View.GONE);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+        exhangeTxt = findViewById(R.id.exchange_txt);
+        learningTxt = findViewById(R.id.learning_txt);
+        learningTxt.setVisibility(View.GONE);
+        exhangeTxt.setText("Update Profile");
+        titleView = findViewById(R.id.updateProfileTitleEdit);
+        universityView = findViewById(R.id.updateProfileUniEdit);
+        departmentView = findViewById(R.id.updateProfileDptEdit);
+        skillsView = findViewById(R.id.updateProfileSkillEdit);
+        overviewView = findViewById(R.id.updateProfileOverViewEdit);
+        community_spinner = findViewById(R.id.updateProfileCommSpinner);
+        chooseImg = findViewById(R.id.updateProfileChooseImg);
+        profileImage = findViewById(R.id.updateProfileProfileImg);
+        updateProfileBtn = findViewById(R.id.updateProfileUpdateBtn);
+        progressBar = findViewById(R.id.updateProfileProgress);
+        updateProfileBtnTxt = findViewById(R.id.updateProfileUpdateBtnTxt);
+
         populateCommunity();
         populate();
-        doneBtn.setOnClickListener(new View.OnClickListener() {
+
+        updateProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadAllData();
             }
         });
 
-        editProfileBtn.setOnClickListener(new View.OnClickListener() {
+        chooseImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chooseImage();
+                chooseImageToUpload();
+            }
+        });
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseImageToUpload();
             }
         });
     }
 
-    private void populateCommunity(){
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                handleCancellation();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void chooseImageToUpload() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                }
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
+            } else {
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto, CHOOSE_FROM_GALLERY);
+            }
+        } else {
+            Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(pickPhoto, CHOOSE_FROM_GALLERY);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        handleCancellation();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        chooseImageToUpload();
+                    }
+                } else {
+                    Toast.makeText(this, "permission denied",
+                            Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+
+    private void populateCommunity() {
         String[] spinnerArrayRaw = getResources().getStringArray(R.array.community_list2);
         spinnerArray = Arrays.asList(spinnerArrayRaw);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -98,121 +190,206 @@ public class EditProfile extends AppCompatActivity {
         community_spinner.setAdapter(adapter);
     }
 
-    private void populate(){
+    private void populate() {
         Intent i = getIntent();
-        profile =(UserProfile) getIntent().getSerializableExtra("profile");
-        if (profile.getMy_overview() != null && !profile.getMy_overview().equals("")){
+        profile = (UserProfile) getIntent().getSerializableExtra("profile");
+        if (profile.getMy_overview() != null && !profile.getMy_overview().equals("")) {
             overviewView.setText(profile.getMy_overview());
         }
-        if(profile.getMy_department() != null && !profile.getMy_department().equals("")){
+        if (profile.getMy_department() != null && !profile.getMy_department().equals("")) {
             departmentView.setText(profile.getMy_department());
         }
-        if(profile.getMy_title() != null && !profile.getMy_title().equals("")){
+        if (profile.getMy_title() != null && !profile.getMy_title().equals("")) {
             titleView.setText(profile.getMy_title());
         }
-        if (profile.getMy_university() != null && !profile.getMy_university().equals("")){
+        if (profile.getMy_university() != null && !profile.getMy_university().equals("")) {
             universityView.setText(profile.getMy_university());
-        }
-        if (profile.getMy_skills() != null && !profile.getMy_skills().equals("") ){
-            skillsView.setText(profile.getMy_skills());
         }
         if (profile.getUser() != null) {
             int pos = spinnerArray.indexOf(profile.getUser().getCommunity());
-            Log.d(TAG,profile.getUser().getCommunity());
             community_spinner.setSelection(pos);
         }
+
+        //TODO:GET SKILLS AND UPLOAD THEM
+
         loadImage();
     }
 
-    private void updateData(String imageURL){
-        progressBar.setVisibility(View.VISIBLE);
-        doneBtn.setVisibility(View.GONE);
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Profile_Information").child(Constants.uid);
-        Map<String, Object> updates = new HashMap<>();
-        updates.put("my_title", titleView.getText().toString().trim());
-        updates.put("my_department", departmentView.getText().toString().trim());
-        updates.put("my_skills", skillsView.getText().toString().trim());
-        updates.put("my_overview", overviewView.getText().toString().trim());
-        updates.put("my_university", universityView.getText().toString().trim());
-        if (imageURL != null) {
-            updates.put("profile_image", imageURL);
+    private void handleCancellation() {
+        if (!titleView.getText().toString().equalsIgnoreCase(profile.getMy_title()) && !universityView.getText().toString().equalsIgnoreCase(profile.getMy_university())
+                && !overviewView.getText().toString().equalsIgnoreCase(profile.getMy_overview()) && !departmentView.getText().toString().equalsIgnoreCase(profile.getMy_department())) {
+            showConfirmationDialog();
+        } else {
+            finish();
         }
-        myRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
+    }
+
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Discard everything?");
+        builder.setMessage("Are you sure to exit the editor?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                if (databaseError == null){
-                    Log.d(TAG,"Profile updated successfully");
-                    DatabaseReference myRef = database.getReference("User_Information").child(Constants.uid);
-                    Map<String, Object> updates = new HashMap<>();
-                    updates.put("community", community_spinner.getSelectedItem().toString());
-                    myRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            if (databaseError == null) {
-                                Log.d(TAG, "Community updated successfully");
-                                Toast.makeText(EditProfile.this,"Updated Successfully",Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(EditProfile.this,"Error updating community",Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "Error updating community" + databaseError.getMessage());
-                            }
-                            progressBar.setVisibility(View.GONE);
-                            finish();
-                        }
-                    });
-                }
-                else{
-                    Toast.makeText(EditProfile.this,"Error Updating",Toast.LENGTH_SHORT).show();
-                    Log.d(TAG,"Error updating" + databaseError.getMessage());
-                    progressBar.setVisibility(View.GONE);
-                    finish();
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (dialogInterface != null) {
+                    dialogInterface.dismiss();
                 }
             }
         });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showProgress() {
+        progressBar.show();
+        updateProfileBtnTxt.setText("");
+        updateProfileBtn.setEnabled(false);
+    }
+
+    private void hideProgress() {
+        progressBar.hide();
+        updateProfileBtnTxt.setText("UPDATE PROFILE");
+        updateProfileBtn.setEnabled(true);
+    }
+
+    private void updateData(String imageURL) {
+        String title = StringUtils.capitalize(titleView.getText().toString());
+        String dpt = StringUtils.capitalize(departmentView.getText().toString());
+        String uni = StringUtils.capitalize(universityView.getText().toString());
+        String overview = overviewView.getText().toString();
+        String skills = skillsView.getText().toString();
+
+        if (isProfileImgChanged) {
+            dbRef = FirebaseDatabase.getInstance().getReference("Profile_Information").child(Constants.uid);
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("my_title", title);
+            updates.put("my_department", dpt);
+            updates.put("my_skills", uni);
+            updates.put("my_overview", overview);
+            updates.put("my_university", skills);
+            if (imageURL != null) {
+                updates.put("profile_image", imageURL);
+            }
+            dbRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    if (databaseError == null) {
+                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("User_Information").child(Constants.uid);
+                        Map<String, Object> updates = new HashMap<>();
+                        updates.put("community", community_spinner.getSelectedItem().toString());
+                        myRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                if (databaseError == null) {
+                                    Toast.makeText(EditProfile.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                                    hideProgress();
+                                    finish();
+                                } else {
+                                    hideProgress();
+                                    Toast.makeText(EditProfile.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } else {
+                        Toast.makeText(EditProfile.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
+                        hideProgress();
+                    }
+                }
+            });
+        } else {
+            if (titleView.getText().toString().equalsIgnoreCase(profile.getMy_title()) && overviewView.getText().toString().equalsIgnoreCase(profile.getMy_overview())
+                    && universityView.getText().toString().equalsIgnoreCase(profile.getMy_university()) && departmentView.getText().toString().equalsIgnoreCase(profile.getMy_department())
+            ) {
+                Toast.makeText(EditProfile.this, "No changes made", Toast.LENGTH_SHORT).show();
+                hideProgress();
+            } else {
+                if (overviewView.getText().length() > 79) {
+                    dbRef = FirebaseDatabase.getInstance().getReference("Profile_Information").child(Constants.uid);
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("my_title", titleView.getText().toString().trim());
+                    updates.put("my_department", departmentView.getText().toString().trim());
+                    updates.put("my_skills", skillsView.getText().toString().trim());
+                    updates.put("my_overview", overviewView.getText().toString().trim());
+                    updates.put("my_university", universityView.getText().toString().trim());
+                    if (imageURL != null) {
+                        updates.put("profile_image", imageURL);
+                    }
+                    dbRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            if (databaseError == null) {
+                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("User_Information").child(Constants.uid);
+                                Map<String, Object> updates = new HashMap<>();
+                                updates.put("community", community_spinner.getSelectedItem().toString());
+                                myRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                        if (databaseError == null) {
+                                            Toast.makeText(EditProfile.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                                            hideProgress();
+                                            finish();
+                                        } else {
+                                            hideProgress();
+                                            Toast.makeText(EditProfile.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(EditProfile.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
+                                hideProgress();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(EditProfile.this, "Minimum 80 Characters required for overview", Toast.LENGTH_LONG).show();
+                    hideProgress();
+                }
+            }
+        }
     }
 
     private void uploadAllData() {
-        if(filePath != null)
-        {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading Image... ");
-            progressDialog.show();
-            storage = FirebaseStorage.getInstance();
-            storageReference = storage.getReference();
-            StorageReference ref = storageReference.child("profileImages/"+ Constants.uid);
-            ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Toast.makeText(EditProfile.this, "Uploaded Image", Toast.LENGTH_SHORT).show();
-                            updateData(null);
+        showProgress();
+        if (isProfileImgChanged) {
+            if (filePath != null) {
+                storageRef = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.uid);
+                storageRef.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Error While Uploading Profile Image", Toast.LENGTH_LONG).show();
+                            hideProgress();
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(EditProfile.this, "Failed To upload Image", Toast.LENGTH_SHORT).show();
-                            updateData(null);
+                        return storageRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            updateData(task.getResult().toString());
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error While Uploading Profile Image", Toast.LENGTH_LONG).show();
+                            hideProgress();
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
-                        }
-                    });
-        }
-        else{
+                    }
+                });
+            } else {
+                updateData(null);
+            }
+        } else {
             updateData(null);
         }
     }
 
-    private void loadImage(){
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/"+ Constants.uid);
+    private void loadImage() {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.uid);
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -225,31 +402,21 @@ public class EditProfile extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Log.e(TAG,"Error Loading Image");
             }
         });
     }
 
-    private void chooseImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
+        if (requestCode == CHOOSE_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 profileImage.setImageBitmap(bitmap);
-            }
-            catch (IOException e)
-            {
+                isProfileImgChanged = true;
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

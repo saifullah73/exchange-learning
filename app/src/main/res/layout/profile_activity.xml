@@ -1,377 +1,373 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/profileBackground">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="@color/colorPrimaryDark2"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleTextAppearance="@style/TransparentText"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/profile_bk"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_marginTop="20dp"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/main_user_profile_avatar"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="#FF000000"/>
-
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/gender_view"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="3dp"
-                        android:layout_marginTop="2dp"
-                        android:src = "@drawable/male_icon_24"
-                        />
-                    <TextView
-                        android:id="@+id/name_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Saifullah"
-                        android:textSize="28dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/overview_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hello my name is Saifullah,Hello my name is SaifullahHello my name is SaifullahHello my name is SaifullahHello my name is SaifullahHello my name is SaifullahHello my name is Saifullah"
-                    android:textSize="12dp"
-                    android:paddingLeft="10dp"
-                    android:textAlignment="center"
-                    android:paddingRight="10dp"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/profileBackground"
-                    android:gravity="center">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_alignParentTop="true"
-                        android:background="@drawable/profile_bk" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/followButton"
-                        style="@style/profileStyledBackButton"
-                        android:text="Following"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20sp"/>
-                    <LinearLayout
-                        android:id="@+id/follow_followers_buttons"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/followers_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Followers"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:paddingTop="7dp"
-                        android:layout_marginRight="1dp"
-                        android:paddingBottom="7dp"
-                        android:background="@drawable/follow_followers_button_background_left"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="16sp"/>
-                    <Button
-                        android:id="@+id/following_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Following"
-                        android:paddingLeft="20dp"
-                        android:layout_marginLeft="1dp"
-                        android:paddingRight="20dp"
-                        android:paddingTop="7dp"
-                        android:paddingBottom="7dp"
-                        android:gravity="center"
-                        android:background="@drawable/follow_followers_button_background_right"
-                        android:textAlignment="center"
-                        android:textSize="16sp"/>
-                    </LinearLayout>
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.appsnipp.profiledesigns.ProfileActivity">
-
-        <LinearLayout
-            android:id="@+id/profile_data_holder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
-            <TextView
-                style="@style/headerText"
-                android:layout_width="wrap_content"
-                android:text="Account Info" />
-
-            <ImageView
-                android:id="@+id/editProfilebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_edit_black_24dp" />
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/title_container"
-                style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/titleImageView"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/user_icon" />
-
-                <TextView
-                    android:id="@+id/titleTextView"
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/titleImageView"
-                    android:text="Title" />
-
-                <TextView
-                    android:id="@+id/title_view"
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/titleImageView"
-                    android:text="Software Engineer" />
-
-            </RelativeLayout>
-
-<!--            <View style="@style/proifleDetailsView" />-->
-
-            <RelativeLayout
-                android:id ="@+id/university_container"
-                style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/univeristyImageView"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/university_icon" />
-
-                <TextView
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/univeristyImageView"
-                    android:text="University" />
-
-                <TextView
-                    android:id="@+id/university_text"
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/univeristyImageView"
-                    android:text="Comsats" />
-
-            </RelativeLayout>
-
-<!--            <View style="@style/proifleDetailsView" />-->
-
-            <RelativeLayout
-                android:id="@+id/department_container"
-                style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/departmentImageView"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/department_icon" />
-
-                <TextView
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/departmentImageView"
-                    android:text="Department" />
-
-                <TextView
-                    android:id="@+id/department_text"
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/departmentImageView"
-                    android:text="Computer Science" />
-
-            </RelativeLayout>
-
-<!--            <View style="@style/proifleDetailsView" />-->
-
-            <RelativeLayout
-                android:id="@+id/community_container"
-                style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/communityImageView"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/team_icon" />
-
-                <TextView
-                    android:id="@+id/commTextView"
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/communityImageView"
-                    android:text="Community" />
-
-                <TextView
-                    android:id="@+id/community_text"
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/communityImageView"
-                    android:text="Computer Science" />
-
-            </RelativeLayout>
-
-<!--            <View style="@style/proifleDetailsView" />-->
-
-
-            <RelativeLayout
-                android:id="@+id/location_container"
-                style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/locationImageView"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/pin_icon" />
-
-                <TextView
-                    android:id="@+id/locationTextView"
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/locationImageView"
-                    android:text="Location" />
-
-                <TextView
-                    android:id="@+id/location_text"
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/locationImageView"
-                    android:text="Islamabad, Pakistan" />
-
-            </RelativeLayout>
-
-<!--            <View style="@style/proifleDetailsView" />-->
-
-            <RelativeLayout
-                android:id="@+id/skills_container"
-                style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/skillsImageView"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/skill_icon" />
-
-                <TextView
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/skillsImageView"
-                    android:text="Skills" />
-
-                <TextView
-                    android:id="@+id/skills_text"
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/skillsImageView"
-                    android:text="Java, Python" />
-
-            </RelativeLayout>
-
-<!--            <View style="@style/proifleDetailsView" />-->
-
-            <RelativeLayout
-                android:id="@+id/email_container"
-                style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/emailImageView"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/mail_icon" />
-
-                <TextView
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/emailImageView"
-                    android:text="Email" />
-
-                <TextView
-                    android:id="@+id/email_text"
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/emailImageView"
-                    android:text="saifullah@nust.com" />
-
-            </RelativeLayout>
-
-<!--            <View style="@style/proifleDetailsView" />-->
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <ProgressBar
-        android:id="@+id/profile_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        ></ProgressBar>
+    <!--    <com.google.android.material.appbar.AppBarLayout-->
+    <!--        android:id="@+id/app_bar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:fitsSystemWindows="true"-->
+    <!--        android:theme="@style/AppTheme.AppBarOverlay">-->
+
+    <!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
+    <!--            android:id="@+id/toolbar_layout"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:fitsSystemWindows="true"-->
+    <!--            app:contentScrim="@color/colorPrimaryDark2"-->
+    <!--            app:expandedTitleMarginEnd="64dp"-->
+    <!--            app:expandedTitleMarginStart="48dp"-->
+    <!--            app:expandedTitleTextAppearance="@style/TransparentText"-->
+    <!--            app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+    <!--            app:toolbarId="@+id/toolbar">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:id="@+id/linearLayout"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_centerInParent="true"-->
+    <!--                android:background="@drawable/profile_bk"-->
+    <!--                android:gravity="center_horizontal"-->
+    <!--                android:orientation="vertical">-->
+
+
+    <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--                    android:layout_marginTop="20dp"-->
+    <!--                    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--                    android:id="@+id/profile_image"-->
+    <!--                    android:layout_width="100dp"-->
+    <!--                    android:layout_height="100dp"-->
+    <!--                    android:src="@drawable/main_user_profile_avatar"-->
+    <!--                    app:civ_border_width="2dp"-->
+    <!--                    app:civ_border_color="#FF000000"/>-->
+
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:orientation="horizontal">-->
+
+    <!--                    <ImageView-->
+    <!--                        android:id="@+id/gender_view"-->
+    <!--                        android:layout_width="20dp"-->
+    <!--                        android:layout_height="20dp"-->
+    <!--                        android:layout_gravity="center"-->
+    <!--                        android:layout_marginRight="3dp"-->
+    <!--                        android:layout_marginTop="2dp"-->
+    <!--                        android:src = "@drawable/male_icon_24"-->
+    <!--                        />-->
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/name_view"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="Saifullah"-->
+    <!--                        android:textSize="28dp"-->
+    <!--                        android:textStyle="bold" />-->
+
+    <!--                </LinearLayout>-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/overview_view"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="Hello my name is Saifullah,Hello my name is SaifullahHello my name is SaifullahHello my name is SaifullahHello my name is SaifullahHello my name is SaifullahHello my name is Saifullah"-->
+    <!--                    android:textSize="12dp"-->
+    <!--                    android:paddingLeft="10dp"-->
+    <!--                    android:textAlignment="center"-->
+    <!--                    android:paddingRight="10dp"-->
+    <!--                    android:textStyle="bold" />-->
+
+    <!--                <RelativeLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="bottom"-->
+    <!--                    android:layout_marginTop="20dp"-->
+    <!--                    android:background="@color/profileBackground"-->
+    <!--                    android:gravity="center">-->
+
+    <!--                    <View-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="30dp"-->
+    <!--                        android:layout_alignParentTop="true"-->
+    <!--                        android:background="@drawable/profile_bk" />-->
+
+    <!--                    <TextView-->
+    <!--                        android:visibility="visible"-->
+    <!--                        android:id="@+id/followButton"-->
+    <!--                        style="@style/profileStyledBackButton"-->
+    <!--                        android:text="Following"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:textAlignment="center"-->
+    <!--                        android:textSize="20sp"/>-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/follow_followers_buttons"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:orientation="horizontal">-->
+    <!--                    <Button-->
+    <!--                        android:id="@+id/followers_button"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="Followers"-->
+    <!--                        android:paddingLeft="20dp"-->
+    <!--                        android:paddingRight="20dp"-->
+    <!--                        android:paddingTop="7dp"-->
+    <!--                        android:layout_marginRight="1dp"-->
+    <!--                        android:paddingBottom="7dp"-->
+    <!--                        android:background="@drawable/follow_followers_button_background_left"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:textAlignment="center"-->
+    <!--                        android:textSize="16sp"/>-->
+    <!--                    <Button-->
+    <!--                        android:id="@+id/following_button"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="Following"-->
+    <!--                        android:paddingLeft="20dp"-->
+    <!--                        android:layout_marginLeft="1dp"-->
+    <!--                        android:paddingRight="20dp"-->
+    <!--                        android:paddingTop="7dp"-->
+    <!--                        android:paddingBottom="7dp"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:background="@drawable/follow_followers_button_background_right"-->
+    <!--                        android:textAlignment="center"-->
+    <!--                        android:textSize="16sp"/>-->
+    <!--                    </LinearLayout>-->
+    <!--                </RelativeLayout>-->
+
+    <!--            </LinearLayout>-->
+
+    <!--            <androidx.appcompat.widget.Toolbar-->
+    <!--                android:id="@+id/toolbar"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="?attr/actionBarSize"-->
+    <!--                app:layout_collapseMode="pin"-->
+    <!--                app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+    <!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+    <!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <!--    <androidx.core.widget.NestedScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--        tools:context="com.appsnipp.profiledesigns.ProfileActivity">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/profile_data_holder"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="20dp"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:layout_marginRight="20dp"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginBottom="20dp"-->
+    <!--                android:orientation="horizontal">-->
+    <!--            <TextView-->
+    <!--                style="@style/headerText"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:text="Account Info" />-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/editProfilebtn"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_gravity="center"-->
+    <!--                android:layout_marginLeft="10dp"-->
+    <!--                android:src="@drawable/ic_edit_black_24dp" />-->
+
+    <!--            </LinearLayout>-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:id="@+id/title_container"-->
+    <!--                style="@style/profileDetailsLayout">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/titleImageView"-->
+    <!--                    style="@style/profileDetailsImage"-->
+    <!--                    android:src="@drawable/user_icon" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/titleTextView"-->
+    <!--                    style="@style/profileDetailsTextMain"-->
+    <!--                    android:layout_toRightOf="@id/titleImageView"-->
+    <!--                    android:text="Title" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/title_view"-->
+    <!--                    style="@style/profileDetailsMiniText"-->
+    <!--                    android:layout_toRightOf="@id/titleImageView"-->
+    <!--                    android:text="Software Engineer" />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--&lt;!&ndash;            <View style="@style/proifleDetailsView" />&ndash;&gt;-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:id ="@+id/university_container"-->
+    <!--                style="@style/profileDetailsLayout">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/univeristyImageView"-->
+    <!--                    style="@style/profileDetailsImage"-->
+    <!--                    android:src="@drawable/university_icon" />-->
+
+    <!--                <TextView-->
+    <!--                    style="@style/profileDetailsTextMain"-->
+    <!--                    android:layout_toRightOf="@id/univeristyImageView"-->
+    <!--                    android:text="University" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/university_text"-->
+    <!--                    style="@style/profileDetailsMiniText"-->
+    <!--                    android:layout_toRightOf="@id/univeristyImageView"-->
+    <!--                    android:text="Comsats" />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--&lt;!&ndash;            <View style="@style/proifleDetailsView" />&ndash;&gt;-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:id="@+id/department_container"-->
+    <!--                style="@style/profileDetailsLayout">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/departmentImageView"-->
+    <!--                    style="@style/profileDetailsImage"-->
+    <!--                    android:src="@drawable/department_icon" />-->
+
+    <!--                <TextView-->
+    <!--                    style="@style/profileDetailsTextMain"-->
+    <!--                    android:layout_toRightOf="@id/departmentImageView"-->
+    <!--                    android:text="Department" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/department_text"-->
+    <!--                    style="@style/profileDetailsMiniText"-->
+    <!--                    android:layout_toRightOf="@id/departmentImageView"-->
+    <!--                    android:text="Computer Science" />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--&lt;!&ndash;            <View style="@style/proifleDetailsView" />&ndash;&gt;-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:id="@+id/community_container"-->
+    <!--                style="@style/profileDetailsLayout">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/communityImageView"-->
+    <!--                    style="@style/profileDetailsImage"-->
+    <!--                    android:src="@drawable/team_icon" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/commTextView"-->
+    <!--                    style="@style/profileDetailsTextMain"-->
+    <!--                    android:layout_toRightOf="@id/communityImageView"-->
+    <!--                    android:text="Community" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/community_text"-->
+    <!--                    style="@style/profileDetailsMiniText"-->
+    <!--                    android:layout_toRightOf="@id/communityImageView"-->
+    <!--                    android:text="Computer Science" />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--&lt;!&ndash;            <View style="@style/proifleDetailsView" />&ndash;&gt;-->
+
+
+    <!--            <RelativeLayout-->
+    <!--                android:id="@+id/location_container"-->
+    <!--                style="@style/profileDetailsLayout">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/locationImageView"-->
+    <!--                    style="@style/profileDetailsImage"-->
+    <!--                    android:src="@drawable/pin_icon" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/locationTextView"-->
+    <!--                    style="@style/profileDetailsTextMain"-->
+    <!--                    android:layout_toRightOf="@id/locationImageView"-->
+    <!--                    android:text="Location" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/location_text"-->
+    <!--                    style="@style/profileDetailsMiniText"-->
+    <!--                    android:layout_toRightOf="@id/locationImageView"-->
+    <!--                    android:text="Islamabad, Pakistan" />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--&lt;!&ndash;            <View style="@style/proifleDetailsView" />&ndash;&gt;-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:id="@+id/skills_container"-->
+    <!--                style="@style/profileDetailsLayout">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/skillsImageView"-->
+    <!--                    style="@style/profileDetailsImage"-->
+    <!--                    android:src="@drawable/skill_icon" />-->
+
+    <!--                <TextView-->
+    <!--                    style="@style/profileDetailsTextMain"-->
+    <!--                    android:layout_toRightOf="@id/skillsImageView"-->
+    <!--                    android:text="Skills" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/skills_text"-->
+    <!--                    style="@style/profileDetailsMiniText"-->
+    <!--                    android:layout_toRightOf="@id/skillsImageView"-->
+    <!--                    android:text="Java, Python" />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--&lt;!&ndash;            <View style="@style/proifleDetailsView" />&ndash;&gt;-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:id="@+id/email_container"-->
+    <!--                style="@style/profileDetailsLayout">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/emailImageView"-->
+    <!--                    style="@style/profileDetailsImage"-->
+    <!--                    android:src="@drawable/mail_icon" />-->
+
+    <!--                <TextView-->
+    <!--                    style="@style/profileDetailsTextMain"-->
+    <!--                    android:layout_toRightOf="@id/emailImageView"-->
+    <!--                    android:text="Email" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/email_text"-->
+    <!--                    style="@style/profileDetailsMiniText"-->
+    <!--                    android:layout_toRightOf="@id/emailImageView"-->
+    <!--                    android:text="saifullah@nust.com" />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--&lt;!&ndash;            <View style="@style/proifleDetailsView" />&ndash;&gt;-->
+
+    <!--        </LinearLayout>-->
+
+    <!--    </androidx.core.widget.NestedScrollView>-->
+
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/profile_progress_bar"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:visibility="gone"-->
+    <!--        ></ProgressBar>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

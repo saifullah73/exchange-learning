@@ -54,6 +54,10 @@ public class loginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        checkPrefsAndLogin();
+    }
+
+    private void checkPrefsAndLogin() {
         prefs = getSharedPreferences("loginDetails", MODE_PRIVATE);
         String email = prefs.getString("email", "none");
         String password = prefs.getString("password", "none");
@@ -66,12 +70,10 @@ public class loginActivity extends AppCompatActivity {
     }
 
     private void showGeneralLoadingLayout() {
-        Log.d("startupdebug", "showGeneralLoadingLayout: showing loading");
         setContentView(R.layout.loading_layout);
     }
 
     private void setViews() {
-        Log.d("startupdebug", "showGeneralLoadingLayout: setView()");
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         loginbtn = findViewById(R.id.loginBtn);
@@ -228,6 +230,7 @@ public class loginActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+
     private void showVerificationFailDialog(final FirebaseUser user) {
         progressBar.hide();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -297,5 +300,11 @@ public class loginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPrefsAndLogin();
     }
 }

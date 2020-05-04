@@ -6,7 +6,7 @@
     android:animateLayoutChanges="true"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context=".ImageDetailActivity">
+    tools:context=".activities.ImageDetailActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save"
@@ -22,10 +22,11 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_centerInParent="true"
-        android:scaleType="centerInside"
+        android:src="@drawable/main_post_image_avatart"
         android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@id/save"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

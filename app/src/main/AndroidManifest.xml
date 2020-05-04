@@ -11,12 +11,20 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ImageDetailActivity" />
-        <activity android:name=".Profile.EditProfile"
-            android:theme="@style/EditTheme">
-        </activity>
+        <activity android:name=".activities.CreateImagePostActivity"></activity>
+        <activity android:name=".activities.CreateNoImagePostActivity" />
+        <activity
+            android:name=".activities.PostDetailActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".activities.ImageDetailActivity" />
+        <activity
+            android:name=".Profile.EditProfile"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Profile.ProfileActivity" />
         <activity android:name=".loginsignup.signupActivity" />
         <activity android:name=".loginsignup.loginActivity">
             <intent-filter>
@@ -27,14 +35,12 @@
         </activity>
         <activity
             android:name=".Profile.ProfileActivity"
-            android:theme="@style/ProfileTheme">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

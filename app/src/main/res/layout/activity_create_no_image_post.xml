@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/toolbar" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/createNoImgPostBodyLayoutLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbarLayout"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <EditText
+                android:id="@+id/createNoImgPostTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/fullwhite"
+                android:fontFamily="@font/open_sans_light"
+                android:hint="Title or Hashtag"
+                android:text=""
+                android:inputType="textMultiLine"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/darkGray"
+                android:textColorHint="@color/drawerMenuGray"
+                android:textSize="18sp"
+                android:theme="@style/LoginEditTextStyle" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/createNoImgPostBodyLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/createNoImgPostBodyLayoutLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <EditText
+                android:id="@+id/createNoImgPostBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foreground="@drawable/background_rectangle_ouline"
+                android:background="@null"
+                android:backgroundTint="@color/fullwhite"
+                android:fontFamily="@font/open_sans_light"
+                android:gravity="start"
+                android:hint="What are you looking for?"
+                android:inputType="textMultiLine"
+                android:lines="16"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/darkGray"
+                android:textColorHint="@color/drawerMenuGray"
+                android:textSize="18sp"
+                android:theme="@style/LoginEditTextStyle" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/skillLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/createNoImgPostBodyLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_below="@id/EmailtextInputEditTextLayout"
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:textColor="@color/drawerMenuGray"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:text="Show my skills?"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:theme="@style/LoginSignUpProgressBar"
+                    android:id="@+id/createNoImgPostSkillRg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:textColor="@color/drawerMenuGray"
+                        android:id="@+id/createNoImgPostYesBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:textColor="@color/drawerMenuGray"
+                        android:id="@+id/createNoImgPostNoBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:text="No" />
+
+                </RadioGroup>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/typeLayout"
+            android:layout_width="match_parent"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/skillLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:theme="@style/mySpinnerItemStyle"
+                    android:id="@+id/createNoImgPostTypeSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/multiLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/typeLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tagCommTxtView"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:layout_height="wrap_content"
+                    android:text="Tag Communities" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/createNoImgPostShareBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/multiLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/postSelectorBtnColor"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:cardCornerRadius="4dp">
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/createNoImgPostProgress"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:indicatorColor="@color/fullwhite"
+                app:indicatorName="BallClipRotateMultipleIndicator" />
+
+            <TextView
+                android:id="@+id/createNoImgPostShareBtnTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/basic"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="SHARE POST"
+                android:textColor="@color/fullwhite"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</ScrollView>

@@ -2,14 +2,13 @@ package com.company.exchange_learning.model;
 
 import androidx.annotation.NonNull;
 
-import com.company.exchange_learning.model.BasicUser;
-
 import java.io.Serializable;
+import java.util.List;
 
 public class UserProfile implements Serializable {
     String my_overview;
     String my_department;
-    String my_skills;
+    List<String> my_skills;
     String my_title;
     String my_university;
     BasicUser user;
@@ -18,7 +17,7 @@ public class UserProfile implements Serializable {
 
     }
 
-    public UserProfile(String my_overview, String my_department, String my_skills, String my_title, String my_university, BasicUser user) {
+    public UserProfile(String my_overview, String my_department, List<String> my_skills, String my_title, String my_university, BasicUser user) {
         this.my_overview = my_overview;
         this.my_department = my_department;
         this.my_skills = my_skills;
@@ -27,7 +26,7 @@ public class UserProfile implements Serializable {
         this.user = user;
     }
 
-    public UserProfile(String my_overview, String my_department, String my_skills, String my_title, String my_university) {
+    public UserProfile(String my_overview, String my_department, List<String> my_skills, String my_title, String my_university) {
         this.my_overview = my_overview;
         this.my_department = my_department;
         this.my_skills = my_skills;
@@ -43,7 +42,7 @@ public class UserProfile implements Serializable {
         return my_department;
     }
 
-    public String getMy_skills() {
+    public List<String> getMy_skills() {
         return my_skills;
     }
 
@@ -67,7 +66,7 @@ public class UserProfile implements Serializable {
         this.my_department = my_department;
     }
 
-    public void setMy_skills(String my_skills) {
+    public void setMy_skills(List<String> my_skills) {
         this.my_skills = my_skills;
     }
 
@@ -86,7 +85,7 @@ public class UserProfile implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        String abc = "Overview: "+my_overview+" University: "+my_university+" Skills: "+my_skills+" Title: "+my_title+" Department: "+my_department;
+        String abc = "Overview: " + my_overview + " University: " + my_university + " Title: " + my_title + " Department: " + my_department;
         return abc;
     }
 }

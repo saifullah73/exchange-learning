@@ -3,7 +3,6 @@ package com.company.exchange_learning.loginsignup;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -34,10 +33,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.WordUtils;
+
 import java.util.Objects;
 
 public class signupActivity extends AppCompatActivity {
-    private static final String TAG = "signupActivity";
     private EditText fname_v, lname_v, city_v, password_v, email_v;
     private Spinner countrySpinner, communitySpinner;
     private CardView signUp;
@@ -83,9 +84,7 @@ public class signupActivity extends AppCompatActivity {
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
         View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
         if (view == null) {
             view = new View(activity);
         }
@@ -93,7 +92,6 @@ public class signupActivity extends AppCompatActivity {
     }
 
     private String getGender() {
-
         try {
             int selectedId = rgroup.getCheckedRadioButtonId();
             RadioButton radioButton = findViewById(selectedId);
@@ -105,18 +103,18 @@ public class signupActivity extends AppCompatActivity {
 
 
     public void signup() {
-        final String fname = fname_v.getText().toString().trim();
+        final String fname = WordUtils.capitalize(fname_v.getText().toString().trim());
 
-        final String lname = lname_v.getText().toString().trim();
+        final String lname = WordUtils.capitalize(lname_v.getText().toString().trim());
 
         final String email = email_v.getText().toString().trim();
 
         String password = password_v.getText().toString().trim();
 
-        final String city = city_v.getText().toString().trim();
+        final String city = StringUtils.capitalize(city_v.getText().toString().trim());
 
-        final String country = countrySpinner.getSelectedItem().toString();
-        final String community = communitySpinner.getSelectedItem().toString();
+        final String country = WordUtils.capitalize(countrySpinner.getSelectedItem().toString());
+        final String community = WordUtils.capitalize(communitySpinner.getSelectedItem().toString());
 
         final String gender = getGender();
 
@@ -127,15 +125,6 @@ public class signupActivity extends AppCompatActivity {
         } else if (password.length() == 0) {
             Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show();
         } else {
-            Log.d(TAG, "fName " + fname);
-            Log.d(TAG, "lName " + lname);
-            Log.d(TAG, "email " + email);
-            Log.d(TAG, "password " + password);
-            Log.d(TAG, "city " + city);
-            Log.d(TAG, "country " + country);
-            Log.d(TAG, "community " + community);
-            Log.d(TAG, "Gender " + gender);
-
             signUp.setVisibility(View.INVISIBLE);
             hideKeyboard(signupActivity.this);
             progressBar.show();
@@ -144,8 +133,6 @@ public class signupActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(fname + " " + lname)
@@ -155,7 +142,6 @@ public class signupActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Log.d(TAG, "User profile updated.");
                                                 }
                                             }
                                         });
@@ -164,9 +150,7 @@ public class signupActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Log.d(TAG, "Verfication Email sent");
                                                 } else {
-                                                    Log.d(TAG, "Unable to send verfication email");
                                                 }
                                             }
                                         });
