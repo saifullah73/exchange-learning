@@ -1,281 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:scrollbars="none"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:fillViewport="true">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/background">
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/toolbarLayout"
+            android:id="@+id/profileImgLayout"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/edit_profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/main_user_profile_avatar"
-                app:civ_border_color="#FF000000"
+                app:civ_border_overlay="true"
                 app:civ_border_width="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_profile_header" />
-
-            <ImageView
-                android:id="@+id/editProfileImagebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:src="@drawable/ic_edit_black_24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_profile_image"
-                app:layout_constraintStart_toEndOf="@+id/edit_profile_image"
-                app:layout_constraintTop_toTopOf="@+id/edit_profile_image"
-                app:layout_constraintVertical_bias="0.13999999" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TitletextInputLayout"
-                style="@style/TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:hint="Title"
-                app:hintAnimationEnabled="true"
-                app:hintEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_profile_image">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/TitletextInputEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/inputHintColor"
-                    android:drawablePadding="20dp"
-                    android:maxLength="100"
-                    android:inputType="text"
-                    android:textColor="@color/inputHintColor"
-                    android:textColorHighlight="@color/inputHintColor"
-                    android:textColorLink="@color/inputHintColor" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/UniversitytextInputLayout"
-                style="@style/TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:hint="University"
-                app:hintAnimationEnabled="true"
-                app:hintEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TitletextInputLayout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/UniversityInputEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/inputHintColor"
-                    android:drawablePadding="20dp"
-                    android:inputType="text"
-                    android:maxLength="100"
-                    android:textColor="@color/inputHintColor"
-                    android:textColorHighlight="@color/inputHintColor"
-                    android:textColorLink="@color/inputHintColor" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/DepartmenttextInputLayout"
-                style="@style/TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-
-                android:hint="Department"
-                app:hintAnimationEnabled="true"
-                app:hintEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/UniversitytextInputLayout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/DepartmenttextInputEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/inputHintColor"
-                    android:drawablePadding="20dp"
-                    android:inputType="text"
-                    android:maxLength="100"
-                    android:textColor="@color/inputHintColor"
-                    android:textColorHighlight="@color/inputHintColor"
-                    android:textColorLink="@color/inputHintColor" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/OverviewtextInputLayout"
-                style="@style/TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="40dp"
-                android:hint="Overview"
-                android:textAlignment="center"
-                android:textColorHint="@color/inputHintColor"
-                app:hintAnimationEnabled="true"
-                app:hintEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DepartmenttextInputLayout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/overviewInputEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/inputHintColor"
-                    android:drawablePadding="20dp"
-                    android:maxLength="200"
-                    android:inputType="text"
-                    android:textColor="@color/inputHintColor"
-                    android:textColorHighlight="@color/inputHintColor"
-                    android:textColorHint="@color/inputHintColor"
-                    android:textColorLink="@color/inputHintColor" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/skillstextInputLayout"
-                style="@style/TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:hint="Skills"
-                app:hintAnimationEnabled="true"
-                app:hintEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/OverviewtextInputLayout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/skillstextInputEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLength="100"
-                    android:backgroundTint="@color/inputHintColor"
-                    android:drawablePadding="20dp"
-                    android:inputType="text"
-                    android:textColor="@color/inputHintColor"
-                    android:textColorHighlight="@color/inputHintColor"
-                    android:textColorLink="@color/inputHintColor" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:id="@+id/edit_linear_layout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/skillstextInputLayout">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="4"
-                    android:gravity="center_vertical"
-                    android:text="Community"
-                    android:textSize="20sp" />
-
-                <Spinner
-                    android:id="@+id/edit_community_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="6"
-                    android:foreground="@drawable/background_rectangle_ouline" />
-
-
-            </LinearLayout>
-
-
-
-            <Button
-                android:id="@+id/editProfileScreenBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="40dp"
-                android:background="@color/colorPrimary2"
-                android:text="Done"
-                android:textColor="@color/fullwhite"
+                app:civ_border_color="@color/hamburger"
+                android:id="@+id/updateProfileProfileImg"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/main_user_profile_avatar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_linear_layout" />
-
-            <ProgressBar
-                android:id="@+id/edit_prof_progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="40dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_linear_layout" />
-
-            <TextView
-                android:id="@+id/edit_profile_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Edit Profile"
-                android:textColor="@color/colorPrimary2"
-                android:textSize="44sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/updateProfileChooseImg"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/ic_camera_alt_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@id/updateProfileProfileImg"
+                app:layout_constraintEnd_toEndOf="@id/updateProfileProfileImg" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/updateProfileTitleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_below="@id/profileImgLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="2dp">
+
+            <EditText
+                android:id="@+id/updateProfileTitleEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/fullwhite"
+                android:fontFamily="@font/open_sans_light"
+                android:hint="Title"
+                android:text=""
+                android:inputType="textMultiLine"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/darkGray"
+                android:textColorHint="@color/drawerMenuGray"
+                android:textSize="18sp"
+                android:theme="@style/LoginEditTextStyle" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/updateProfileOverViewLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_below="@id/updateProfileTitleLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="2dp">
+
+            <EditText
+                android:id="@+id/updateProfileOverViewEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/fullwhite"
+                android:fontFamily="@font/open_sans_light"
+                android:hint="Overview (At least 80 Characters)"
+                android:text=""
+                android:inputType="textMultiLine"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/darkGray"
+                android:textColorHint="@color/drawerMenuGray"
+                android:textSize="18sp"
+                android:theme="@style/LoginEditTextStyle" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/updateProfileUniLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_below="@id/updateProfileOverViewLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="2dp">
+
+            <EditText
+                android:id="@+id/updateProfileUniEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/fullwhite"
+                android:fontFamily="@font/open_sans_light"
+                android:hint="University"
+                android:text=""
+                android:inputType="textMultiLine"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/darkGray"
+                android:textColorHint="@color/drawerMenuGray"
+                android:textSize="18sp"
+                android:theme="@style/LoginEditTextStyle" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/updateProfileDptLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_below="@id/updateProfileUniLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="2dp">
+
+            <EditText
+                android:id="@+id/updateProfileDptEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/fullwhite"
+                android:fontFamily="@font/open_sans_light"
+                android:hint="Department"
+                android:text=""
+                android:inputType="textMultiLine"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/darkGray"
+                android:textColorHint="@color/drawerMenuGray"
+                android:textSize="18sp"
+                android:theme="@style/LoginEditTextStyle" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/updateProfileSkillLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_below="@id/updateProfileDptLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="2dp">
+
+            <EditText
+                android:id="@+id/updateProfileSkillEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/fullwhite"
+                android:fontFamily="@font/open_sans_light"
+                android:hint="Skills (Comma Separated)"
+                android:inputType="textMultiLine"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/darkGray"
+                android:textColorHint="@color/drawerMenuGray"
+                android:textSize="18sp"
+                android:theme="@style/LoginEditTextStyle" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:id="@+id/updateProfileSpinnerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/updateProfileSkillLayout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="2dp">
+
+            <LinearLayout
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+                <Spinner
+                    android:theme="@style/mySpinnerItemStyle"
+                    android:id="@+id/updateProfileCommSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/updateProfileUpdateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/postSelectorBtnColor"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:cardCornerRadius="4dp">
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/updateProfileProgress"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:indicatorColor="@color/fullwhite"
+                app:indicatorName="BallClipRotateMultipleIndicator" />
+
+            <TextView
+                android:id="@+id/updateProfileUpdateBtnTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/basic"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="UPDATE PROFILE"
+                android:textColor="@color/fullwhite"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</ScrollView>

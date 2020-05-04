@@ -34,4 +34,5 @@
     <string name="category_physics">Physics</string>
     <string name="category_stats">Statistics</string>
     <string name="postedInText">Posted in:</string>
+    <string name="skillsText">Skills:</string>
 </resources>

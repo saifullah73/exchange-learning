@@ -6,14 +6,43 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="drawerArrowStyle">@style/MainActivityDrawerArrowStyle</item>
+        <item name="actionMenuTextColor">@color/hamburger</item>
+        <item name="android:actionMenuTextColor">@color/hamburger</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+    <style name="MultiSelectDialogStyle" parent="AppTheme">
+        <item name="colorPrimary">@color/hamburger</item>
+        <item name="colorPrimaryDark">@color/hamburger</item>
+        <item name="colorAccent">@color/hamburger</item>
+    </style>
+
+    <style name="ProfileActivityStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/hamburger</item>
+        <item name="colorPrimaryDark">@color/drawer_orange</item>
+        <item name="colorAccent">@color/hamburger</item>
+        <item name="actionMenuTextColor">@color/fullwhite</item>
+        <item name="colorControlNormal">@color/fullwhite</item>
+        <item name="android:actionMenuTextColor">@color/fullwhite</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="MainActivityToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <item name="colorControlNormal">@color/hamburger</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ProfileActivityToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/fullwhite</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/drawerMenuGray</item>
     </style>
 
     <style name="EditTheme" parent="AppTheme">
@@ -28,10 +57,11 @@
         <item name="colorAccent">#001E8C</item>
     </style>
 
-    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+    <style name="MainActivityDrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@color/hamburger</item>
     </style>
+
 
     <style name="SearchEditTextStyle" parent="AppTheme">
         <item name="colorAccent">@color/darkGray</item>

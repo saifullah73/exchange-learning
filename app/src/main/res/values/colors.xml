@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#FAFAFB</color>
     <color name="colorPrimaryDark">#FAFAFB</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#1976D2</color>
     <color name="hamburger">#1976D2</color>
     <color name="lessGray">#D9DDDD</color>
     <color name="darkGray">#9A9A9C</color>

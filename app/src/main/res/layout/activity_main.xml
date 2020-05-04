@@ -59,11 +59,13 @@
                             ads:civ_border_width="2dp" />
 
                         <TextView
-                            android:inputType="textCapWords"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:id="@+id/drawer_user_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
+                            android:layout_marginEnd="8dp"
                             android:layout_marginTop="16dp"
                             android:layout_toRightOf="@id/drawer_profile_img"
                             android:fontFamily="@font/montserrat"
@@ -74,6 +76,8 @@
                             tools:ignore="TextViewEdits" />
 
                         <TextView
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:id="@+id/drawer_user_community"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -83,6 +87,7 @@
                             android:textColor="@android:color/white"
                             android:fontFamily="@font/allerta"
                             android:layout_marginTop="1dp"
+                            android:layout_marginEnd="8dp"
                             android:paddingBottom="1dp"
                             android:background="@drawable/background_search"
                             android:paddingStart="4dp"

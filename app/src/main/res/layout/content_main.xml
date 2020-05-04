@@ -66,7 +66,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/montserrat"
-                            android:text="Welcome, Logged In User!"
+                            android:text="Welcome, logged In User!"
                             android:textColor="@color/darkGray"
                             android:textSize="18sp" />
 
@@ -185,9 +185,11 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/emptyMsgCreatePost"
                             android:clickable="true"
                             android:foreground="?attr/selectableItemBackground"
                             android:focusable="true"
+                            android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Create Post"
@@ -203,6 +205,8 @@
                             android:text="OR" />
 
                         <TextView
+                            android:id="@+id/emptyMsgUploadImg"
+                            android:textStyle="bold"
                             android:clickable="true"
                             android:foreground="?attr/selectableItemBackground"
                             android:focusable="true"

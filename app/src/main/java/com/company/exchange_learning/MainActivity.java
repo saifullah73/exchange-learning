@@ -27,7 +27,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.company.exchange_learning.Profile.ProfileActivity;
+import com.company.exchange_learning.activities.CreateImagePostActivity;
+import com.company.exchange_learning.activities.CreateNoImagePostActivity;
+import com.company.exchange_learning.activities.PostDetailActivity;
 import com.company.exchange_learning.adapters.PostsAdapter;
+import com.company.exchange_learning.listeners.OnPostClickListener;
+import com.company.exchange_learning.listeners.OnPostUserImageClickListener;
 import com.company.exchange_learning.loginsignup.loginActivity;
 import com.company.exchange_learning.model.PostModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,26 +49,29 @@ import com.google.firebase.storage.StorageReference;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.apache.commons.text.WordUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnPostClickListener, OnPostUserImageClickListener {
 
     private static final String TAG = "MainActivity";
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     CircleImageView drawerProfileImagView;
     NavigationView navigationView;
-    TextView userCommunityTxtView, showAllPostsBtn, showMyCommunityPostsBtn, toolbarExhangeTxt, toolbarLearningTxt;
+    TextView userCommunityTxtView, showAllPostsBtn, showMyCommunityPostsBtn, toolbarExhangeTxt, toolbarLearningTxt, emptyMsgCP, emptyMsgUI;
     CircleImageView profileImagePost;
-    TextView drawerUserName, postUserName;
+    TextView drawerUserName, mainWelcomeMsg;
 
 
     RecyclerView recyclerView;
     List<PostModel> mPosts, mTempPosts, mAllPosts;
+
     PostsAdapter mAdapter;
     LinearLayout goToProfile, logout, goToMyPosts, goToNotif,goToSettings;
 
@@ -109,13 +117,29 @@ public class MainActivity extends AppCompatActivity {
         mainHeader = findViewById(R.id.main_header);
         postSwitchBtn = findViewById(R.id.postSelectorLayout);
         drawerUserName = findViewById(R.id.drawer_user_name);
-        postUserName = findViewById(R.id.main_welcome_txtView);
+        mainWelcomeMsg = findViewById(R.id.main_welcome_txtView);
         profileImagePost = findViewById(R.id.main_user_img_imgView);
         drawerProfileImagView = navigationView.findViewById(R.id.drawer_profile_img);
         userCommunityTxtView = navigationView.findViewById(R.id.drawer_user_community);
         toolbarExhangeTxt = findViewById(R.id.exchange_txt);
         toolbarLearningTxt = findViewById(R.id.learning_txt);
+        emptyMsgCP = findViewById(R.id.emptyMsgCreatePost);
+        emptyMsgUI = findViewById(R.id.emptyMsgUploadImg);
         loadLoggedInUserDetails();
+
+        emptyMsgCP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CreateNoImagePostActivity.class).putExtra("actionType", "newPost"));
+            }
+        });
+
+        emptyMsgUI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CreateImagePostActivity.class).putExtra("actionType", "newPost"));
+            }
+        });
 
         goToMyPosts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,14 +195,14 @@ public class MainActivity extends AppCompatActivity {
         createPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(MainActivity.this, CreateNoImagePostActivity.class).putExtra("actionType", "newPost"));
             }
         });
 
         uploadImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(MainActivity.this, CreateImagePostActivity.class).putExtra("actionType", "newPost"));
             }
         });
 
@@ -236,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
         mPosts = new ArrayList<>();
         mTempPosts = new ArrayList<>();
         mAllPosts = new ArrayList<>();
-        mAdapter = new PostsAdapter(mPosts, getApplicationContext());
+        mAdapter = new PostsAdapter(mPosts, getApplicationContext(), this, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -295,12 +319,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (Constants.uName == null || Constants.uName.equals("N/A")) {
+        if (Constants.uName == null || Constants.uName.equalsIgnoreCase("N/A")) {
             drawerUserName.setText("Welcome!");
-            postUserName.setText("Welcome to Exchange Learning");
+            mainWelcomeMsg.setText("Welcome!");
         } else {
-            drawerUserName.setText(Constants.uName);
-            postUserName.setText("Welcome, " + Constants.uName + "!");
+            drawerUserName.setText(WordUtils.capitalize(Constants.uName));
+            mainWelcomeMsg.setText(WordUtils.capitalize("Welcome, " + Constants.uName + "!"));
         }
 
         if (Constants.uCommunity == null) {
@@ -314,13 +338,13 @@ public class MainActivity extends AppCompatActivity {
     private void loadPostsUserImages() {
         if (!mPosts.isEmpty()) {
             for (int i = 0; i < mPosts.size(); i++) {
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/" + mPosts.get(i).getUserId());
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/" + mPosts.get(i).getUser_id());
                 final int finalI = i;
                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         String imageURL = uri.toString();
-                        mPosts.get(finalI).setPostUserPostedImage(imageURL);
+                        mPosts.get(finalI).setPost_user_posted_image(imageURL);
                         mAdapter.notifyImageLoaded(finalI);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -334,18 +358,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void fetchPostUserInfo(final PostModel post, final long totalPosts) {
         userInfoRef = FirebaseDatabase.getInstance().getReference("User_Information");
-        userInfoRef.child(post.getUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
+        userInfoRef.child(post.getUser_id()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     if (dataSnapshot.hasChild("name")) {
-                        post.setPostUserPostedName(dataSnapshot.child("name").getValue().toString());
+                        post.setPost_user_posted_name(dataSnapshot.child("name").getValue().toString());
                     } else {
-                        post.setPostUserPostedName("(No Name)");
+                        post.setPost_user_posted_name("(No Name)");
                     }
-                    totalPostsLoaded++;
                     mPosts.add(post);
-                    if (totalPostsLoaded == totalPosts) {
+                    if (mPosts.size() == totalPosts) {
                         prepareRecyclerView(true, false);
                         loadPostsUserImages();
                     }
@@ -397,6 +420,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean checkIfPostCommunityEqualsMyCommunity(PostModel post) {
+        for (String st : post.getTagged_communities()) {
+            if (st.equalsIgnoreCase(Constants.uCommunity)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void prepareRecyclerView(boolean showOnlyPublicPosts, boolean showOnlyUserPosts) {
         hideProgressBar();
         if (!showOnlyUserPosts) {
@@ -406,7 +438,7 @@ public class MainActivity extends AppCompatActivity {
                     emptyMsgLayout.setVisibility(View.VISIBLE);
                     postSwitchBtn.setVisibility(View.VISIBLE);
                 } else {
-                    PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null);
+                    PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
                     mPosts.add(post);
                     recyclerView.setVisibility(View.VISIBLE);
                     emptyMsgLayout.setVisibility(View.GONE);
@@ -415,83 +447,89 @@ public class MainActivity extends AppCompatActivity {
                 }
                 mTempPosts.clear();
             } else {
-                showProgressBar();
-                mTempPosts.addAll(mPosts);
-                mTempPosts.remove(mTempPosts.size() - 1);
-                mPosts.clear();
-                for (PostModel post : mTempPosts) {
-                    if (!post.getPostType().equals("NoMorePost")) {
-                        if (post.getPostCategory().equals(Constants.uCommunity)) {
-                            mPosts.add(post);
+                if (!mPosts.isEmpty()) {
+                    showProgressBar();
+                    mTempPosts.addAll(mPosts);
+                    mTempPosts.remove(mTempPosts.size() - 1);
+                    mPosts.clear();
+                    for (PostModel post : mTempPosts) {
+                        if (!post.getPost_type().equalsIgnoreCase("NoMorePost")) {
+                            if (checkIfPostCommunityEqualsMyCommunity(post)) {
+                                mPosts.add(post);
+                            }
                         }
                     }
+                    if (mPosts.isEmpty()) {
+                        recyclerView.setVisibility(View.GONE);
+                        emptyMsgLayout.setVisibility(View.VISIBLE);
+                        postSwitchBtn.setVisibility(View.VISIBLE);
+                    } else {
+                        PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
+                        mPosts.add(post);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        emptyMsgLayout.setVisibility(View.GONE);
+                        postSwitchBtn.setVisibility(View.VISIBLE);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                    hideProgressBar();
                 }
-                if (mPosts.isEmpty()) {
-                    recyclerView.setVisibility(View.GONE);
-                    emptyMsgLayout.setVisibility(View.VISIBLE);
-                    postSwitchBtn.setVisibility(View.VISIBLE);
-                } else {
-                    PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null);
-                    mPosts.add(post);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    emptyMsgLayout.setVisibility(View.GONE);
-                    postSwitchBtn.setVisibility(View.VISIBLE);
-                    mAdapter.notifyDataSetChanged();
-                }
-                hideProgressBar();
             }
         } else {
             if (showOnlyPublicPosts) {
-                mTempPosts.clear();
-                mTempPosts.addAll(mAllPosts);
-                mTempPosts.remove(mTempPosts.size() - 1);
-                mPosts.clear();
-                for (PostModel post : mTempPosts) {
-                    if (!post.getPostType().equals("NoMorePost")) {
-                        if (post.getUserId().equals(Constants.uid)) {
-                            mPosts.add(post);
+                if (!mAllPosts.isEmpty()) {
+                    mTempPosts.clear();
+                    mTempPosts.addAll(mAllPosts);
+                    mTempPosts.remove(mTempPosts.size() - 1);
+                    mPosts.clear();
+                    for (PostModel post : mTempPosts) {
+                        if (!post.getPost_type().equalsIgnoreCase("NoMorePost")) {
+                            if (post.getUser_id().equalsIgnoreCase(Constants.uid)) {
+                                mPosts.add(post);
+                            }
                         }
                     }
+                    if (mPosts.isEmpty()) {
+                        recyclerView.setVisibility(View.GONE);
+                        emptyMsgLayout.setVisibility(View.VISIBLE);
+                        postSwitchBtn.setVisibility(View.VISIBLE);
+                    } else {
+                        PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
+                        mPosts.add(post);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        emptyMsgLayout.setVisibility(View.GONE);
+                        postSwitchBtn.setVisibility(View.VISIBLE);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                    mTempPosts.clear();
                 }
-                if (mPosts.isEmpty()) {
-                    recyclerView.setVisibility(View.GONE);
-                    emptyMsgLayout.setVisibility(View.VISIBLE);
-                    postSwitchBtn.setVisibility(View.VISIBLE);
-                } else {
-                    PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null);
-                    mPosts.add(post);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    emptyMsgLayout.setVisibility(View.GONE);
-                    postSwitchBtn.setVisibility(View.VISIBLE);
-                    mAdapter.notifyDataSetChanged();
-                }
-                mTempPosts.clear();
             } else {
-                showProgressBar();
-                mTempPosts.addAll(mAllPosts);
-                mTempPosts.remove(mTempPosts.size() - 1);
-                mPosts.clear();
-                for (PostModel post : mTempPosts) {
-                    if (!post.getPostType().equals("NoMorePost")) {
-                        if (post.getPostCategory().equals(Constants.uCommunity) && post.getUserId().equals(Constants.uid)) {
-                            mPosts.add(post);
+                if (!mAllPosts.isEmpty()) {
+                    showProgressBar();
+                    mTempPosts.addAll(mAllPosts);
+                    mTempPosts.remove(mTempPosts.size() - 1);
+                    mPosts.clear();
+                    for (PostModel post : mTempPosts) {
+                        if (!post.getPost_type().equalsIgnoreCase("NoMorePost")) {
+                            if (checkIfPostCommunityEqualsMyCommunity(post) && post.getUser_id().equalsIgnoreCase(Constants.uid)) {
+                                mPosts.add(post);
+                            }
                         }
                     }
+                    if (mPosts.isEmpty()) {
+                        recyclerView.setVisibility(View.GONE);
+                        emptyMsgLayout.setVisibility(View.VISIBLE);
+                        postSwitchBtn.setVisibility(View.VISIBLE);
+                    } else {
+                        PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
+                        mPosts.add(post);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        emptyMsgLayout.setVisibility(View.GONE);
+                        postSwitchBtn.setVisibility(View.VISIBLE);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                    mTempPosts.clear();
+                    hideProgressBar();
                 }
-                if (mPosts.isEmpty()) {
-                    recyclerView.setVisibility(View.GONE);
-                    emptyMsgLayout.setVisibility(View.VISIBLE);
-                    postSwitchBtn.setVisibility(View.VISIBLE);
-                } else {
-                    PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null);
-                    mPosts.add(post);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    emptyMsgLayout.setVisibility(View.GONE);
-                    postSwitchBtn.setVisibility(View.VISIBLE);
-                    mAdapter.notifyDataSetChanged();
-                }
-                mTempPosts.clear();
-                hideProgressBar();
             }
         }
     }
@@ -508,6 +546,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void subscribeToPosts() {
+        mPosts.clear();
+        mAllPosts.clear();
+        mTempPosts.clear();
         totalPostsLoaded = 0;
         showProgressBar();
         postDataRef = FirebaseDatabase.getInstance().getReference("Posts_Table");
@@ -519,17 +560,8 @@ public class MainActivity extends AppCompatActivity {
                         long totalPosts = dataSnapshot.getChildrenCount();
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             PostModel post = dsp.getValue(PostModel.class);
-                            if (post != null) {
-                                if (post.getPostCategory().equals("Public") || post.getPostCategory().equals(Constants.uCommunity)) {
-                                    fetchPostUserInfo(post, totalPosts);
-                                } else {
-                                    totalPostsLoaded++;
-                                    if (totalPostsLoaded == totalPosts) {
-                                        prepareRecyclerView(true, false);
-                                        loadPostsUserImages();
-                                    }
-                                }
-                            }
+                            post.setPost_id(dsp.getKey());
+                            fetchPostUserInfo(post, totalPosts);
                         }
                     } else {
                         prepareRecyclerView(true, false);
@@ -549,87 +581,87 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateDrawerProfileImageBorder(String community) {
         if (community != null) {
-            if (community.equals("Architecture")) {
+            if (community.equalsIgnoreCase("Architecture")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_arch));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_arch));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_arch), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Biosciences")) {
+            } else if (community.equalsIgnoreCase("Biosciences")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_bioSci));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_bioSci));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_bioSci), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Chemical Engineering")) {
+            } else if (community.equalsIgnoreCase("Chemical Engineering")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_chemEng));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_chemEng));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_chemEng), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Chemistry")) {
+            } else if (community.equalsIgnoreCase("Chemistry")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_chem));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_chem));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_chem), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Civil Engineering")) {
+            } else if (community.equalsIgnoreCase("Civil Engineering")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_civil));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_civil));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_civil), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Computer Science")) {
+            } else if (community.equalsIgnoreCase("Computer Science")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_cs));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_cs));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_cs), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Department of Biotechnology")) {
+            } else if (community.equalsIgnoreCase("Department of Biotechnology")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_dobt));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_dobt));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_dobt), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Development Studies")) {
+            } else if (community.equalsIgnoreCase("Development Studies")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_devStd));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_devStd));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_devStd), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Earth Sciences")) {
+            } else if (community.equalsIgnoreCase("Earth Sciences")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_es));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_es));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_es), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Economics")) {
+            } else if (community.equalsIgnoreCase("Economics")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_economics));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_economics));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_economics), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Electrical and Computer Engineering")) {
+            } else if (community.equalsIgnoreCase("Electrical and Computer Engineering")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_ece));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_ece));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_ece), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Environmental Sciences")) {
+            } else if (community.equalsIgnoreCase("Environmental Sciences")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_env_s));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_env_s));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_env_s), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Health Informatics")) {
+            } else if (community.equalsIgnoreCase("Health Informatics")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_health));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_health));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_health), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Humanities")) {
+            } else if (community.equalsIgnoreCase("Humanities")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_hum));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_hum));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_hum), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Management Sciences")) {
+            } else if (community.equalsIgnoreCase("Management Sciences")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_ms));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_ms));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_ms), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Mathematics")) {
+            } else if (community.equalsIgnoreCase("Mathematics")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_math));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_math));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_math), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Mechanical Engineering")) {
+            } else if (community.equalsIgnoreCase("Mechanical Engineering")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_me));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_me));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_me), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Meteorology")) {
+            } else if (community.equalsIgnoreCase("Meteorology")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_met));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_met));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_met), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Pharmacy")) {
+            } else if (community.equalsIgnoreCase("Pharmacy")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_pharm));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_pharm));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_pharm), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Physics")) {
+            } else if (community.equalsIgnoreCase("Physics")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_physics));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_physics));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_physics), PorterDuff.Mode.SRC_ATOP);
-            } else if (community.equals("Statistics")) {
+            } else if (community.equalsIgnoreCase("Statistics")) {
                 profileImagePost.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_stats));
                 drawerProfileImagView.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.category_stats));
                 userCommunityTxtView.getBackground().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.category_stats), PorterDuff.Mode.SRC_ATOP);
@@ -643,9 +675,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        mTempPosts.clear();
-        mPosts.clear();
-        mAllPosts.clear();
+        mTempPosts = null;
+        mPosts = null;
+        mAllPosts = null;
         super.onDestroy();
     }
 
@@ -663,5 +695,19 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void showPostDetail(PostModel post) {
+        Intent intent = new Intent(MainActivity.this, PostDetailActivity.class);
+        intent.putExtra("PostObject", post);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showProfile(String id) {
+        Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+        i.putExtra("uid", id);
+        startActivity(i);
     }
 }

@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/app_logo" />
+        android:src="@drawable/loading" />
 
     <LinearLayout
         android:id="@+id/appTitle"
@@ -60,6 +60,7 @@
         app:cardCornerRadius="2dp"
         android:elevation="0dp"
         app:cardElevation="0dp"
+        android:foreground="@drawable/background_rectangle_ouline"
         android:id="@+id/emailLayout"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -83,7 +84,7 @@
             android:textSize="18sp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/open_sans_light"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:backgroundTint="@color/fullwhite" />
@@ -91,6 +92,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:foreground="@drawable/background_rectangle_ouline"
         app:cardCornerRadius="2dp"
         android:layout_below="@id/emailLayout"
         android:layout_marginStart="16dp"
@@ -112,7 +114,7 @@
             android:maxLines="1"
             android:textColor="@color/darkGray"
             android:hint="Password"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/open_sans_light"
             android:inputType="textPassword"
             android:textColorHint="@color/darkGray"
             android:textSize="18sp"
@@ -145,6 +147,9 @@
         app:cardElevation="0dp"
         app:cardCornerRadius="4dp"
         android:id="@+id/loginBtn"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

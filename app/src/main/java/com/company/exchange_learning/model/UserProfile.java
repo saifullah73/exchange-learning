@@ -2,8 +2,6 @@ package com.company.exchange_learning.model;
 
 import androidx.annotation.NonNull;
 
-import com.company.exchange_learning.model.BasicUser;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -87,7 +85,7 @@ public class UserProfile implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        String abc = "Overview: "+my_overview+" University: "+my_university+" Skills: "+my_skills.toArray().toString()+" Title: "+my_title+" Department: "+my_department;
+        String abc = "Overview: " + my_overview + " University: " + my_university + " Title: " + my_title + " Department: " + my_department;
         return abc;
     }
 }
