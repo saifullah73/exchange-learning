@@ -111,27 +111,30 @@
             android:text="Software Engineer"
             android:textColor="@color/lessGray"
             android:textSize="16sp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name_view" />
+            app:layout_constraintTop_toBottomOf="@id/name_view"
+            tools:visibility="visible" />
 
         <LinearLayout
-            android:gravity="center"
             android:id="@+id/followLayout"
-            android:orientation="horizontal"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/aboutContent"
-            app:layout_constraintTop_toBottomOf="@id/titleViewUpper">
+            app:layout_constraintTop_toBottomOf="@id/titleViewUpper"
+            tools:visibility="visible">
 
 
             <androidx.cardview.widget.CardView
-                android:layout_marginEnd="4dp"
                 android:id="@+id/followBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="4dp"
                 android:layout_marginBottom="16dp"
                 android:background="@color/fullwhite"
                 android:clickable="true"
@@ -170,10 +173,10 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_marginStart="4dp"
                 android:id="@+id/followersBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@color/fullwhite"
@@ -192,9 +195,9 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_marginTop="2dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="4dp"
+                        android:layout_marginTop="2dp"
                         android:src="@drawable/ic_follower" />
 
                     <TextView
@@ -216,23 +219,23 @@
         </LinearLayout>
 
         <LinearLayout
-            android:gravity="center"
             android:id="@+id/singularFollowFollowingButtonLayout"
-            android:orientation="horizontal"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/aboutContent"
-            app:layout_constraintTop_toBottomOf="@id/titleViewUpper">
+            app:layout_constraintTop_toBottomOf="@id/titleViewUpper"
+            tools:visibility="gone">
 
 
             <androidx.cardview.widget.CardView
-                android:layout_marginEnd="4dp"
                 android:id="@+id/singularFollowFollowingButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="4dp"
                 android:layout_marginBottom="16dp"
                 android:background="@color/fullwhite"
                 android:clickable="true"
@@ -248,7 +251,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id= "@+id/follow_following_indicator"
+                        android:id="@+id/follow_following_indicator"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center_vertical"
@@ -256,7 +259,7 @@
                         android:src="@drawable/ic_done_black_24dp" />
 
                     <TextView
-                        android:id= "@+id/follow_following_indicator_text"
+                        android:id="@+id/follow_following_indicator_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -601,6 +604,50 @@
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@id/emailImageView"
                     android:text="email@gmail.com"
+                    android:textColor="@color/lessGray"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/address_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:id="@+id/addressImageView"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_location" />
+
+                <TextView
+                    android:id="@+id/address_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@id/addressImageView"
+                    android:text="Address"
+                    android:textColor="@color/drawerMenuGray"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/address_text"
+                    android:inputType="textMultiLine"
+                    android:minLines="1"
+                    android:maxLines="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/address_textView"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@id/addressImageView"
+                    android:text="my address"
                     android:textColor="@color/lessGray"
                     android:textSize="16sp"
                     android:textStyle="bold" />

@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -47,7 +50,6 @@ import com.wang.avi.AVLoadingIndicatorView;
 import org.apache.commons.text.WordUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +62,7 @@ public class EditProfile extends AppCompatActivity {
     public static final int CHOOSE_FROM_GALLERY = 99;
 
     private static final String TAG = "EditProfile";
-    private EditText titleView, universityView, departmentView, skillsView, overviewView;
+    private EditText titleView, universityView, departmentView, skillsView, overviewView, addressView;
     private CardView updateProfileBtn;
     private TextView updateProfileBtnTxt;
     private AVLoadingIndicatorView progressBar;
@@ -93,6 +95,7 @@ public class EditProfile extends AppCompatActivity {
         titleView = findViewById(R.id.updateProfileTitleEdit);
         universityView = findViewById(R.id.updateProfileUniEdit);
         departmentView = findViewById(R.id.updateProfileDptEdit);
+        addressView = findViewById(R.id.updateProfileaddrEdit);
         skillsView = findViewById(R.id.updateProfileSkillEdit);
         overviewView = findViewById(R.id.updateProfileOverViewEdit);
         community_spinner = findViewById(R.id.updateProfileCommSpinner);
@@ -139,6 +142,8 @@ public class EditProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     private void chooseImageToUpload() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -171,8 +176,7 @@ public class EditProfile extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.READ_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_GRANTED) {
+                            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         chooseImageToUpload();
                     }
                 } else {
@@ -200,6 +204,9 @@ public class EditProfile extends AppCompatActivity {
         }
         if (profile.getMy_department() != null && !profile.getMy_department().equals("")) {
             departmentView.setText(profile.getMy_department());
+        }
+        if (profile.getMy_address() != null && !profile.getMy_address().equals("")) {
+            addressView.setText(profile.getMy_address());
         }
         if (profile.getMy_title() != null && !profile.getMy_title().equals("")) {
             titleView.setText(profile.getMy_title());
@@ -265,9 +272,10 @@ public class EditProfile extends AppCompatActivity {
         updateProfileBtn.setEnabled(true);
     }
 
-    private void updateData(String imageURL) {
+    private void updateData(Uri imageURL) {
         String title = WordUtils.capitalize(titleView.getText().toString());
         String dpt = WordUtils.capitalize(departmentView.getText().toString());
+        String addr = WordUtils.capitalize(addressView.getText().toString());
         String uni = WordUtils.capitalize(universityView.getText().toString());
         String overview = overviewView.getText().toString();
         List<String> skills = Arrays.asList(skillsView.getText().toString().trim().split(","));
@@ -277,11 +285,16 @@ public class EditProfile extends AppCompatActivity {
             Map<String, Object> updates = new HashMap<>();
             updates.put("my_title", title);
             updates.put("my_department", dpt);
-            updates.put("my_skills", skills);
+            if (skills.size() != 0 && !skills.get(0).equals("")){
+                updates.put("my_skills", skills);
+            }
             updates.put("my_overview", overview);
             updates.put("my_university", uni);
+            updates.put("my_address",addr);
             if (imageURL != null) {
-                updates.put("profile_image", imageURL);
+                UserProfileChangeRequest.Builder ii = new UserProfileChangeRequest.Builder();
+                ii.setPhotoUri(imageURL);
+                FirebaseAuth.getInstance().getCurrentUser().updateProfile(ii.build());
             }
             dbRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
                 @Override
@@ -312,7 +325,7 @@ public class EditProfile extends AppCompatActivity {
         } else {
             if (titleView.getText().toString().equalsIgnoreCase(profile.getMy_title()) && overviewView.getText().toString().equalsIgnoreCase(profile.getMy_overview())
                     && universityView.getText().toString().equalsIgnoreCase(profile.getMy_university()) && departmentView.getText().toString().equalsIgnoreCase(profile.getMy_department())
-                    && skillsView.getText().toString().trim().equalsIgnoreCase(convert())
+                    && skillsView.getText().toString().trim().equalsIgnoreCase(convert()) && addressView.getText().toString().equalsIgnoreCase(profile.getMy_address())
             ) {
                 Toast.makeText(EditProfile.this, "No changes made", Toast.LENGTH_SHORT).show();
                 hideProgress();
@@ -322,11 +335,17 @@ public class EditProfile extends AppCompatActivity {
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("my_title", titleView.getText().toString().trim());
                     updates.put("my_department", departmentView.getText().toString().trim());
-                    updates.put("my_skills", Arrays.asList(skillsView.getText().toString().trim().split(",")));
+                    updates.put("my_address",addressView.getText().toString().trim());
+                    List<String> skills2 = Arrays.asList(skillsView.getText().toString().trim().split(","));
+                    if (skills2.size() != 0 && !skills2.get(0).equals("")){
+                        updates.put("my_skills", skills2);
+                    }
                     updates.put("my_overview", overviewView.getText().toString().trim());
                     updates.put("my_university", universityView.getText().toString().trim());
                     if (imageURL != null) {
-                        updates.put("profile_image", imageURL);
+                        UserProfileChangeRequest.Builder ii = new UserProfileChangeRequest.Builder();
+                        ii.setPhotoUri(imageURL);
+                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(ii.build());
                     }
                     dbRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
                         @Override
@@ -382,7 +401,7 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
-                            updateData(task.getResult().toString());
+                            updateData(task.getResult());
                         } else {
                             Toast.makeText(getApplicationContext(), "Error While Uploading Profile Image", Toast.LENGTH_LONG).show();
                             hideProgress();
@@ -418,10 +437,16 @@ public class EditProfile extends AppCompatActivity {
 
     private String convert(){
         String output = "";
-        for (int x = 0 ; x < profile.getMy_skills().size(); x++){
-            output += profile.getMy_skills().get(x) + ", ";
+        if (profile.getMy_skills() != null) {
+            for (int x = 0; x < profile.getMy_skills().size(); x++) {
+                output += profile.getMy_skills().get(x) + ", ";
+            }
+            return output.substring(0, output.length() - 2);
         }
-         return output.substring(0,output.length()-2);
+        else{
+            return output;
+        }
+
     }
 
 

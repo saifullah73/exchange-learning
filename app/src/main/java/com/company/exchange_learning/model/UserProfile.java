@@ -11,6 +11,7 @@ public class UserProfile implements Serializable {
     List<String> my_skills;
     String my_title;
     String my_university;
+    String my_address;
     BasicUser user;
 
     public UserProfile(){
@@ -32,6 +33,14 @@ public class UserProfile implements Serializable {
         this.my_skills = my_skills;
         this.my_title = my_title;
         this.my_university = my_university;
+    }
+
+    public String getMy_address() {
+        return my_address;
+    }
+
+    public void setMy_address(String my_address) {
+        this.my_address = my_address;
     }
 
     public String getMy_overview() {

@@ -348,6 +348,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyItemChanged(pos);
     }
 
+
     private int randomizeColor() {
         int[] colors = {R.color.category_bioSci, R.color.category_chem, R.color.category_chemEng, R.color.category_hum, R.color.category_met
                 , R.color.category_civil, R.color.category_cs, R.color.category_devStd, R.color.category_math, R.color.category_pharm};
@@ -420,4 +421,6 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             thirdCateogryHolder = itemView.findViewById(R.id.postImgItemThirdCategoryLayout);
         }
     }
+
+
 }

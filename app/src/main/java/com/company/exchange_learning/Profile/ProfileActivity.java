@@ -53,8 +53,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivityTAG";
-    private String uid;
-    private boolean mode = false;
+    private String uid = Constants.uid;
+    private boolean mode = true;
     private UserProfile profile = null;
     private BasicUser basicUser = null;
     private CardView editBtn, followBtn, followerBtn;
@@ -65,8 +65,8 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout singularFollowFollowingButtonLayout;
     private ImageView follow_follower_indicator_view;
     private TextView follow_follower_indicator_view_text;
-    private RelativeLayout titleContainer, universityContainer, departmentContainer, communityContainer, location_container, skill_container, email_container;
-    private TextView titleView, universityView, departmentView, communityView, locationView, skillView, emailView, nameView, overviewView, titleUpper;
+    private RelativeLayout titleContainer, universityContainer, departmentContainer, communityContainer, location_container, skill_container, email_container,addressContainer;
+    private TextView titleView, universityView, departmentView, communityView, locationView, skillView, emailView, nameView, overviewView, titleUpper,addressView;
     private LinearLayout data_holder;
     private AVLoadingIndicatorView progressBar;
     private FrameLayout header;
@@ -80,9 +80,11 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         loadViews();
-        uid = getIntent().getStringExtra("uid");
-        if (uid.equals(Constants.uid)) {
-            mode = true;
+        if (getIntent() != null && getIntent().getStringExtra("uid") != null) {
+            uid = getIntent().getStringExtra("uid");
+            if (!uid.equals(Constants.uid)) {
+                mode = false;
+            }
         }
         loadData(mode);
     }
@@ -101,6 +103,8 @@ public class ProfileActivity extends AppCompatActivity {
         universityView = findViewById(R.id.university_text);
         departmentContainer = findViewById(R.id.department_container);
         departmentView = findViewById(R.id.department_text);
+        addressContainer = findViewById(R.id.address_container);
+        addressView = findViewById(R.id.address_text);
         communityContainer = findViewById(R.id.community_container);
         communityView = findViewById(R.id.community_text);
         location_container = findViewById(R.id.location_container);
@@ -151,18 +155,17 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void populateViews(final UserProfile profile, boolean mode) {
         toolbarTitle.setText(WordUtils.capitalize(profile.getUser().getName()));
-        aboutContent.setVisibility(View.VISIBLE);
         Log.i("TESTABC", String.valueOf(mode));
         if (!mode) {
-            editBtn.setVisibility(View.GONE);
-            followersButtons.setVisibility(View.GONE);
+            editBtn.setVisibility(View.INVISIBLE);
+            followersButtons.setVisibility(View.INVISIBLE);
             singularFollowFollowingButtonLayout.setVisibility(View.VISIBLE);
             setFollowButtonText();
         }
         else{
             editBtn.setVisibility(View.VISIBLE);
             followersButtons.setVisibility(View.VISIBLE);
-            singularFollowFollowingButtonLayout.setVisibility(View.GONE);
+            singularFollowFollowingButtonLayout.setVisibility(View.INVISIBLE);
         }
         singularFollowFollowingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,10 +201,19 @@ public class ProfileActivity extends AppCompatActivity {
             nameView.setVisibility(View.GONE);
         }
         if (profile.getMy_overview() != null && !profile.getMy_overview().equals("")) {
+            aboutContent.setVisibility(View.VISIBLE);
             overviewView.setVisibility(View.VISIBLE);
             overviewView.setText(profile.getMy_overview());
         } else {
+            aboutContent.setVisibility(View.INVISIBLE);
             overviewView.setVisibility(View.GONE);
+        }
+        if (profile.getMy_address() != null && !profile.getMy_address().equals("")){
+            addressContainer.setVisibility(View.VISIBLE);
+            addressView.setText(profile.getMy_address());
+        }
+        else{
+            addressContainer.setVisibility(View.GONE);
         }
         if (profile.getMy_department() != null && !profile.getMy_department().equals("")) {
             departmentContainer.setVisibility(View.VISIBLE);
@@ -211,10 +223,11 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if (profile.getMy_title() != null && !profile.getMy_title().equals("")) {
             titleContainer.setVisibility(View.VISIBLE);
+            titleUpper.setVisibility(View.VISIBLE);
             titleView.setText(WordUtils.capitalize(profile.getMy_title()));
             titleUpper.setText(WordUtils.capitalize(profile.getMy_title()));
         } else {
-            titleUpper.setVisibility(View.GONE);
+            titleUpper.setVisibility(View.INVISIBLE);
             titleContainer.setVisibility(View.GONE);
         }
         if (profile.getMy_university() != null && !profile.getMy_university().equals("")) {
@@ -223,7 +236,7 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             universityContainer.setVisibility(View.GONE);
         }
-        if (profile.getMy_skills() != null && profile.getMy_skills().size() != 0){
+        if (profile.getMy_skills() != null && profile.getMy_skills().size() != 0 && !profile.getMy_skills().get(0).equals("")){
             skill_container.setVisibility(View.VISIBLE);
             String output = "";
             for (int x = 0 ; x < profile.getMy_skills().size(); x++){
@@ -343,15 +356,15 @@ public class ProfileActivity extends AppCompatActivity {
         toolbarTitle.setVisibility(View.VISIBLE);
 
         if (!mode) {
-            editBtn.setVisibility(View.GONE);
-            followersButtons.setVisibility(View.GONE);
+            editBtn.setVisibility(View.INVISIBLE);
+            followersButtons.setVisibility(View.INVISIBLE);
             singularFollowFollowingButtonLayout.setVisibility(View.VISIBLE);
             setFollowButtonText();
         }
         else{
             editBtn.setVisibility(View.VISIBLE);
             followersButtons.setVisibility(View.VISIBLE);
-            singularFollowFollowingButtonLayout.setVisibility(View.GONE);
+            singularFollowFollowingButtonLayout.setVisibility(View.INVISIBLE);
         }
     }
 

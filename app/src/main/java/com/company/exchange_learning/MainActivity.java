@@ -262,6 +262,8 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         mAllPosts = new ArrayList<>();
         mAdapter = new PostsAdapter(mPosts, getApplicationContext(), this, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
@@ -439,7 +441,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                     postSwitchBtn.setVisibility(View.VISIBLE);
                 } else {
                     PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
-                    mPosts.add(post);
+                    mPosts.add(0,post);
                     recyclerView.setVisibility(View.VISIBLE);
                     emptyMsgLayout.setVisibility(View.GONE);
                     postSwitchBtn.setVisibility(View.VISIBLE);
@@ -465,7 +467,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                         postSwitchBtn.setVisibility(View.VISIBLE);
                     } else {
                         PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
-                        mPosts.add(post);
+                        mPosts.add(0,post);
                         recyclerView.setVisibility(View.VISIBLE);
                         emptyMsgLayout.setVisibility(View.GONE);
                         postSwitchBtn.setVisibility(View.VISIBLE);
@@ -494,7 +496,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                         postSwitchBtn.setVisibility(View.VISIBLE);
                     } else {
                         PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
-                        mPosts.add(post);
+                        mPosts.add(0,post);
                         recyclerView.setVisibility(View.VISIBLE);
                         emptyMsgLayout.setVisibility(View.GONE);
                         postSwitchBtn.setVisibility(View.VISIBLE);
@@ -521,7 +523,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                         postSwitchBtn.setVisibility(View.VISIBLE);
                     } else {
                         PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
-                        mPosts.add(post);
+                        mPosts.add(0,post);
                         recyclerView.setVisibility(View.VISIBLE);
                         emptyMsgLayout.setVisibility(View.GONE);
                         postSwitchBtn.setVisibility(View.VISIBLE);

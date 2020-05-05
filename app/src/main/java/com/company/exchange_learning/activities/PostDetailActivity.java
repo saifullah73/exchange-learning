@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +44,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
 
     Toolbar toolbar;
     CircleImageView userImage;
-    TextView userName, postType, postTimeDate, postTitle, postBody, exchangeTxt, learningTxt;
+    TextView userName, postType, postTimeDate, postTitle, postBody, exchangeTxt, learningTxt, submitProposalButtonText;
     LinearLayout firstCategory, secondCategory, thirdCategory, firstSkills, secondSkills, thirdSkills, skillsHolder, communityHolder;
     ImageView postMainImage, moreBtn;
     CardView submitProposalBtn, retryBtn;
@@ -126,22 +127,22 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                                 }
                             }
                             if (post.getPost_image() == null || post.getPost_image().equals("")) {
-                                handlePostWithNoImage(post, isProposalSubmitted);
+                                handlePostWithNoImage(post, isProposalSubmitted,false);
                             } else {
-                                handlePostWithImage(post, isProposalSubmitted);
+                                handlePostWithImage(post, isProposalSubmitted,false);
                             }
                         } else {
                             if (post.getPost_image() == null || post.getPost_image().equals("")) {
-                                handlePostWithNoImage(post, false);
+                                handlePostWithNoImage(post, false,false);
                             } else {
-                                handlePostWithImage(post, false);
+                                handlePostWithImage(post, false,false);
                             }
                         }
                     } else {
                         if (post.getPost_image() == null || post.getPost_image().equals("")) {
-                            handlePostWithNoImage(post, false);
+                            handlePostWithNoImage(post, false,false);
                         } else {
-                            handlePostWithImage(post, false);
+                            handlePostWithImage(post, false,false);
                         }
                     }
                 }
@@ -149,9 +150,9 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     if (post.getPost_image() == null || post.getPost_image().equals("")) {
-                        handlePostWithNoImage(post, false);
+                        handlePostWithNoImage(post, false,false);
                     } else {
-                        handlePostWithImage(post, false);
+                        handlePostWithImage(post, false,false);
                     }
                 }
             });
@@ -159,14 +160,14 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
             shouldHideEditBtn = false;
             invalidateOptionsMenu();
             if (post.getPost_image() == null || post.getPost_image().equals("")) {
-                handlePostWithNoImage(post, true);
+                handlePostWithNoImage(post, true, true);
             } else {
-                handlePostWithImage(post, true);
+                handlePostWithImage(post, true,true);
             }
         }
     }
 
-    private void handlePostWithImage(final PostModel post, boolean isProposalSubmitted) {
+    private void handlePostWithImage(final PostModel post, boolean isProposalSubmitted, boolean isCurrentUser) {
         setContentView(R.layout.activity_image_post_detail);
         initToolbar();
         exchangeTxt.setText("Post Detail");
@@ -180,12 +181,16 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         secondCategory = findViewById(R.id.postImageDetailSecondCategory);
         thirdCategory = findViewById(R.id.postImageDetailThirdCategory);
         moreBtn = findViewById(R.id.postImageDetailMoreBtn);
-        moreBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showReportMenu(view);
-            }
-        });
+        if (!isCurrentUser) {
+            moreBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showReportMenu(view);
+                }
+            });
+        }else{
+            moreBtn.setVisibility(View.GONE);
+        }
 
         firstSkills = findViewById(R.id.postImageDetailFirstSkills);
         secondSkills = findViewById(R.id.postImageDetailSecondSkills);
@@ -201,8 +206,24 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
             }
         });
         submitProposalBtn = findViewById(R.id.postImageSubmitProposalBtn);
+        submitProposalButtonText = findViewById(R.id.submit_proposal_button_text_image);
 
-        submitProposalBtn.setVisibility(isProposalSubmitted ? View.GONE : View.VISIBLE);
+        Log.i("TESTBC",String.valueOf(isProposalSubmitted) + " " + String.valueOf(isCurrentUser));
+        if (!isProposalSubmitted) {
+            submitProposalBtn.setVisibility(View.VISIBLE);
+            if (isCurrentUser) {
+                submitProposalButtonText.setText("VIEW PROPOSALS");
+            } else {
+                submitProposalButtonText.setText("SUBMIT PROPOSALS");
+            }
+        }else {
+            if (isCurrentUser) {
+                submitProposalButtonText.setText("VIEW PROPOSALS");
+                submitProposalBtn.setVisibility(View.VISIBLE);
+            } else {
+                submitProposalBtn.setVisibility(View.GONE);
+            }
+        }
 
         userName.setText(post.getPost_user_posted_name() == null ? "NoName" : WordUtils.capitalize(post.getPost_user_posted_name()));
         postType.setText(post.getPost_type());
@@ -225,7 +246,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         menu.show();
     }
 
-    private void handlePostWithNoImage(PostModel post, boolean isProposalSubmitted) {
+    private void handlePostWithNoImage(PostModel post, boolean isProposalSubmitted, boolean isCurrentUser) {
         setContentView(R.layout.activity_no_image_post_detail);
         initToolbar();
         exchangeTxt.setText("Post Detail");
@@ -236,26 +257,43 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         postTitle = findViewById(R.id.noPostImageDetailPostTitle);
         postBody = findViewById(R.id.noPostImageDetailPostBody);
         submitProposalBtn = findViewById(R.id.postNoImageSubmitProposalBtn);
+        submitProposalButtonText = findViewById(R.id.submit_proposal_button_text_no_image);
         firstCategory = findViewById(R.id.noPostImageDetailFirstCategory);
         secondCategory = findViewById(R.id.noPostImageDetailSecondCategory);
         thirdCategory = findViewById(R.id.noPostImageDetailThirdCategory);
         moreBtn = findViewById(R.id.noPostImageDetailMoreBtn);
-
         firstSkills = findViewById(R.id.noPostImageDetailFirstSkills);
         secondSkills = findViewById(R.id.noPostImageDetailSecondSkills);
         thirdSkills = findViewById(R.id.noPostImageDetailThirdSkills);
 
         skillsHolder = findViewById(R.id.footer2);
         communityHolder = findViewById(R.id.footer);
-
-        moreBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showReportMenu(view);
+        if (!isCurrentUser) {
+            moreBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showReportMenu(view);
+                }
+            });
+        }else{
+            moreBtn.setVisibility(View.GONE);
+        }
+        Log.i("TESTBC",String.valueOf(isProposalSubmitted) + " " + String.valueOf(isCurrentUser));
+        if (!isProposalSubmitted) {
+            submitProposalBtn.setVisibility(View.VISIBLE);
+            if (isCurrentUser) {
+                submitProposalButtonText.setText("VIEW PROPOSALS");
+            } else {
+                submitProposalButtonText.setText("SUBMIT PROPOSALS");
             }
-        });
-
-        submitProposalBtn.setVisibility(isProposalSubmitted ? View.GONE : View.VISIBLE);
+        }else {
+            if (isCurrentUser) {
+                submitProposalButtonText.setText("VIEW PROPOSALS");
+                submitProposalBtn.setVisibility(View.VISIBLE);
+            } else {
+                submitProposalBtn.setVisibility(View.GONE);
+            }
+        }
 
         userName.setText(post.getPost_user_posted_name() == null ? "NoName" : WordUtils.capitalize(post.getPost_user_posted_name()));
         postType.setText(post.getPost_type());
@@ -370,7 +408,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
 
     private void populateSkills() {
         if (profile != null) {
-            if (profile.getMy_skills().size() > 0) {
+            if (profile.getMy_skills() != null && profile.getMy_skills().size() > 0) {
                 skillsHolder.setVisibility(View.VISIBLE);
                 int n = profile.getMy_skills().size();
                 if (n <= 2) {

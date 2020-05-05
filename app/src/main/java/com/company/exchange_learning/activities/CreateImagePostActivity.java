@@ -220,7 +220,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
             if (isImageLoaded && uri != null) {
                 if (isActionNewPost) {
                     if (mSelectedCommunities != null && mSelectedCommunities.size() != 0) {
-                        if (imgInfo.length() > 50) {
+                        if (imgInfo.length() > 20) {
                             showProgress();
                             storageRef = FirebaseStorage.getInstance().getReference().child("post-images/").child(Constants.uid + "/" + Constants.uid + "_image" + DateTimeUtils.getCurrentDateTime());
                             storageRef.putFile(uri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -266,7 +266,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            Toast.makeText(this, "Image info should be at least 50 characters", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Image info should be at least 20 characters", Toast.LENGTH_SHORT).show();
                             hideProgress();
                         }
                     } else {
@@ -279,7 +279,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                     } else {
                         if (isImageChangedForUpdate) {
                             if (mSelectedCommunities != null && mSelectedCommunities.size() != 0) {
-                                if (imgInfo.length() > 49) {
+                                if (imgInfo.length() >  20) {
                                     showProgress();
                                     storageRef = FirebaseStorage.getInstance().getReference().child("post-images/").child(Constants.uid + "/" + Constants.uid + "_image" + DateTimeUtils.getCurrentDateTime());
                                     storageRef.putFile(uri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -338,7 +338,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                                         }
                                     });
                                 } else {
-                                    Toast.makeText(this, "Image info should be at least 50 characters", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Image info should be at least 20 characters", Toast.LENGTH_SHORT).show();
                                     hideProgress();
                                 }
                             } else {
@@ -346,7 +346,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                             }
                         } else {
                             if (mSelectedCommunities != null && mSelectedCommunities.size() != 0) {
-                                if (imgInfo.length() > 49) {
+                                if (imgInfo.length() > 20) {
                                     postRef = FirebaseDatabase.getInstance().getReference("Posts_Table").child(post.getPost_id());
                                     showProgress();
                                     Map<String, Object> updates = new HashMap<>();
@@ -372,7 +372,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                                         }
                                     });
                                 } else {
-                                    Toast.makeText(this, "Image info should be at least 50 characters", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Image info should be at least 20 characters", Toast.LENGTH_SHORT).show();
                                     hideProgress();
                                 }
                             } else {
