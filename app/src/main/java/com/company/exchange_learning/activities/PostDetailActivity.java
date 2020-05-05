@@ -5,10 +5,12 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -25,14 +28,20 @@ import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.company.exchange_learning.Constants;
+import com.company.exchange_learning.Proposals.ProposalListActivity;
 import com.company.exchange_learning.R;
+import com.company.exchange_learning.model.Notification;
 import com.company.exchange_learning.model.PostModel;
+import com.company.exchange_learning.model.Proposal;
 import com.company.exchange_learning.model.UserProfile;
+import com.company.exchange_learning.utils.DateTimeUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.apache.commons.text.WordUtils;
 
@@ -224,6 +233,19 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                 submitProposalBtn.setVisibility(View.GONE);
             }
         }
+        submitProposalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (submitProposalButtonText.getText().equals("SUBMIT PROPOSALS")) {
+                    showSendProposalDialog();
+                }else{
+                    Intent i = new Intent(PostDetailActivity.this, ProposalListActivity.class);
+                    i.putExtra("id",post.post_id);
+                    i.putExtra("mode","Post");
+                    startActivity(i);
+                }
+            }
+        });
 
         userName.setText(post.getPost_user_posted_name() == null ? "NoName" : WordUtils.capitalize(post.getPost_user_posted_name()));
         postType.setText(post.getPost_type());
@@ -246,7 +268,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         menu.show();
     }
 
-    private void handlePostWithNoImage(PostModel post, boolean isProposalSubmitted, boolean isCurrentUser) {
+    private void handlePostWithNoImage(final PostModel post, boolean isProposalSubmitted, boolean isCurrentUser) {
         setContentView(R.layout.activity_no_image_post_detail);
         initToolbar();
         exchangeTxt.setText("Post Detail");
@@ -294,6 +316,19 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                 submitProposalBtn.setVisibility(View.GONE);
             }
         }
+        submitProposalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (submitProposalButtonText.getText().equals("SUBMIT PROPOSALS")) {
+                    showSendProposalDialog();
+                }else{
+                    Intent i = new Intent(PostDetailActivity.this, ProposalListActivity.class);
+                    i.putExtra("id",post.post_id);
+                    i.putExtra("mode","Post");
+                    startActivity(i);
+                }
+            }
+        });
 
         userName.setText(post.getPost_user_posted_name() == null ? "NoName" : WordUtils.capitalize(post.getPost_user_posted_name()));
         postType.setText(post.getPost_type());
@@ -305,6 +340,76 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
 
         populateCommunities(post);
         populateSkills();
+    }
+
+    private void showSendProposalDialog(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.send_proposal_layout, null, false);
+        builder.setView(view);
+        builder.setCancelable(false);
+        final AlertDialog dialog = builder.show();
+        final EditText proposal_text = view.findViewById(R.id.sp_proposal_field);
+        final TextView submit = view.findViewById(R.id.send_proposal);
+        final TextView cancel = view.findViewById(R.id.cancel_proposal_dialog);
+        final AVLoadingIndicatorView progress = view.findViewById(R.id.submit_proposal_loader);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String m_Text = proposal_text.getText().toString().trim();
+                if ( m_Text.length() > 49) {
+                    submit.setVisibility(View.GONE);
+                    cancel.setVisibility(View.GONE);
+                    progress.show();
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("Post_Proposal_Table").child(post.getPost_id());
+                    Proposal proposal = new Proposal(m_Text,getTimeDate(),Constants.uid);
+                    myRef.push().setValue(proposal, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            if (databaseError == null) {
+                                Log.i("TASTA",databaseReference.getKey());
+                                DatabaseReference myRef2 = database.getReference("Notification_Table/Proposal").child(post.getUser_id());
+                                Notification notif = new Notification(getTimeDate(),post.getPost_id(),databaseReference.getKey(),"exchangelearning");
+                                myRef2.push().setValue(notif, new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                        if (databaseError == null){
+                                            Toast.makeText(PostDetailActivity.this, "Successfully Submitted", Toast.LENGTH_SHORT).show();
+                                            dialog.cancel();
+                                            submitProposalBtn.setVisibility(View.GONE);
+                                        }else{
+                                            submit.setVisibility(View.VISIBLE);
+                                            cancel.setVisibility(View.VISIBLE);
+                                            progress.hide();
+                                            Toast.makeText(PostDetailActivity.this, "Some Error occurred while submitting", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                Log.i("TASTA",databaseError.getMessage());
+                                submit.setVisibility(View.VISIBLE);
+                                cancel.setVisibility(View.VISIBLE);
+                                progress.hide();
+                                Toast.makeText(PostDetailActivity.this, "Some Error occurred while submitting", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(PostDetailActivity.this, "Proposal must be atleast 50 characters", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+    }
+
+    private String getTimeDate() {
+        return DateTimeUtils.getStringFromDate(DateTimeUtils.getCurrentDateTime());
     }
 
     private void populateCommunities(PostModel post) {

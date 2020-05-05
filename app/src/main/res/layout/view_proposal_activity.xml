@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"
@@ -67,7 +68,7 @@
         <TextView
             android:id="@+id/proposal_date"
             android:layout_width="0dp"
-            android:text="12/2/19"
+            tools:text="12/2/19"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="16dp"
@@ -136,7 +137,7 @@
                 android:autoSizeTextType="uniform"
                 android:ellipsize="end"
                 android:ems="5"
-                android:text= "How to solve this problem"
+                android:text="No title"
                 android:fontFamily="sans-serif-medium"
                 android:maxLines="2"
                 android:paddingStart="8dp"
@@ -168,13 +169,13 @@
                 android:scrollbars="vertical"
                 android:ellipsize="end"
                 android:ems="5"
-                android:minLines="20"
-                android:maxLines="20"
+                android:minLines="15"
+                android:maxLines="17"
                 android:fontFamily="@font/open_sans_light"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="6dp"
-                android:text="Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,"
+                tools:text="Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -195,6 +196,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:clickable="true"
+            tools:visibility="gone"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="horizontal"
@@ -236,6 +238,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:clickable="true"
+            tools:visibility="visible"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="horizontal"
@@ -244,7 +247,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleAndBodyLayout">
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@color/darkGray"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"

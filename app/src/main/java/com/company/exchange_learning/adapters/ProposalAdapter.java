@@ -76,7 +76,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
     public void onBindViewHolder(final ProposalViewHolder holder, final int position) {
         holder.dataView.setText(proposals.get(position).getProposal_data());
         holder.dateView.setText(proposals.get(position).getNotif().getCreated_at());
-        if (proposals.get(position).getNotif().getPlatform().equals("bookstore")){
+        if (proposals.get(position).getNotif().getPlatform().equals("bookcity")){
             holder.typeView.setImageDrawable(context.getDrawable(R.drawable.icons_book_24));
         }
         else{

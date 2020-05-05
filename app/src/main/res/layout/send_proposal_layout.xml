@@ -20,6 +20,7 @@
             app:srcCompat="@drawable/main_empty_msg_icon" />
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/sp_title"
         android:layout_width="wrap_content"
@@ -93,7 +94,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/sp_send"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
@@ -105,5 +107,38 @@
         android:text="Send"
         android:textColor="@color/postSelectorBtnColor"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/cancel_proposal_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_send"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:layout_alignParentRight="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="Cancel"
+        android:textColor="@color/redBorderColor"
+        android:textSize="20sp" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/submit_proposal_loader"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/sp_send"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:indicatorName="BallClipRotateMultipleIndicator"
+        app:indicatorColor="@color/hamburger"
+        android:visibility="gone"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="0dp"
+        style="@style/AVLoadingIndicatorView">
+    </com.wang.avi.AVLoadingIndicatorView>
 
 </RelativeLayout>

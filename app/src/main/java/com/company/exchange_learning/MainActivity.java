@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.company.exchange_learning.Profile.ProfileActivity;
+import com.company.exchange_learning.Proposals.ProposalListActivity;
 import com.company.exchange_learning.activities.CreateImagePostActivity;
 import com.company.exchange_learning.activities.CreateNoImagePostActivity;
 import com.company.exchange_learning.activities.PostDetailActivity;
@@ -34,6 +37,7 @@ import com.company.exchange_learning.adapters.PostsAdapter;
 import com.company.exchange_learning.listeners.OnPostClickListener;
 import com.company.exchange_learning.listeners.OnPostUserImageClickListener;
 import com.company.exchange_learning.loginsignup.loginActivity;
+import com.company.exchange_learning.model.Notification;
 import com.company.exchange_learning.model.PostModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,6 +55,7 @@ import com.wang.avi.AVLoadingIndicatorView;
 
 import org.apache.commons.text.WordUtils;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -67,17 +72,19 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
     TextView userCommunityTxtView, showAllPostsBtn, showMyCommunityPostsBtn, toolbarExhangeTxt, toolbarLearningTxt, emptyMsgCP, emptyMsgUI;
     CircleImageView profileImagePost;
     TextView drawerUserName, mainWelcomeMsg;
+    ImageView notifIndicator;
 
 
     RecyclerView recyclerView;
     List<PostModel> mPosts, mTempPosts, mAllPosts;
+    List<Notification> notifications;
 
     PostsAdapter mAdapter;
     LinearLayout goToProfile, logout, goToMyPosts, goToNotif,goToSettings;
 
     LinearLayout emptyMsgLayout, createPostBtn, uploadImgBtn;
 
-    DatabaseReference postDataRef, userInfoRef;
+    DatabaseReference postDataRef, userInfoRef, notifDataRef;
 
     AVLoadingIndicatorView aviLoadingView;
 
@@ -106,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         showAllPostsBtn = findViewById(R.id.main_all_post_btn);
         showMyCommunityPostsBtn = findViewById(R.id.main_community_post_btn);
         emptyMsgLayout = findViewById(R.id.empty_msg);
+        notifIndicator = findViewById(R.id.notification_indicator);
         createPostBtn = findViewById(R.id.main_create_post_btn);
         uploadImgBtn = findViewById(R.id.main_upload_image_btn);
         aviLoadingView = findViewById(R.id.avi);
@@ -169,8 +177,9 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         goToNotif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-                i.putExtra("uid","8XekmtHBRRdq2CQHSBQEN4RWk9N2");
+                Intent i = new Intent(MainActivity.this, ProposalListActivity.class);
+                i.putExtra("mode","Notifications");
+                i.putExtra("id",Constants.uid);
                 startActivity(i);
             }
         });
@@ -580,6 +589,39 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         });
     }
 
+    private void subscribeToNotifications(){
+        if (notifications == null) {
+            notifications = new ArrayList<>();
+        }else{
+            notifications.clear();
+        }
+        notifDataRef = FirebaseDatabase.getInstance().getReference("Notification_Table/Proposal/"+Constants.uid);
+        notifDataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.hasChildren()) {
+                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                            Notification notif = dsp.getValue(Notification.class);
+                            Log.i("NotificationTest",notif.toString());
+                            try {
+                                if (notif.getRead_at().equals("")) {
+                                    notifIndicator.setVisibility(View.VISIBLE);
+                                }
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private void updateDrawerProfileImageBorder(String community) {
         if (community != null) {
@@ -711,5 +753,11 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         Intent i = new Intent(MainActivity.this, ProfileActivity.class);
         i.putExtra("uid", id);
         startActivity(i);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        subscribeToNotifications();
     }
 }

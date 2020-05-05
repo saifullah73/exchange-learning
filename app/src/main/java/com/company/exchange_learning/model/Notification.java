@@ -1,5 +1,7 @@
 package com.company.exchange_learning.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Notification implements Serializable {
@@ -11,6 +13,14 @@ public class Notification implements Serializable {
 
     public Notification(){
 
+    }
+
+    public Notification(String created_at, String post_id, String proposal_id,String platform) {
+        this.created_at = created_at;
+        this.post_id = post_id;
+        this.proposal_id = proposal_id;
+        this.read_at = "";
+        this.platform = platform;
     }
 
     public String getCreated_at() {
@@ -51,5 +61,11 @@ public class Notification implements Serializable {
 
     public void setPlatform(String platform) {
         this.platform = platform;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Created at: " + created_at + "Post id: "+ post_id+ " Proposal id: "+proposal_id+ " read_at "+ read_at + " platform "+ platform;
     }
 }

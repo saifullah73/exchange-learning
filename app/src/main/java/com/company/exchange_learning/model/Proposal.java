@@ -3,7 +3,8 @@ package com.company.exchange_learning.model;
 import java.io.Serializable;
 
 public class Proposal implements Serializable {
-    public String accepted;
+    public boolean accepted;
+    public boolean reported;
     public String proposal_data;
     public String proposal_date;
     public String submitter_id;
@@ -13,15 +14,32 @@ public class Proposal implements Serializable {
 
     }
 
+    public Proposal(String data, String date, String id){
+        this.accepted = false;
+        this.reported = false;
+        this.proposal_data = data;
+        this.proposal_date = date;
+        this.submitter_id = id;
+    }
+
     public Notification getNotif() {
         return notif;
+    }
+
+
+    public boolean isReported() {
+        return reported;
+    }
+
+    public void setReported(boolean reported) {
+        this.reported = reported;
     }
 
     public void setNotif(Notification notif) {
         this.notif = notif;
     }
 
-    public String getAccepted() {
+    public boolean getAccepted() {
         return accepted;
     }
 
@@ -37,7 +55,7 @@ public class Proposal implements Serializable {
         return submitter_id;
     }
 
-    public void setAccepted(String accepted) {
+    public void setAccepted(boolean accepted) {
         this.accepted = accepted;
     }
 

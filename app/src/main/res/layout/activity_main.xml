@@ -171,7 +171,16 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_marginStart="28dp"
+                            android:id="@+id/notification_indicator"
+                            android:layout_marginTop="18dp"
+                            android:layout_width="12dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_height="12dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_info_red_24dp"
+                             />
+                        <ImageView
+
                             android:layout_marginBottom="16dp"
                             android:layout_marginTop="16dp"
                             android:layout_width="25dp"

@@ -21,14 +21,14 @@
         <activity android:name=".Proposals.ProposalListActivity"
             android:theme="@style/FollowersTheme"
             ></activity>
-        <activity android:name=".Proposals.ViewProposalActivity" />
+        <activity android:name=".Proposals.ViewProposalActivity"
+            android:theme="@style/FollowersTheme"/>
         <activity
             android:name=".activities.PostDetailActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".FollowersActivity"
             android:theme="@style/FollowersTheme" />
-        <activity android:name=".ImageDetailActivity" />
         <activity
             android:name=".Profile.EditProfile"
             android:theme="@style/AppTheme"
