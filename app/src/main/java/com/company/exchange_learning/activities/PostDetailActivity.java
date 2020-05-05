@@ -314,7 +314,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                     if (dist == 2) {
                         if (layoutToAdd == 1) {
                             firstCategory.addView(textView);
-                            len += profile.getMy_skills().get(i).length();
+                            len += post.getTagged_communities().get(i).length();
                             if (len > 35) {
                                 layoutToAdd = 2;
                                 len = 0;
@@ -323,7 +323,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                             }
                         } else {
                             secondCategory.addView(textView);
-                            len += profile.getMy_skills().get(i).length();
+                            len += post.getTagged_communities().get(i).length();
                             if (len > 35) {
                                 layoutToAdd = 1;
                                 len = 0;
@@ -334,7 +334,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                     } else {
                         if (layoutToAdd == 1) {
                             firstCategory.addView(textView);
-                            len += profile.getMy_skills().get(i).length();
+                            len += post.getTagged_communities().get(i).length();
                             if (len > 35) {
                                 layoutToAdd = 2;
                                 len = 0;
@@ -343,7 +343,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                             }
                         } else if (layoutToAdd == 2) {
                             secondCategory.addView(textView);
-                            len += profile.getMy_skills().get(i).length();
+                            len += post.getTagged_communities().get(i).length();
                             if (len > 35) {
                                 layoutToAdd = 3;
                                 len = 0;
@@ -352,7 +352,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                             }
                         } else {
                             thirdCategory.addView(textView);
-                            len += profile.getMy_skills().get(i).length();
+                            len += post.getTagged_communities().get(i).length();
                             if (len > 35) {
                                 layoutToAdd = 2;
                                 len = 0;

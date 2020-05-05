@@ -527,6 +527,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                 for (int i = 0; i < post.getTagged_communities().size(); i++) {
                     int id = getCommunityID(post.getTagged_communities().get(i));
                     if (id != -1) {
+                        mSelectedCommunities.add(multiArrayList.get(id).getName());
                         mSelectedCommunitiesIDs.add(id);
                     }
                 }

@@ -34,7 +34,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.WordUtils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -62,8 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         loadViews();
-
-
         uid = getIntent().getStringExtra("uid");
         if (uid.equals(Constants.uid)) {
             mode = true;
@@ -109,7 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void populateViews(final UserProfile profile, boolean mode) {
-        toolbarTitle.setText(StringUtils.capitalize(profile.getUser().getName()));
+        toolbarTitle.setText(WordUtils.capitalize(profile.getUser().getName()));
         if (!mode) {
             editBtn.setVisibility(View.GONE);
         }
@@ -129,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
             locationView.setText(location);
             communityView.setText(profile.getUser().getCommunity());
             emailView.setText(profile.getUser().getEmail());
-            nameView.setText(StringUtils.capitalize(profile.getUser().getName()));
+            nameView.setText(WordUtils.capitalize(profile.getUser().getName()));
         } else {
             communityContainer.setVisibility(View.GONE);
             email_container.setVisibility(View.GONE);
@@ -149,15 +147,15 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if (profile.getMy_title() != null && !profile.getMy_title().equals("")) {
             titleContainer.setVisibility(View.VISIBLE);
-            titleView.setText(StringUtils.capitalize(profile.getMy_title()));
-            titleUpper.setText(StringUtils.capitalize(profile.getMy_title()));
+            titleView.setText(WordUtils.capitalize(profile.getMy_title()));
+            titleUpper.setText(WordUtils.capitalize(profile.getMy_title()));
         } else {
             titleUpper.setVisibility(View.GONE);
             titleContainer.setVisibility(View.GONE);
         }
         if (profile.getMy_university() != null && !profile.getMy_university().equals("")) {
             universityContainer.setVisibility(View.VISIBLE);
-            universityView.setText(StringUtils.capitalize(profile.getMy_university()));
+            universityView.setText(WordUtils.capitalize(profile.getMy_university()));
         } else {
             universityContainer.setVisibility(View.GONE);
         }

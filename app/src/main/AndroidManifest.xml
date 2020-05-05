@@ -8,14 +8,17 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.CreateImagePostActivity"></activity>
+        <activity
+            android:name=".activities.ChatRoomsActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".activities.CreateImagePostActivity" />
         <activity android:name=".activities.CreateNoImagePostActivity" />
         <activity
             android:name=".activities.PostDetailActivity"
@@ -23,8 +26,8 @@
         <activity android:name=".activities.ImageDetailActivity" />
         <activity
             android:name=".Profile.EditProfile"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Profile.ProfileActivity" />
+            android:parentActivityName=".Profile.ProfileActivity"
+            android:theme="@style/AppTheme" />
         <activity android:name=".loginsignup.signupActivity" />
         <activity android:name=".loginsignup.loginActivity">
             <intent-filter>

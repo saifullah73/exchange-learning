@@ -271,9 +271,9 @@ public class EditProfile extends AppCompatActivity {
             Map<String, Object> updates = new HashMap<>();
             updates.put("my_title", title);
             updates.put("my_department", dpt);
-            updates.put("my_skills", uni);
+            updates.put("my_skills", skills);
             updates.put("my_overview", overview);
-            updates.put("my_university", skills);
+            updates.put("my_university", uni);
             if (imageURL != null) {
                 updates.put("profile_image", imageURL);
             }

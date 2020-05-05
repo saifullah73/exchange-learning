@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.company.exchange_learning.Profile.ProfileActivity;
+import com.company.exchange_learning.activities.ChatRoomsActivity;
 import com.company.exchange_learning.activities.CreateImagePostActivity;
 import com.company.exchange_learning.activities.CreateNoImagePostActivity;
 import com.company.exchange_learning.activities.PostDetailActivity;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
     List<PostModel> mPosts, mTempPosts, mAllPosts;
 
     PostsAdapter mAdapter;
-    LinearLayout goToProfile, logout, goToMyPosts;
+    LinearLayout goToProfile, logout, goToMyPosts, goToMessages;
 
     LinearLayout emptyMsgLayout, createPostBtn, uploadImgBtn;
 
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         aviLoadingView = findViewById(R.id.avi);
         goToProfile = findViewById(R.id.drawer_porfile);
         goToMyPosts = findViewById(R.id.drawer_myPosts);
+        goToMessages = findViewById(R.id.drawer_messages);
         logout = findViewById(R.id.drawer_logout);
         mainHeader = findViewById(R.id.main_header);
         postSwitchBtn = findViewById(R.id.postSelectorLayout);
@@ -143,6 +145,13 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             @Override
             public void onClick(View view) {
                 toggleMyPosts(true);
+            }
+        });
+
+        goToMessages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ChatRoomsActivity.class));
             }
         });
 
