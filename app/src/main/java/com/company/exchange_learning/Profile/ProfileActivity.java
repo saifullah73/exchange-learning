@@ -3,6 +3,8 @@ package com.company.exchange_learning.Profile;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,11 +16,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.company.exchange_learning.FollowersActivity;
+import com.company.exchange_learning.model.BasicUser;
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
 import com.company.exchange_learning.model.BasicUser;
@@ -29,11 +35,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.wang.avi.AVLoadingIndicatorView;
 
+
+import org.apache.commons.text.WordUtils;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.text.WordUtils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,6 +60,12 @@ public class ProfileActivity extends AppCompatActivity {
     private BasicUser basicUser = null;
     private CardView editBtn, followBtn, followerBtn;
     private CircleImageView profileImage;
+    private LinearLayout followersButtons;
+    private LinearLayout aboutContent;
+    private CardView singularFollowFollowingButton;
+    private LinearLayout singularFollowFollowingButtonLayout;
+    private ImageView follow_follower_indicator_view;
+    private TextView follow_follower_indicator_view_text;
     private RelativeLayout titleContainer, universityContainer, departmentContainer, communityContainer, location_container, skill_container, email_container;
     private TextView titleView, universityView, departmentView, communityView, locationView, skillView, emailView, nameView, overviewView, titleUpper;
     private LinearLayout data_holder;
@@ -75,6 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
         editBtn = findViewById(R.id.editProfilebtn);
         profileImage = findViewById(R.id.profile_image);
         nameView = findViewById(R.id.name_view);
+        aboutContent = findViewById(R.id.aboutContent);
         overviewView = findViewById(R.id.overview_view);
         titleView = findViewById(R.id.title_view);
         titleContainer = findViewById(R.id.title_container);
@@ -95,8 +115,32 @@ public class ProfileActivity extends AppCompatActivity {
         header = findViewById(R.id.frameLayout);
         backBtn = findViewById(R.id.backBtn);
         titleUpper = findViewById(R.id.titleViewUpper);
+        singularFollowFollowingButton = findViewById(R.id.singularFollowFollowingButton);
+        singularFollowFollowingButtonLayout = findViewById(R.id.singularFollowFollowingButtonLayout);
+        follow_follower_indicator_view = findViewById(R.id.follow_following_indicator);
+        follow_follower_indicator_view_text = findViewById(R.id.follow_following_indicator_text);
+        followersButtons = findViewById(R.id.followLayout);
         followBtn = findViewById(R.id.followBtn);
         followerBtn = findViewById(R.id.followersBtn);
+
+        followerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProfileActivity.this, FollowersActivity.class);
+                i.putExtra("uid",uid);
+                i.putExtra("mode",0);
+                startActivity(i);
+            }
+        });
+        followBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProfileActivity.this, FollowersActivity.class);
+                i.putExtra("uid",uid);
+                i.putExtra("mode",1);
+                startActivity(i);
+            }
+        });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,9 +152,30 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void populateViews(final UserProfile profile, boolean mode) {
         toolbarTitle.setText(WordUtils.capitalize(profile.getUser().getName()));
+        aboutContent.setVisibility(View.VISIBLE);
+        Log.i("TESTABC", String.valueOf(mode));
         if (!mode) {
             editBtn.setVisibility(View.GONE);
+            followersButtons.setVisibility(View.GONE);
+            singularFollowFollowingButtonLayout.setVisibility(View.VISIBLE);
+            setFollowButtonText();
         }
+        else{
+            editBtn.setVisibility(View.VISIBLE);
+            followersButtons.setVisibility(View.VISIBLE);
+            singularFollowFollowingButtonLayout.setVisibility(View.GONE);
+        }
+        singularFollowFollowingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (follow_follower_indicator_view_text.getText().equals("Follow")){
+                    followerAdded();
+                }
+                else{
+                    followerRemoved();
+                }
+            }
+        });
         editBtn.setClickable(true);
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,9 +224,17 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             universityContainer.setVisibility(View.GONE);
         }
-
-        //TODO:GET SKILLS AND SHOW THEM
-
+        if (profile.getMy_skills() != null && profile.getMy_skills().size() != 0){
+            skill_container.setVisibility(View.VISIBLE);
+            String output = "";
+            for (int x = 0 ; x < profile.getMy_skills().size(); x++){
+                output += profile.getMy_skills().get(x) + ", ";
+            }
+            skillView.setText(output.substring(0,output.length()-2));
+        }
+        else{
+            skill_container.setVisibility(View.GONE);
+        }
         loadImage();
     }
 
@@ -269,11 +342,210 @@ public class ProfileActivity extends AppCompatActivity {
         followerBtn.setVisibility(View.VISIBLE);
         backBtn.setVisibility(View.VISIBLE);
         toolbarTitle.setVisibility(View.VISIBLE);
-        editBtn.setVisibility(View.VISIBLE);
+
+        if (!mode) {
+            editBtn.setVisibility(View.GONE);
+            followersButtons.setVisibility(View.GONE);
+            singularFollowFollowingButtonLayout.setVisibility(View.VISIBLE);
+            setFollowButtonText();
+        }
+        else{
+            editBtn.setVisibility(View.VISIBLE);
+            followersButtons.setVisibility(View.VISIBLE);
+            singularFollowFollowingButtonLayout.setVisibility(View.GONE);
+        }
+    }
+
+    private void followerAdded(){
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                List following = dataSnapshot.getValue(t);
+                if (following == null){
+                    following = new ArrayList();
+                }
+                following.add(uid);
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                myRef.setValue(following, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null){
+                            Log.i(TAG,"Added following");
+                            follow_follower_indicator_view_text.setText("Following");
+                            follow_follower_indicator_view.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            Log.i(TAG," Error Added following");
+                            Log.e(TAG, databaseError.getMessage());
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG," Error Added following");
+                Log.e(TAG,databaseError.getMessage());
+            }
+        });
+
+
+
+        myRef = database.getReference("Followers").child(uid).child("followers");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                List following = dataSnapshot.getValue(t);
+                if (following == null){
+                    following = new ArrayList();
+                }
+                following.add(Constants.uid);
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Followers").child(uid).child("followers");
+                myRef.setValue(following, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null){
+                            Log.i(TAG,"Added follower");
+                        }
+                        else{
+                            Log.i(TAG," Error Added follower");
+                            Log.e(TAG, databaseError.getMessage());
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG," Error Added follower");
+                Log.e(TAG,databaseError.getMessage());
+            }
+        });
+    }
+
+    private void followerRemoved(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.unfollow_layout, null, false);
+        builder.setView(view);
+        builder.setCancelable(true);
+        final AlertDialog dialog = builder.show();
+        CardView unfollow = view.findViewById(R.id.unfollow);
+        TextView cancel = view.findViewById(R.id.cancelDialog);
+        unfollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                        List following = dataSnapshot.getValue(t);
+                        if (following != null) {
+                            following.remove(uid);
+                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                            myRef.setValue(following, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                    if (databaseError == null) {
+                                        Log.i(TAG, "Removed following");
+                                        follow_follower_indicator_view_text.setText("Follow");
+                                        follow_follower_indicator_view.setVisibility(View.GONE);
+                                        dialog.dismiss();
+
+                                    } else {
+                                        Log.i(TAG, " Error removing following");
+                                        Log.e(TAG, databaseError.getMessage());
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.i(TAG," Error removing following");
+                        Log.e(TAG,databaseError.getMessage());
+                    }
+                });
+
+
+
+                myRef = database.getReference("Followers").child(uid).child("followers");
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                        List following = dataSnapshot.getValue(t);
+                        if (following != null) {
+                            following.remove(Constants.uid);
+                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference("Followers").child(uid).child("followers");
+                            myRef.setValue(following, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                    if (databaseError == null) {
+                                        Log.i(TAG, "removed follower");
+                                    } else {
+                                        Log.i(TAG, " Error removing follower");
+                                        Log.e(TAG, databaseError.getMessage());
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.i(TAG," Error removing follower");
+                        Log.e(TAG,databaseError.getMessage());
+                    }
+                });
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void setFollowButtonText(){
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                List following = dataSnapshot.getValue(t);
+                if (following != null && following.contains(uid)){
+                    follow_follower_indicator_view_text.setText("Following");
+                    follow_follower_indicator_view.setVisibility(View.VISIBLE);
+                }
+                else{
+                    follow_follower_indicator_view_text.setText("Follow");
+                    follow_follower_indicator_view.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        loadData(mode);
     }
 }

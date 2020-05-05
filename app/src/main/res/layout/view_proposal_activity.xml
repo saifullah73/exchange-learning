@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:elevation="4dp"
+    android:focusable="true"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/proposal_image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/main_user_profile_avatar"
+            app:civ_border_color="@color/hamburger"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toTopOf="@id/first_line"
+            app:layout_constraintEnd_toStartOf="@+id/proposal_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/proposal_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/montserrat"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:text="Saifullah"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/proposal_date_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/proposal_image"
+            app:layout_constraintTop_toTopOf="@+id/proposal_image" />
+
+        <TextView
+            android:id="@+id/proposal_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/basic"
+            android:textColor="@color/drawer_orange"
+            android:textSize="13sp"
+            android:text="Date Submitted"
+            app:layout_constraintBottom_toBottomOf="@+id/proposal_image"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/proposal_image"
+            app:layout_constraintTop_toBottomOf="@+id/proposal_name" />
+
+        <TextView
+            android:id="@+id/proposal_date"
+            android:layout_width="0dp"
+            android:text="12/2/19"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/drawerMenuGray"
+            android:textDirection="ltr"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/proposal_date_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/proposal_date_label" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="3dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/post_item_point_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/proposal_date_label"
+            app:layout_constraintEnd_toStartOf="@+id/post_item_postTime_txtview"
+            app:layout_constraintStart_toEndOf="@+id/proposal_date_label"
+            app:layout_constraintTop_toTopOf="@+id/proposal_date_label" />
+
+        <View
+            android:id="@+id/first_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/lessGray"
+            app:layout_constraintBottom_toTopOf="@+id/titleAndBodyLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/proposal_image" />
+
+        <LinearLayout
+            app:layout_constraintTop_toBottomOf="@id/first_line"
+            app:layout_constraintBottom_toTopOf="@id/second_line"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/titleAndBodyLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/proposal_post_title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/basic"
+                android:textColor="@color/colorPrimary2"
+                android:textSize="18sp"
+                android:text="Post Title" />
+
+            <TextView
+                android:id="@+id/proposal_post_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeMinTextSize="16sp"
+                android:autoSizeStepGranularity="2dp"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:ems="5"
+                android:text= "How to solve this problem"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="2"
+                android:paddingStart="8dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="8dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/proposal_data_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/basic"
+                android:textColor="@color/colorPrimary2"
+                android:textSize="18sp"
+                android:text="Proposal " />
+
+            <TextView
+                android:id="@+id/proposal_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeMinTextSize="16sp"
+                app:autoSizeStepGranularity="2dp"
+                app:autoSizeTextType="uniform"
+                android:scrollbars="vertical"
+                android:ellipsize="end"
+                android:ems="5"
+                android:minLines="20"
+                android:maxLines="20"
+                android:fontFamily="@font/open_sans_light"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="6dp"
+                android:text="Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,Hi my name is Saifullah, I wanted help regarding something,"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/second_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/lessGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleAndBodyLayout" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id = "@+id/proposal_accept_layout"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleAndBodyLayout">
+
+                <LinearLayout
+                    android:visibility="visible"
+                    android:background="@color/hamburger"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/main_create_post_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Accept"
+                        android:textColor="@color/fullwhite" />
+                </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id = "@+id/proposal_response_layout"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleAndBodyLayout">
+            <LinearLayout
+                android:visibility="gone"
+                android:background="@color/darkGray"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/proposal_response_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Accepted"
+                    android:textColor="@color/fullwhite" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

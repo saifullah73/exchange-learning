@@ -197,7 +197,7 @@ public class CreateNoImagePostActivity extends AppCompatActivity {
                     if (mSelectedCommunities.size() == 0) {
                         Toast.makeText(this, "Please tag at least 1 community", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (postTitle.length() > 49 && postBody.length() > 59) {
+                        if (postTitle.length() > 10 && postBody.length() > 59) {
                             postRef = FirebaseDatabase.getInstance().getReference("Posts_Table");
                             showProgress();
                             post = PostModel.getPostMode(1);

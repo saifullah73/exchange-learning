@@ -11,7 +11,6 @@ public class BasicUser implements Serializable {
     private String city_name;
     private String community;
     private String email;
-    private String email_verified;
     private String android_device_token;
 
     public BasicUser(){
@@ -24,20 +23,9 @@ public class BasicUser implements Serializable {
         this.city_name = city_name;
         this.community = community;
         this.email = email;
-        this.email_verified = "false";
         this.android_device_token = android_device_token;
     }
 
-    public BasicUser(String name, String gender, String country_name, String city_name, String community, String email, String email_verified, String android_device_token) {
-        this.name = name;
-        this.gender = gender;
-        this.country_name = country_name;
-        this.city_name = city_name;
-        this.community = community;
-        this.email = email;
-        this.email_verified = email_verified;
-        this.android_device_token = android_device_token;
-    }
 
     public String getName() {
         return name;
@@ -63,9 +51,6 @@ public class BasicUser implements Serializable {
         return email;
     }
 
-    public String getEmail_verified() {
-        return email_verified;
-    }
 
     public String getAndroid_device_token() {
         return android_device_token;
@@ -93,10 +78,6 @@ public class BasicUser implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setEmail_verified(String email_verified) {
-        this.email_verified = email_verified;
     }
 
     public void setAndroid_device_token(String android_device_token) {

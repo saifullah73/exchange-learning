@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
     List<PostModel> mPosts, mTempPosts, mAllPosts;
 
     PostsAdapter mAdapter;
-    LinearLayout goToProfile, logout, goToMyPosts, goToMessages;
+    LinearLayout goToProfile, logout, goToMyPosts, goToMessages, goToNotif,goToSettings;
 
     LinearLayout emptyMsgLayout, createPostBtn, uploadImgBtn;
 
@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         aviLoadingView = findViewById(R.id.avi);
         goToProfile = findViewById(R.id.drawer_porfile);
         goToMyPosts = findViewById(R.id.drawer_myPosts);
+        goToNotif = findViewById(R.id.drawer_notif);
+        goToSettings = findViewById(R.id.drawer_settings);
         goToMessages = findViewById(R.id.drawer_messages);
         logout = findViewById(R.id.drawer_logout);
         mainHeader = findViewById(R.id.main_header);
@@ -160,6 +162,24 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, ProfileActivity.class);
                 i.putExtra("uid", Constants.uid);
+                startActivity(i);
+            }
+        });
+
+        goToSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                i.putExtra("uid", "jgT7EMrWNFOdEx54tBpxUKwABOf2");
+                startActivity(i);
+            }
+        });
+
+        goToNotif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                i.putExtra("uid","8XekmtHBRRdq2CQHSBQEN4RWk9N2");
                 startActivity(i);
             }
         });

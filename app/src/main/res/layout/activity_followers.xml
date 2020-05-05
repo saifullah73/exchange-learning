@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FollowersActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/follower_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/follower_avi"
+        style="@style/AVLoadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="1dp"
+        android:visibility="visible"
+        app:indicatorColor="@color/hamburger"
+        app:indicatorName="BallClipRotateMultipleIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/follower_recycler_view"
+        app:layout_constraintStart_toStartOf="@+id/follower_recycler_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id = "@+id/followers_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:id="@+id/errMsg"
+            android:textColor="@color/darkGray"
+            android:fontFamily="@font/open_sans_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Some error occurred" />
+
+        <ImageView
+            android:id="@+id/errImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/error_icon"
+            android:alpha="0.7"
+            android:layout_above="@id/errMsg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/retryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/errMsg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/postSelectorBtnColor"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="4dp"
+                android:text="Retry"
+                android:textColor="@color/fullwhite"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

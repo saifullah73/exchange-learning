@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dialog_background"
+    android:backgroundTint="@color/loginSignUpBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/sp_header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/hamburger"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:srcCompat="@drawable/main_empty_msg_icon" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sp_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/open_sans_light"
+        android:lines="1"
+        android:maxLines="1"
+        android:text="Send Proposal"
+        android:textColor="@color/fullBlack"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/sp_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_title"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/open_sans_light"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:text="Please type you proposal in the field below"
+        android:textColor="@color/darkGray"
+        android:textSize="16sp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sp_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_msg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/fullwhite"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp">
+
+        <EditText
+            android:theme="@style/LoginSignUpProgressBar"
+            android:inputType="textMultiLine"
+            android:minLines="18"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="top|left"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:scrollbars="vertical"
+            android:fontFamily="@font/montserrat"
+            android:hint="Enter text here"
+            android:id="@+id/sp_proposal_field"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/send_proposal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_send"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="Send"
+        android:textColor="@color/postSelectorBtnColor"
+        android:textSize="20sp" />
+
+</RelativeLayout>

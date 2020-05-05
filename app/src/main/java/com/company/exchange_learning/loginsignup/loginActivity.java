@@ -35,9 +35,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.wang.avi.AVLoadingIndicatorView;
-
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class loginActivity extends AppCompatActivity {
     private static final String TAG = "loginActivity";
@@ -90,7 +90,6 @@ public class loginActivity extends AppCompatActivity {
                 if (perfromCheck()) {
                     login(emailView.getText().toString().trim(), passwordView.getText().toString().trim());
                 }
-
             }
         });
         goToSignUpBtn.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +176,6 @@ public class loginActivity extends AppCompatActivity {
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference("User_Information").child(user.getUid());
                                 Map<String, Object> updates = new HashMap<>();
-                                updates.put("email_verified", "true");
                                 myRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
                                     @Override
                                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

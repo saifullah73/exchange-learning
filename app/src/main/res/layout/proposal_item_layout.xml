@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:elevation="10dp"
+    android:animateLayoutChanges="true"
+    android:layout_marginBottom="5dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginBottom="5dp"
+        android:id="@+id/proposallist_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/proposalList_item_avatar"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/main_user_profile_avatar"
+            app:civ_border_color="@color/cardview_dark_background"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"/>
+
+        <ImageView
+            android:id="@+id/proposallist_image_view"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:src= "@drawable/icons_book_24"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/proposalList_username"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+        <TextView
+            android:id="@+id/proposalList_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/open_sans_light"
+            android:maxLines="1"
+            tools:text="Username"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/proposalList_item_avatar"
+            app:layout_constraintStart_toEndOf="@+id/proposalList_item_avatar"
+            app:layout_constraintTop_toTopOf="@+id/proposalList_item_avatar"
+            app:layout_constraintVertical_bias="0.17000002" />
+
+
+        <TextView
+            android:id="@+id/proposalList_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:minLines = "1"
+            android:maxLength="30"
+            android:fontFamily="@font/open_sans_light"
+            android:maxLines="1"
+            tools:text="Hello,I have this porposal,okodksjf"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/proposalList_item_avatar"
+            app:layout_constraintStart_toEndOf="@+id/proposalList_item_avatar"
+            app:layout_constraintTop_toTopOf="@+id/proposalList_item_avatar"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/proposalList_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:minLines="1"
+            tools:text="12/2/19 12:00:12"
+            android:textColor="@color/hamburger"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/proposallist_image_view"
+            app:layout_constraintVertical_bias="0.333"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
