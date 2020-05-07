@@ -197,7 +197,7 @@ public class CreateNoImagePostActivity extends AppCompatActivity {
                     if (mSelectedCommunities.size() == 0) {
                         Toast.makeText(this, "Please tag at least 1 community", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (postTitle.length() > 10 && postBody.length() > 59) {
+                        if (postTitle.length() > 9 && postBody.length() > 59) {
                             postRef = FirebaseDatabase.getInstance().getReference("Posts_Table");
                             showProgress();
                             post = PostModel.getPostMode(1);
@@ -224,7 +224,7 @@ public class CreateNoImagePostActivity extends AppCompatActivity {
                             });
                         } else {
                             hideProgress();
-                            Toast.makeText(this, "Title and body should be at least 50 and 60 characters respectively", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, "Title and body should be at least 10 and 60 characters respectively", Toast.LENGTH_LONG).show();
                         }
                     }
                 } else {
@@ -241,7 +241,7 @@ public class CreateNoImagePostActivity extends AppCompatActivity {
                         if (mSelectedCommunities.size() == 0) {
                             Toast.makeText(this, "Please tag at least 1 community", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (postBody.length() > 59 && postTitle.length() > 49) {
+                            if (postBody.length() > 59 && postTitle.length() > 9) {
                                 postRef = FirebaseDatabase.getInstance().getReference("Posts_Table").child(post.getPost_id());
                                 showProgress();
                                 Map<String, Object> updates = new HashMap<>();
@@ -268,7 +268,7 @@ public class CreateNoImagePostActivity extends AppCompatActivity {
                                 });
                             } else {
                                 hideProgress();
-                                Toast.makeText(this, "Title and body should be at least 50 and 60 characters respectively", Toast.LENGTH_LONG).show();
+                                Toast.makeText(this, "Title and body should be at least 10 and 60 characters respectively", Toast.LENGTH_LONG).show();
                             }
                         }
                     } else {

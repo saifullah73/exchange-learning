@@ -1,0 +1,6 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/report_proposal"
+        android:title="Report" />
+    <item android:id="@+id/delete_proposal"
+        android:title="Delete" />
+</menu>

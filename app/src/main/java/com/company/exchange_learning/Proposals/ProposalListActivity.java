@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProposalListActivity extends AppCompatActivity {
-    private static final String TAG = "ProposalListActivity";
+    private static final String TAG = "MyProposalListActivity";
     private RecyclerView recyclerView;
     private AVLoadingIndicatorView loadingIndicatorView;
     private LinearLayoutManager layoutManager;
@@ -48,6 +48,8 @@ public class ProposalListActivity extends AppCompatActivity {
     private ProposalAdapter adapter;
     private List<Notification> notifications;
     private List<Proposal> allProposals;
+    private long notificationLength;
+    private long count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,13 +75,13 @@ public class ProposalListActivity extends AppCompatActivity {
                 getSupportActionBar().setTitle("Post Proposal");
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setElevation(5);
-                key = "post";
+                key = "exchangelearning";
                 getData(mode,key,id);
             } else if(mode.equals("Book")) {
                 getSupportActionBar().setTitle("Book Proposal");
                 getSupportActionBar().setElevation(5);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                key = "bookstore";
+                key = "bookcity";
                 getData(mode,key,id);
             }else{
                 getSupportActionBar().setTitle("Notifications");
@@ -88,60 +90,76 @@ public class ProposalListActivity extends AppCompatActivity {
                 getDataAll();
             }
         }catch (Exception e){
+
         }
 
     }
 
     public void getData(final String mode,final String key, final String id){
+        count = 0;
         notifications = new ArrayList<>();
         allProposals = new ArrayList<>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("Notification_Table").child(Constants.uid);
+        final DatabaseReference myRef = database.getReference("Notification_Table/Proposal").child(Constants.uid);
+        Log.i(TAG,"Starting Read");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
+                    Log.i(TAG,"Found Children");
                     for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                         Notification notif = dsp.getValue(Notification.class);
-                        if (notif != null) {
-                            if (notif.getPlatform().equals(key)) {
-                                notifications.add(notif);
-                            }
+                        Log.i(TAG,notif.toString());
+                        notifications.add(notif);
+                    }
+                    Log.i(TAG,"More than 0 notifications ready for display");
+                    Log.i(TAG,"unfiltered = "+ notifications.size());
+                    List<Notification> temp = new ArrayList<>();
+                    for (final Notification not : notifications) {
+                        if (not.getPost_id().equals(id)) {
+                            temp.add(not);
                         }
                     }
-                    if (notifications.size() != 0) {
-                        for (final Notification not : notifications) {
-                            if (not.getProposal_id().equals(id)) {
-                                final DatabaseReference myRef2 = database.getReference(mode + "_Proposal_Table").child(not.post_id).child(not.proposal_id);
-                                myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.exists()) {
-                                            Proposal proposal = dataSnapshot.getValue(Proposal.class);
-                                            proposal.setNotif(not);
-                                            allProposals.add(proposal);
-                                            if (allProposals.size() == 1){
-                                                setData(allProposals);
-                                            }
-                                            else{
-                                                notifyChanges();
-                                            }
-                                        }
+                    notifications = temp;
+                    Log.i(TAG,"filtered = "+ notifications.size());
+                    notificationLength = notifications.size();
+                    for (final Notification not : notifications) {
+                        final DatabaseReference myRef2 = database.getReference(mode + "_Proposal_Table").child(not.post_id).child(not.proposal_id);
+                        myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Log.i(TAG,"Reading Proposal from " + myRef2.toString());
+                                if (dataSnapshot.exists()) {
+                                    Proposal proposal = dataSnapshot.getValue(Proposal.class);
+                                    proposal.setNotif(not);
+                                    allProposals.add(proposal);
+                                    count+=1;
+                                    Log.i(TAG,"Read a proposal");
+                                    if (allProposals.size() == 1){
+                                        Log.i(TAG,"Setting data");
+                                        setData(allProposals);
                                     }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                    else{
+                                        Log.i(TAG,"Notifying changes");
+                                        notifyChanges();
                                     }
-                                });
+                                }else{
+                                    count+=1;
+                                    Log.i(TAG,"No proposal found at this location");
+                                    if (count == notificationLength && allProposals.size() ==0 ){
+                                        showErrorLayout("No Proposal Found",0);
+                                    }
+                                }
                             }
-                            else{
-                                showErrorLayout("No Proposal Found",0);
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                if (count == notificationLength && allProposals.size() ==0){
+                                    showErrorLayout("No Proposal Found",0);
+                                }
+                                Log.i(TAG,"Cancelled reading proposal" + databaseError.getMessage());
                             }
-                        }
-                    }
-                    else{
-                        showErrorLayout("No Proposal Found",0);
+                        });
                     }
                 }else{
                     showErrorLayout("No Proposal Found",0);
@@ -158,51 +176,65 @@ public class ProposalListActivity extends AppCompatActivity {
 
 
     public void getDataAll(){
+        count = 0;
         notifications = new ArrayList<>();
         allProposals = new ArrayList<>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("Notification_Table").child(Constants.uid);
+        final DatabaseReference myRef = database.getReference("Notification_Table/Proposal").child(Constants.uid);
+        Log.i(TAG,"Starting Read");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
+                    notificationLength = dataSnapshot.getChildrenCount();
+                    Log.i(TAG,"Found Children");
                     for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                         Notification notif = dsp.getValue(Notification.class);
-                        if (notif != null) {
-                            notifications.add(notif);
-                        }
+                        Log.i(TAG,notif.toString());
+                        notifications.add(notif);
                     }
-                    if (notifications.size() != 0) {
-                        for (final Notification not : notifications) {
-                            DatabaseReference myRef2;
-                            if (not.getPlatform().equals("post")){
-                                myRef2 = database.getReference("Post_Proposal_Table").child(not.post_id).child(not.proposal_id);
-                            }else{
-                                myRef2 = database.getReference("Book_Proposal_Table").child(not.post_id).child(not.proposal_id);
-                            }
-                            myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.exists()) {
-                                        Proposal proposal = dataSnapshot.getValue(Proposal.class);
-                                        proposal.setNotif(not);
-                                        allProposals.add(proposal);
-                                        if (allProposals.size() == 1){
-                                            setData(allProposals);
-                                        }
-                                        else{
-                                            notifyChanges();
-                                        }
+                    Log.i(TAG,"More than 0 notifications ready for display");
+                    for (final Notification not : notifications) {
+                        final DatabaseReference myRef2;
+                        if (not.getPlatform().equals("exchangelearning")){
+                            myRef2 = database.getReference("Post_Proposal_Table").child(not.post_id).child(not.proposal_id);
+                        }else{
+                            myRef2 = database.getReference("Book_Proposal_Table").child(not.post_id).child(not.proposal_id);
+                        }
+                        myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Log.i(TAG,"Reading Proposal from " + myRef2.toString());
+                                if (dataSnapshot.exists()) {
+                                    Proposal proposal = dataSnapshot.getValue(Proposal.class);
+                                    proposal.setNotif(not);
+                                    allProposals.add(proposal);
+                                    count+=1;
+                                    Log.i(TAG,"Read a proposal");
+                                    if (allProposals.size() == 1){
+                                        Log.i(TAG,"Setting data");
+                                        setData(allProposals);
+                                    }
+                                    else{
+                                        Log.i(TAG,"Notifying changes");
+                                        notifyChanges();
+                                    }
+                                }else{
+                                    count+=1;
+                                    Log.i(TAG,"No proposal found at this location");
+                                    if (count == notificationLength && allProposals.size() == 0){
+                                        showErrorLayout("No Proposal Found",0);
                                     }
                                 }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                if (count == notificationLength & allProposals.size() == 0){
+                                    showErrorLayout("No Proposal Found",0);
                                 }
-                            });
-                        }
-                    }
-                    else{
-                        showErrorLayout("No Proposal Found",0);
+                                Log.i(TAG,"Cancelled reading proposal" + databaseError.getMessage());
+                            }
+                        });
                     }
                 }else{
                     showErrorLayout("No Proposal Found",0);
@@ -222,6 +254,8 @@ public class ProposalListActivity extends AppCompatActivity {
         loadingIndicatorView.hide();
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         // specify an adapter (see also next example)
         adapter = new ProposalAdapter(data,getApplicationContext());
