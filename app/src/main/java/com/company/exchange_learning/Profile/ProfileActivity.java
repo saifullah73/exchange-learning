@@ -47,6 +47,7 @@ import org.apache.commons.text.WordUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.text.WordUtils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

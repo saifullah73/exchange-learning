@@ -29,6 +29,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.company.exchange_learning.Profile.ProfileActivity;
+import com.company.exchange_learning.activities.ChatActivity;
+import com.company.exchange_learning.activities.ChatRoomsActivity;
 import com.company.exchange_learning.Proposals.ProposalListActivity;
 import com.company.exchange_learning.activities.CreateImagePostActivity;
 import com.company.exchange_learning.activities.CreateNoImagePostActivity;
@@ -81,7 +83,8 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
     List<Notification> notifications;
 
     PostsAdapter mAdapter;
-    LinearLayout goToProfile, logout, goToMyPosts, goToNotif,goToSettings,goToBookCity;
+    LinearLayout goToProfile, logout, goToMyPosts, goToNotif,goToSettings,goToBookCity,goToMessages;
+
 
     LinearLayout emptyMsgLayout, createPostBtn, uploadImgBtn;
 
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         goToNotif = findViewById(R.id.drawer_notif);
         goToSettings = findViewById(R.id.drawer_settings);
         goToBookCity = findViewById(R.id.drawer_bookcity);
+        goToMessages = findViewById(R.id.drawer_messages);
         logout = findViewById(R.id.drawer_logout);
         mainHeader = findViewById(R.id.main_header);
         postSwitchBtn = findViewById(R.id.postSelectorLayout);
@@ -162,6 +166,13 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, BookCityMain.class));
+            }
+        });
+
+        goToMessages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ChatRoomsActivity.class));
             }
         });
 

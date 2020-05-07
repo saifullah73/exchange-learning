@@ -5,6 +5,7 @@
     <color name="colorAccent">#1976D2</color>
     <color name="hamburger">#1976D2</color>
     <color name="lessGray">#D9DDDD</color>
+    <color name="lesserGray">#E6E8E8</color>
     <color name="darkGray">#9A9A9C</color>
 
     <color name="add_post_blue">#8FCCF4</color>

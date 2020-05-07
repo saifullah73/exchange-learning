@@ -201,6 +201,36 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/drawer_messages"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_marginStart="28dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_comments" />
+
+                        <TextView
+                            android:layout_marginStart="24dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="16sp"
+                            android:textColor="@color/darkGray"
+                            android:fontFamily="@font/open_sans_light"
+                            android:text="Messages" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/drawer_settings"
                         android:clickable="true"
                         android:focusable="true"

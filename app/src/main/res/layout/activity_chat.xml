@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
+    android:layout_height="match_parent"
+    tools:context=".activities.ChatActivity">
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:layout_centerInParent="true"
+        android:id="@+id/chatAvi"
+        android:elevation="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicatorName="BallClipRotateMultipleIndicator"
+        app:indicatorColor="@color/hamburger"
+        android:visibility="visible"
+        style="@style/AVLoadingIndicatorView" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/chatToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:theme="@style/MainActivityToolbarTheme">
+
+            <LinearLayout
+                android:id="@+id/appTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chat_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/basic"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:text="User Name"
+                    android:textColor="@color/hamburger"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/chatRecyclerView"
+        android:layout_below="@id/appbar"
+        android:layout_above="@id/dividerLine" />
+
+    <ImageView
+        android:id="@+id/chatMsgSendBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginBottom="2dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_send" />
+
+    <View
+        android:id="@+id/dividerLine"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@id/msgEditLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/lessGray" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/msgEditLayout"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/lesserGray"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/chatMsgSendBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/chatMsgEditText"
+            android:textColor="@color/black"
+            android:hint="Type Message"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp"
+            android:inputType="text|textNoSuggestions|textMultiLine|textCapSentences"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
