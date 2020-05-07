@@ -217,7 +217,11 @@ public class BookDetail extends AppCompatActivity implements PopupMenu.OnMenuIte
         });
         bookTitle.setText(book.getBook_title());
         bookType.setText(book.getBook_type());
-        bookPrice.setText(book.getBook_price() + "RS/-");
+        if (book.getBook_price() != null && !book.getBook_price().equals("")) {
+            bookPrice.setText(book.getBook_price() + "RS/-");
+        }else{
+            bookPrice.setVisibility(View.INVISIBLE);
+        }
         bookDesc.setText(book.getBook_description());
         bookAddr.setText(book.getBook_address());
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/" + book.getUser_id());

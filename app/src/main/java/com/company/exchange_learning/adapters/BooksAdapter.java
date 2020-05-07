@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public class BooksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private ConstraintLayout layout;
         private TextView typeView;
         private TextView descView,priceView;
+        private LinearLayout pricelayout;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -43,6 +45,7 @@ public class BooksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             typeView = itemView.findViewById(R.id.bookList_type);
             descView = itemView.findViewById(R.id.bookList_text);
             priceView = itemView.findViewById(R.id.bookList_price);
+            pricelayout = itemView.findViewById(R.id.book_price_layout);
 
         }
     }
@@ -92,7 +95,11 @@ public class BooksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((BooksAdapter.BookViewHolder) holder).descView.setText(books.get(position).getBook_description());
             ((BooksAdapter.BookViewHolder) holder).titleView.setText(books.get(position).getBook_title());
             ((BooksAdapter.BookViewHolder) holder).typeView.setText(books.get(position).getBook_type());
-            ((BooksAdapter.BookViewHolder) holder).priceView.setText(books.get(position).getBook_price() + "RS/-");
+            if (books.get(position).getBook_price() != null && !books.get(position).getBook_price().equals("")) {
+                ((BooksAdapter.BookViewHolder) holder).priceView.setText(books.get(position).getBook_price() + "RS/-");
+            }else{
+                ((BookViewHolder) holder).pricelayout.setVisibility(View.GONE);
+            }
             Log.d(TAG, "Starting Load");
             Glide.with(context)
                     .load(books.get(position).getCover_photo())

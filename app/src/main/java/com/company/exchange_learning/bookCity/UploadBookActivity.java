@@ -220,7 +220,7 @@ public class UploadBookActivity extends AppCompatActivity {
         final String book_price = uploadBookPrice.getText().toString().trim().replaceFirst("^0+(?!$)", "");
         final String book_type = typeSpinner.getSelectedItem().toString();
         try{
-        if (book_type.equals("@Sell") && !book_price.equals("") && Integer.valueOf(book_price) == 0){
+        if ((book_type.equals("@Sell")) && !book_price.equals("") && Integer.valueOf(book_price) == 0){
             Toast.makeText(this, "Please enter a price other than 0", Toast.LENGTH_LONG).show();
             return;
         }}catch (Exception e){
@@ -252,7 +252,9 @@ public class UploadBookActivity extends AppCompatActivity {
                                         book.setUser_id(Constants.uid);
                                         book.setBook_address(book_addr);
                                         book.setBook_description(book_desc);
-                                        book.setBook_price(book_price);
+                                        if (Integer.valueOf(book_price) != 0) {
+                                            book.setBook_price(book_price);
+                                        }
                                         book.getTagged_communities().addAll(mSelectedCommunities);
                                         book.setBook_type(book_type);
 
@@ -319,7 +321,9 @@ public class UploadBookActivity extends AppCompatActivity {
                                                         updates.put("cover_photo", downUri.toString());
                                                         updates.put("book_type", book_type);
                                                         updates.put("book_description", book_desc);
-                                                        updates.put("book_price", book_price);
+                                                        if (Integer.valueOf(book_price) != 0) {
+                                                            book.setBook_price(book_price);
+                                                        }
                                                         updates.put("book_address", book_addr);
                                                         updates.put("user_id", book.getUser_id());
                                                         updates.put("tagged_communities", mSelectedCommunities);
@@ -361,14 +365,16 @@ public class UploadBookActivity extends AppCompatActivity {
                             }
                         } else {
                             if (mSelectedCommunities != null && mSelectedCommunities.size() != 0) {
-                                if (book_title.length() > 20) {
+                                if (book_title.length() > 4 && book_desc.length() > 4 && book_price.length() > 0 && book_addr.length() > 4) {
                                     postRef = FirebaseDatabase.getInstance().getReference("Books_City").child(book.getBook_id());
                                     showProgress();
                                     Map<String, Object> updates = new HashMap<>();
                                     updates.put("book_title", book_title);
                                     updates.put("book_type", book_type);
                                     updates.put("book_description", book_desc);
-                                    updates.put("book_price", book_price);
+                                    if (Integer.parseInt(book_price) != 0) {
+                                        updates.put("book_price", book_price);
+                                    }
                                     updates.put("book_address", book_addr);
                                     updates.put("user_id", book.getUser_id());
                                     updates.put("tagged_communities", mSelectedCommunities);
@@ -623,13 +629,13 @@ public class UploadBookActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                if(selectedItem.equals("@Donate"))
+                if(selectedItem.equals("@Donate") || selectedItem.equals("@Exchange"))
                 {
                     uploadBookPrice.setText("0");
                     uploadBookPrice.setEnabled(false);
                 }else{
                     uploadBookPrice.setText("");
-                    uploadBookPrice.setEnabled(true);
+                    uploadBookPrice.setEnabled(true );
                 }
             } // to close the onItemSelected
             public void onNothingSelected(AdapterView<?> parent)
