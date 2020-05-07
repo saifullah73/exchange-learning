@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.company.exchange_learning.adapters.ChatMessageAdapter;
 import com.company.exchange_learning.listeners.OnMsgLayoutLongClick;
 import com.company.exchange_learning.model.ChatMessageModel;
 import com.company.exchange_learning.model.ChatRoomModel;
+import com.company.exchange_learning.model.Report;
 import com.company.exchange_learning.utils.DateTimeUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,6 +62,8 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
     ImageView msgSendBtn;
 
     ChatRoomModel chatRoom;
+    String uID;
+    String type;
 
     DatabaseReference chatRef;
     ChildEventListener eventListener;
@@ -184,16 +188,16 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
     }
 
     private void handleIntent() {
-        String type;
         String action = getIntent().getStringExtra("action");
         if (action.equalsIgnoreCase("chat")) {
             chatRoom = (ChatRoomModel) getIntent().getSerializableExtra("chatRoom");
+            uID = chatRoom.getChatRoomId();
             type = getIntent().getStringExtra("type");
             toolbarTxt.setText(WordUtils.capitalize(chatRoom.getUserName()));
-            subscribeToConversation(chatRoom.getChatRoomId(), type);
+            subscribeToConversation(uID, type);
         } else if (action.equalsIgnoreCase("welcome")) {
             type = getIntent().getStringExtra("type");
-            String uID = getIntent().getStringExtra("uID");
+            uID = getIntent().getStringExtra("uID");
             initiateNewChat(uID, type);
         }
     }
@@ -343,13 +347,66 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
             }
         });
         CardView reportBtn = view.findViewById(R.id.reportMsgBtn);
+        reportBtn.setVisibility(msg.getSender_id().equalsIgnoreCase(Constants.uid) ? View.GONE : View.VISIBLE);
         reportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Report Message
+                if (type.equalsIgnoreCase("post")) {
+                    reportProposal(true, msg.getMsgKey());
+                } else {
+                    reportProposal(false, msg.getMsgKey());
+                }
             }
         });
     }
+
+    private void reportProposal(boolean isPost, String msgId) {
+        String platform = isPost ? "exchangelearning" : "bookcity";
+        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.report_layout, null, false);
+        builder.setView(view);
+        builder.setCancelable(true);
+        final androidx.appcompat.app.AlertDialog dialog = builder.show();
+        TextView msg = view.findViewById(R.id.msg);
+        msg.setText("Are you sure you want to report this message?");
+        AVLoadingIndicatorView loader = view.findViewById(R.id.report_loader);
+        CardView send = view.findViewById(R.id.report_dialog_button);
+        TextView cancel = view.findViewById(R.id.report_dialog_cancel);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send.setVisibility(View.GONE);
+                cancel.setVisibility(View.GONE);
+                loader.setVisibility(View.VISIBLE);
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref;
+                ref = database.getReference("Reports").child("message_report").child(platform);
+                String userId = uID.replace(Constants.uid, "");
+                Report report = new Report(userId, Constants.uid, msgId);
+                ref.push().setValue(report, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@com.google.firebase.database.annotations.Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null) {
+                            Toast.makeText(ChatActivity.this, "Reported Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(ChatActivity.this, "Unexpected error while reporting", Toast.LENGTH_SHORT).show();
+                            send.setVisibility(View.VISIBLE);
+                            cancel.setVisibility(View.VISIBLE);
+                            loader.setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
 
     private String formatDateString(String postDate) {
         try {
