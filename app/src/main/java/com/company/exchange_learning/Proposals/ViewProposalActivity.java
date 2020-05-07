@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
+import com.company.exchange_learning.activities.ChatActivity;
 import com.company.exchange_learning.model.Proposal;
 import com.company.exchange_learning.model.Report;
 import com.company.exchange_learning.utils.DateTimeUtils;
@@ -41,6 +43,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewProposalActivity extends AppCompatActivity {
     private static final String TAG = "MyViewProposalActivity";
+    private static final int GO_TO_BOOK_CHAT = 0;
+    private static final int GO_TO_POST_CHAT = 1;
     private Proposal proposal;
     private CircleImageView proposalImage;
     private TextView proposalDate,proposalName,proposalData,proposalPostTitle,titleLabel;
@@ -314,7 +318,11 @@ public class ViewProposalActivity extends AppCompatActivity {
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         if (databaseError == null){
                             Toast.makeText(ViewProposalActivity.this, "Proposal Accepted", Toast.LENGTH_SHORT).show();
-                            goToChat();
+                            if (proposal.getNotif().getPlatform().equals("bookcity")) {
+                                goToChat(GO_TO_BOOK_CHAT);
+                            }else{
+                                goToChat(GO_TO_POST_CHAT);
+                            }
                         }
                         else{
                             Toast.makeText(ViewProposalActivity.this, "Unexpected error while accepting", Toast.LENGTH_SHORT).show();
@@ -334,9 +342,20 @@ public class ViewProposalActivity extends AppCompatActivity {
         });
     }
 
-    private void goToChat(){
+    private void goToChat(int mode){
         ProposalListActivity.getInstance().startRead();
-        //write code here
+        Log.i(TAG,String.valueOf(mode));
+        if(mode == GO_TO_BOOK_CHAT ){
+            Log.i(TAG,String.valueOf("sending to book"));
+            Intent i = new Intent(ViewProposalActivity.this, ChatActivity.class);
+            i.putExtra("type","book").putExtra("action","welcome").putExtra("uID",proposal.getSubmitter_id());
+            startActivity(i);
+        }else {
+            Log.i(TAG,String.valueOf("sending to post"));
+            Intent i = new Intent(ViewProposalActivity.this, ChatActivity.class);
+            i.putExtra("type","post").putExtra("action","welcome").putExtra("uID",proposal.getSubmitter_id());
+            startActivity(i);
+        }
         finish();
     }
 }
