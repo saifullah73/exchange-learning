@@ -31,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
 import com.company.exchange_learning.model.UserProfile;
+import com.company.exchange_learning.utils.DBOperations;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -388,7 +389,7 @@ public class EditProfile extends AppCompatActivity {
         if (isProfileImgChanged) {
             if (filePath != null) {
                 storageRef = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.uid);
-                storageRef.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                storageRef.putFile(filePath, DBOperations.getmetaData()).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                         if (!task.isSuccessful()) {

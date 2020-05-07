@@ -8,15 +8,16 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.ChatActivity"
+            android:parentActivityName=".activities.ChatRoomsActivity"></activity>
             android:parentActivityName=".activities.ChatRoomsActivity" />
         <activity android:name=".activities.ImageDetailActivity" />
         <activity android:name=".activities.CreateImagePostActivity" />
@@ -24,7 +25,25 @@
             android:name=".activities.ChatRoomsActivity"
             android:theme="@style/AppTheme"
             android:parentActivityName=".MainActivity" />
+        <activity android:name=".Settings" android:theme="@style/FollowersTheme"></activity>
+        <activity
+            android:name=".bookCity.BookDetail"
+            android:parentActivityName=".bookCity.BookCityMain" />
+        <activity android:name=".bookCity.UploadBookActivity" />
+        <activity
+            android:name=".bookCity.BookCityMain"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".activities.ImageDetailActivity" />
+        <activity android:name=".activities.CreateImagePostActivity"></activity>
         <activity android:name=".activities.CreateNoImagePostActivity" />
+        <activity android:name=".Proposals.ProposalListActivity"
+            android:theme="@style/FollowersTheme"
+            ></activity>
+        <activity android:name=".Proposals.ViewProposalActivity"
+            android:theme="@style/FollowersTheme"/>
+        <activity
+            android:name=".activities.PostDetailActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Proposals.ProposalListActivity"
             android:theme="@style/FollowersTheme" />

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dialog_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/hamburger"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:srcCompat="@drawable/login_not_verified_icon" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/open_sans_light"
+        android:lines="1"
+        android:maxLines="1"
+        android:text="Accept Proposal"
+        android:textColor="@color/fullBlack"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="13dp"
+        android:fontFamily="@font/open_sans_light"
+        android:gravity="center"
+        android:text="Are you sure you want to accept proposal?"
+        android:textColor="@color/darkGray"
+        android:textSize="16sp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/accept_dialog_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/msg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/category_env_s"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="Accept"
+            android:textColor="@color/fullwhite"
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/accept_report_loader"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/msg"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:indicatorName="BallClipRotateMultipleIndicator"
+        app:indicatorColor="@color/hamburger"
+        android:visibility="gone"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="0dp"
+        style="@style/AVLoadingIndicatorView">
+    </com.wang.avi.AVLoadingIndicatorView>
+
+    <TextView
+        android:id="@+id/accept_dialog_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/accept_dialog_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="Cancel"
+        android:textColor="@color/redBorderColor"
+        android:textSize="20sp" />
+
+</RelativeLayout>

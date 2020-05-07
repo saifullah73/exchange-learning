@@ -260,6 +260,37 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/drawer_bookcity"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_marginStart="28dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/icons8_book_64" />
+
+                        <TextView
+                            android:layout_marginStart="24dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/drawer_orange"
+                            android:fontFamily="@font/allerta"
+                            android:text="Book City" />
+
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
             </ScrollView>

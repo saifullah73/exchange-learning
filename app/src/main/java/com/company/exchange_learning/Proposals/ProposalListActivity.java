@@ -15,13 +15,16 @@ import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
+import com.company.exchange_learning.activities.PostDetailActivity;
 import com.company.exchange_learning.adapters.FollowerAdapter;
 import com.company.exchange_learning.adapters.ProposalAdapter;
 import com.company.exchange_learning.model.Notification;
 import com.company.exchange_learning.model.Proposal;
+import com.company.exchange_learning.utils.DateTimeUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,11 +33,17 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.threeten.bp.LocalDateTime;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class ProposalListActivity extends AppCompatActivity {
     private static final String TAG = "MyProposalListActivity";
+    private static ProposalListActivity instance;
     private RecyclerView recyclerView;
     private AVLoadingIndicatorView loadingIndicatorView;
     private LinearLayoutManager layoutManager;
@@ -54,6 +63,7 @@ public class ProposalListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposal_list);
+        instance = this;
         recyclerView = findViewById(R.id.proposal_recycler_view);
         loadingIndicatorView = findViewById(R.id.proposal_avi);
         errorView = findViewById(R.id.proposal_error);
@@ -67,9 +77,11 @@ public class ProposalListActivity extends AppCompatActivity {
         notifications = new ArrayList<>();
         mode = getIntent().getStringExtra("mode");
         id = getIntent().getStringExtra("id");
+        startRead();
 
+    }
 
-
+    public void startRead(){
         try {
             if (mode.equals("Post")) {
                 getSupportActionBar().setTitle("Post Proposal");
@@ -92,7 +104,13 @@ public class ProposalListActivity extends AppCompatActivity {
         }catch (Exception e){
 
         }
+    }
 
+    public static ProposalListActivity getInstance(){
+        if (instance == null){
+            instance = new ProposalListActivity();
+        }
+        return instance;
     }
 
     public void getData(final String mode,final String key, final String id){
@@ -109,6 +127,7 @@ public class ProposalListActivity extends AppCompatActivity {
                     Log.i(TAG,"Found Children");
                     for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                         Notification notif = dsp.getValue(Notification.class);
+                        notif.setNotification_id(dsp.getKey());
                         Log.i(TAG,notif.toString());
                         notifications.add(notif);
                     }
@@ -124,6 +143,13 @@ public class ProposalListActivity extends AppCompatActivity {
                     Log.i(TAG,"filtered = "+ notifications.size());
                     notificationLength = notifications.size();
                     for (final Notification not : notifications) {
+                        if (not == null){
+                            count+=1;
+                            if (count == notificationLength && allProposals.size() == 0 ){
+                                showErrorLayout("No Proposal Found",0);
+                            }
+                            continue;
+                        }
                         final DatabaseReference myRef2 = database.getReference(mode + "_Proposal_Table").child(not.post_id).child(not.proposal_id);
                         myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -132,10 +158,16 @@ public class ProposalListActivity extends AppCompatActivity {
                                 if (dataSnapshot.exists()) {
                                     Proposal proposal = dataSnapshot.getValue(Proposal.class);
                                     proposal.setNotif(not);
-                                    allProposals.add(proposal);
-                                    count+=1;
+                                    if (!proposal.isReported()) {
+                                        allProposals.add(proposal);
+                                        allProposals = sortByDate(allProposals);
+                                        Log.i(TAG,"added");
+                                    }else{
+                                        Log.i(TAG,"Not added");
+                                    }
+                                    Log.i(TAG,"All proposal size = "+ allProposals.size());
                                     Log.i(TAG,"Read a proposal");
-                                    if (allProposals.size() == 1){
+                                    if (allProposals.size() <= 1){
                                         Log.i(TAG,"Setting data");
                                         setData(allProposals);
                                     }
@@ -143,10 +175,14 @@ public class ProposalListActivity extends AppCompatActivity {
                                         Log.i(TAG,"Notifying changes");
                                         notifyChanges();
                                     }
+                                    count+=1;
+                                    if (count == notificationLength && allProposals.size() == 0 ){
+                                        showErrorLayout("No Proposal Found",0);
+                                    }
                                 }else{
                                     count+=1;
                                     Log.i(TAG,"No proposal found at this location");
-                                    if (count == notificationLength && allProposals.size() ==0 ){
+                                    if (count == notificationLength && allProposals.size() == 0 ){
                                         showErrorLayout("No Proposal Found",0);
                                     }
                                 }
@@ -186,15 +222,23 @@ public class ProposalListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                    notificationLength = dataSnapshot.getChildrenCount();
                     Log.i(TAG,"Found Children");
                     for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                         Notification notif = dsp.getValue(Notification.class);
+                        notif.setNotification_id(dsp.getKey());
                         Log.i(TAG,notif.toString());
                         notifications.add(notif);
                     }
+                    notificationLength = notifications.size();
                     Log.i(TAG,"More than 0 notifications ready for display");
                     for (final Notification not : notifications) {
+                        if (not == null){
+                            count+=1;
+                            if (count == notificationLength && allProposals.size() == 0 ){
+                                showErrorLayout("No Proposal Found",0);
+                            }
+                            continue;
+                        }
                         final DatabaseReference myRef2;
                         if (not.getPlatform().equals("exchangelearning")){
                             myRef2 = database.getReference("Post_Proposal_Table").child(not.post_id).child(not.proposal_id);
@@ -208,16 +252,27 @@ public class ProposalListActivity extends AppCompatActivity {
                                 if (dataSnapshot.exists()) {
                                     Proposal proposal = dataSnapshot.getValue(Proposal.class);
                                     proposal.setNotif(not);
-                                    allProposals.add(proposal);
-                                    count+=1;
                                     Log.i(TAG,"Read a proposal");
-                                    if (allProposals.size() == 1){
+                                    Log.i(TAG,"Reported : "+ proposal.isReported());
+                                    if (!proposal.isReported()) {
+                                        allProposals.add(proposal);
+                                        allProposals = sortByDate(allProposals);
+                                        Log.i(TAG,"added");
+                                    }else{
+                                        Log.i(TAG,"Not added");
+                                    }
+                                    Log.i(TAG,"All proposal size = "+ allProposals.size());
+                                    if (allProposals.size() <= 1){
                                         Log.i(TAG,"Setting data");
                                         setData(allProposals);
                                     }
                                     else{
                                         Log.i(TAG,"Notifying changes");
                                         notifyChanges();
+                                    }
+                                    count+=1;
+                                    if (count == notificationLength && allProposals.size() == 0 ){
+                                        showErrorLayout("No Proposal Found",0);
                                     }
                                 }else{
                                     count+=1;
@@ -257,13 +312,14 @@ public class ProposalListActivity extends AppCompatActivity {
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
-        // specify an adapter (see also next example)
         adapter = new ProposalAdapter(data,getApplicationContext());
         recyclerView.setAdapter(adapter);
     }
 
     public void notifyChanges(){
-        adapter.notifyDataSetChanged();
+        if (adapter!= null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -305,5 +361,28 @@ public class ProposalListActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
+    }
+
+    private List<Proposal> sortByDate(List<Proposal> list){
+        Collections.sort(list, new Comparator<Proposal>() {
+            public int compare(Proposal o1, Proposal o2) {
+                if (o1.getProposal_date() == null || o2.getProposal_date() == null)
+                    return 0;
+                LocalDateTime d11 = DateTimeUtils.getDateFromString(allProposals.get(0).getProposal_date());
+                LocalDateTime d22 = DateTimeUtils.getDateFromString(allProposals.get(1).getProposal_date());
+                Log.i("DATETEST", d11.toString());
+                Log.i("DATETEST", d22.toString());
+                Log.i("DATETEST","" + d22.compareTo(d11));
+                Log.i("DATETEST","" + d11.compareTo(d22));
+                return d11.compareTo(d22);
+            }
+        });
+        return list;
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

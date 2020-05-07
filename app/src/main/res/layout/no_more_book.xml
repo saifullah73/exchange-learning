@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/main_post_no_more_post_icon" />
+
+    <TextView
+        android:layout_marginStart="16dp"
+        android:textSize="16dp"
+        android:textColor="@color/drawerMenuGray"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="No more books!" />
+
+</LinearLayout>
