@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".activities.ChatRoomsActivity">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/chatToolbar"
             android:layout_width="match_parent"
-            app:layout_scrollFlags="scroll|enterAlways"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
             app:theme="@style/MainActivityToolbarTheme">
 
             <LinearLayout
-                android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/appTitle"
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:textColor="@color/hamburger"
                     android:id="@+id/exchange_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:layout_marginEnd="1dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/basic"
                     android:lines="1"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginEnd="1dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/basic"
-                    android:text="Conversations" />
+                    android:text="Conversations"
+                    android:textColor="@color/hamburger"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -52,13 +54,17 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/hamburger"
+            app:tabTextColor="@color/hamburger" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

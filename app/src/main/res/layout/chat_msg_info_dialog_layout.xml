@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/hamburger"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/ic_msg_information" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/open_sans_light"
+        android:lines="1"
+        android:maxLines="1"
+        android:text="Message Information"
+        android:textColor="@color/fullBlack"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/dateTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/basic"
+        android:gravity="center"
+        android:text="Date: "
+        android:textColor="@color/darkGray"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/dateTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_toEndOf="@id/dateTxtView"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/open_sans_light"
+        android:gravity="center"
+        android:text="5/6/2020 10:20:46"
+        android:textColor="@color/darkGray"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/statusTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateTxtView"
+        android:layout_marginStart="32dp"
+        android:textStyle="bold"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/basic"
+        android:gravity="center"
+        android:text="Status: "
+        android:textColor="@color/darkGray"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/statusTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateTxt"
+        android:layout_toEndOf="@id/statusTxtView"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/open_sans_light"
+        android:gravity="center"
+        android:text="UNSEEN"
+        android:textColor="@color/darkGray"
+        android:textSize="16sp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/reportMsgBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statusTxtView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/redBorderColor"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="Report This Message"
+            android:textColor="@color/fullwhite"
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/cancelBtn"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:fontFamily="@font/basic"
+        android:textColor="@color/hamburger"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_below="@id/reportMsgBtn"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

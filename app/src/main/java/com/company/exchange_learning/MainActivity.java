@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.company.exchange_learning.Profile.ProfileActivity;
+import com.company.exchange_learning.activities.ChatActivity;
 import com.company.exchange_learning.activities.ChatRoomsActivity;
 import com.company.exchange_learning.activities.CreateImagePostActivity;
 import com.company.exchange_learning.activities.CreateNoImagePostActivity;
@@ -169,8 +170,10 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         goToSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-                i.putExtra("uid", "jgT7EMrWNFOdEx54tBpxUKwABOf2");
+                Intent i = new Intent(MainActivity.this, ChatActivity.class);
+                i.putExtra("uID", "jgT7EMrWNFOdEx54tBpxUKwABOf2");
+                i.putExtra("action", "welcome");
+                i.putExtra("type", "post");
                 startActivity(i);
             }
         });
@@ -586,7 +589,6 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             }
         });
     }
-
 
     private void updateDrawerProfileImageBorder(String community) {
         if (community != null) {

@@ -35,6 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.wang.avi.AVLoadingIndicatorView;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -201,7 +202,7 @@ public class loginActivity extends AppCompatActivity {
                             }
                         } else {
                             progressBar.hide();
-                            Toast.makeText(loginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(loginActivity.this, "Error signing in", Toast.LENGTH_SHORT).show();
                         }
                         loginbtn.setEnabled(true);
                     }

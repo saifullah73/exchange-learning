@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NavUtils;
 import androidx.viewpager.widget.ViewPager;
 
 import com.company.exchange_learning.R;
@@ -42,11 +41,16 @@ public class ChatRoomsActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
