@@ -73,7 +73,7 @@
         <EditText
             android:theme="@style/LoginSignUpProgressBar"
             android:inputType="textMultiLine"
-            android:minLines="18"
+            android:minLines="9"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:gravity="top|left"

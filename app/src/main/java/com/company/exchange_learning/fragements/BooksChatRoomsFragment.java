@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -177,7 +176,7 @@ public class BooksChatRoomsFragment extends Fragment implements OnChatRoomMainLa
             storageRef.child("profileImages/" + userId).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    if (uri != null) {
+                    if (uri != null && !mChatRooms.isEmpty()) {
                         mChatRooms.get(finalI).setUserImgUrl(uri.toString());
                         mAdapter.notifyItemChanged(finalI);
                     }
@@ -276,7 +275,6 @@ public class BooksChatRoomsFragment extends Fragment implements OnChatRoomMainLa
 
     @Override
     public void deleteChatRoom(String id) {
-        Log.d("listenerdebug", "deleteChatRoom: BOOK: " + id);
         showChatRoomDeleteConfirmation(id);
     }
 }

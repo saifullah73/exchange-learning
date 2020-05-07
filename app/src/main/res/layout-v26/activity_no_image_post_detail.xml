@@ -60,7 +60,7 @@
                     android:src="@drawable/ic_more_horiz_black_24dp"
                     app:layout_constraintBottom_toTopOf="@id/first_line"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/noPostImageDetailPostedUserName"
+                    app:layout_constraintStart_toEndOf="@+id/noPostImageDetailPostedUserName"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -76,7 +76,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/noPostImageDetailPostType"
-                    app:layout_constraintEnd_toEndOf="@id/noPostImageDetailMoreBtn"
+                    app:layout_constraintEnd_toStartOf="@+id/noPostImageDetailMoreBtn"
                     app:layout_constraintStart_toEndOf="@id/noPostImageDetailUserImgView"
                     app:layout_constraintTop_toTopOf="@id/noPostImageDetailUserImgView" />
 
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     app:cardBackgroundColor="@color/postSelectorBtnColor"
@@ -100,7 +100,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3">
+                    app:layout_constraintTop_toBottomOf="@id/fourth_line">
 
                     <TextView
                         android:id="@+id/submit_proposal_button_text_no_image"
@@ -293,13 +293,23 @@
                     app:layout_constraintTop_toBottomOf="@id/footer"
                     app:layout_constraintBottom_toTopOf="@id/footer2" />
 
+                <View
+                    android:id="@+id/fourth_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:background="@color/lessGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/footer2"
+                    app:layout_constraintBottom_toTopOf="@id/postNoImageSubmitProposalBtn" />
+
                 <LinearLayout
                     android:id="@+id/footer2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toTopOf="@id/postNoImageSubmitProposalBtn"
+                    app:layout_constraintBottom_toTopOf="@id/fourth_line"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/third_line">

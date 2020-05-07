@@ -219,17 +219,17 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         submitProposalBtn = findViewById(R.id.postImageSubmitProposalBtn);
         submitProposalButtonText = findViewById(R.id.submit_proposal_button_text_image);
 
-        Log.i("TESTBC",String.valueOf(isProposalSubmitted) + " " + String.valueOf(isCurrentUser));
+        Log.i("TESTBC", isProposalSubmitted + " " + isCurrentUser);
         if (!isProposalSubmitted) {
             submitProposalBtn.setVisibility(View.VISIBLE);
             if (isCurrentUser) {
-                submitProposalButtonText.setText("VIEW PROPOSALS");
+                submitProposalButtonText.setText("VIEW PROPOSAL");
             } else {
-                submitProposalButtonText.setText("SUBMIT PROPOSALS");
+                submitProposalButtonText.setText("SUBMIT PROPOSAL");
             }
         }else {
             if (isCurrentUser) {
-                submitProposalButtonText.setText("VIEW PROPOSALS");
+                submitProposalButtonText.setText("VIEW PROPOSAL");
                 submitProposalBtn.setVisibility(View.VISIBLE);
             } else {
                 submitProposalBtn.setVisibility(View.GONE);
@@ -238,7 +238,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         submitProposalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (submitProposalButtonText.getText().equals("SUBMIT PROPOSALS")) {
+                if (submitProposalButtonText.getText().equals("SUBMIT PROPOSAL")) {
                     showSendProposalDialog();
                 }else{
                     Intent i = new Intent(PostDetailActivity.this, ProposalListActivity.class);
@@ -302,17 +302,17 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         }else{
             moreBtn.setVisibility(View.GONE);
         }
-        Log.i("TESTBC",String.valueOf(isProposalSubmitted) + " " + String.valueOf(isCurrentUser));
+        Log.i("TESTBC", isProposalSubmitted + " " + isCurrentUser);
         if (!isProposalSubmitted) {
             submitProposalBtn.setVisibility(View.VISIBLE);
             if (isCurrentUser) {
-                submitProposalButtonText.setText("VIEW PROPOSALS");
+                submitProposalButtonText.setText("VIEW PROPOSAL");
             } else {
-                submitProposalButtonText.setText("SUBMIT PROPOSALS");
+                submitProposalButtonText.setText("SUBMIT PROPOSAL");
             }
         }else {
             if (isCurrentUser) {
-                submitProposalButtonText.setText("VIEW PROPOSALS");
+                submitProposalButtonText.setText("VIEW PROPOSAL");
                 submitProposalBtn.setVisibility(View.VISIBLE);
             } else {
                 submitProposalBtn.setVisibility(View.GONE);
@@ -321,7 +321,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         submitProposalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (submitProposalButtonText.getText().equals("SUBMIT PROPOSALS")) {
+                if (submitProposalButtonText.getText().equals("SUBMIT PROPOSAL")) {
                     showSendProposalDialog();
                 }else{
                     Intent i = new Intent(PostDetailActivity.this, ProposalListActivity.class);

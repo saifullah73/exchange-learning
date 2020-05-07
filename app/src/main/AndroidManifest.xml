@@ -17,7 +17,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.ChatActivity"
-            android:parentActivityName=".activities.ChatRoomsActivity"></activity>
             android:parentActivityName=".activities.ChatRoomsActivity" />
         <activity android:name=".activities.ImageDetailActivity" />
         <activity android:name=".activities.CreateImagePostActivity" />
@@ -33,21 +32,15 @@
         <activity
             android:name=".bookCity.BookCityMain"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".activities.ImageDetailActivity" />
-        <activity android:name=".activities.CreateImagePostActivity"></activity>
         <activity android:name=".activities.CreateNoImagePostActivity" />
-        <activity android:name=".Proposals.ProposalListActivity"
-            android:theme="@style/FollowersTheme"
-            ></activity>
+        <activity
+            android:name=".Proposals.ProposalListActivity"
+            android:theme="@style/FollowersTheme" />
         <activity android:name=".Proposals.ViewProposalActivity"
             android:theme="@style/FollowersTheme"/>
         <activity
             android:name=".activities.PostDetailActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".Proposals.ProposalListActivity"
-            android:theme="@style/FollowersTheme" />
-        <activity android:name=".Proposals.ViewProposalActivity" />
         <activity
             android:name=".FollowersActivity"
             android:theme="@style/FollowersTheme" />

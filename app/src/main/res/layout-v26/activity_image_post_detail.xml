@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     app:cardBackgroundColor="@color/postSelectorBtnColor"
@@ -54,7 +54,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView">
+                    app:layout_constraintTop_toBottomOf="@id/fourth_line">
 
                     <TextView
                         android:id="@+id/submit_proposal_button_text_image"
@@ -284,6 +284,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/footer" />
 
+                <View
+                    android:id="@+id/fourth_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:background="@color/lessGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/footer2"
+                    app:layout_constraintBottom_toTopOf="@id/postImageSubmitProposalBtn" />
+
                 <LinearLayout
                     android:id="@+id/footer2"
                     android:layout_width="match_parent"
@@ -293,7 +303,7 @@
                     app:layout_constraintBottom_toTopOf="@id/postImageSubmitProposalBtn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/third_line">
+                    app:layout_constraintTop_toBottomOf="@id/third_line">
 
                     <TextView
                         android:id="@+id/skillsText"
