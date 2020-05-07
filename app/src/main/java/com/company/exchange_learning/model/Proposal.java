@@ -35,6 +35,7 @@ public class Proposal implements Serializable {
         this.reported = reported;
     }
 
+
     public void setNotif(Notification notif) {
         this.notif = notif;
     }

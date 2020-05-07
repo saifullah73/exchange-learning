@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        tools:context=".activities.PostDetailActivity">
+
+
+        <include
+            android:id="@+id/layout"
+            layout="@layout/layout_bookcity" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bookImageMainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bookImageSubmitProposalBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/postSelectorBtnColor"
+                    android:clickable="true"
+                    android:elevation="0dp"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                    <TextView
+                        android:id="@+id/submit_proposal_button_text_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/basic"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="SUBMIT PROPOSAL"
+                        android:textColor="@color/fullwhite"
+                        android:textSize="20sp" />
+                </androidx.cardview.widget.CardView>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/bookImageDetailUserImgView"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/main_user_profile_avatar"
+                    app:civ_border_color="@color/hamburger"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintBottom_toTopOf="@id/first_line"
+                    app:layout_constraintEnd_toStartOf="@id/bookImageDetailPostedUserName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/bookImageDetailMoreBtn"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_more_horiz_black_24dp"
+                    app:layout_constraintBottom_toTopOf="@id/first_line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bookImageDetailPostedUserName"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bookImageDetailPostedUserName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/montserrat"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/bookImageDetailbookType"
+                    app:layout_constraintEnd_toStartOf="@+id/bookImageDetailMoreBtn"
+                    app:layout_constraintStart_toEndOf="@id/bookImageDetailUserImgView"
+                    app:layout_constraintTop_toTopOf="@id/bookImageDetailUserImgView" />
+
+                <TextView
+                    android:id="@+id/bookImageDetailbookType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/basic"
+                    android:textColor="@color/drawerMenuGray"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/bookImageDetailUserImgView"
+                    app:layout_constraintEnd_toStartOf="@id/imageView"
+                    app:layout_constraintStart_toEndOf="@id/bookImageDetailUserImgView"
+                    app:layout_constraintTop_toBottomOf="@id/bookImageDetailPostedUserName" />
+
+                
+
+                <TextView
+                    android:id="@+id/bookImageDetailBookPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/drawer_orange"
+                    android:textDirection="ltr"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@id/bookImageDetailbookType"
+                    app:layout_constraintEnd_toStartOf="@+id/bookImageDetailMoreBtn"
+                    app:layout_constraintStart_toEndOf="@id/imageView"
+                    app:layout_constraintTop_toTopOf="@id/bookImageDetailbookType" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/post_item_point_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/bookImageDetailbookType"
+                    app:layout_constraintEnd_toStartOf="@id/bookImageDetailBookPrice"
+                    app:layout_constraintStart_toEndOf="@id/bookImageDetailbookType"
+                    app:layout_constraintTop_toTopOf="@id/bookImageDetailbookType" />
+
+                <View
+                    android:id="@+id/first_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/lessGray"
+                    app:layout_constraintBottom_toTopOf="@id/layout_views"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bookImageDetailUserImgView" />
+
+                <LinearLayout
+                    android:id="@+id/layout_views"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@id/bookImageDetailBookMainImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/first_line">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Title"
+                        android:paddingStart="8dp"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        ></TextView>
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:id="@+id/bookImagetitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/allerta"
+                    android:maxLines="4"
+                    android:paddingStart="8dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="6dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2dp"
+                    app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textStyle="bold"
+                        android:paddingStart="8dp"
+                        android:textSize="18sp"
+                        android:gravity="left"
+                        ></TextView>
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:id="@+id/bookImageDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_light"
+                    android:maxLines="4"
+                    android:paddingStart="8dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="6dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintTop_toBottomOf="@id/bookImagetitle"
+                    app:layout_constraintBottom_toTopOf="@id/bookImageAddr"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textStyle="bold"
+                        android:paddingStart="8dp"
+                        android:textSize="18sp"
+                        android:gravity="left"
+                        ></TextView>
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:id="@+id/bookImageAddr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_light"
+                    android:maxLines="4"
+                    android:paddingStart="8dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="6dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintTop_toBottomOf="@id/bookImageDesc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/bookImageDetailBookMainImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="600dp"
+                    android:minHeight="350dp"
+                    android:src="@drawable/main_post_image_avatart"
+                    app:layout_constraintBottom_toTopOf="@id/second_line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_views" />
+
+                <View
+                    android:id="@+id/second_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:background="@color/lessGray"
+                    app:layout_constraintBottom_toTopOf="@id/footer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bookImageDetailBookMainImage" />
+
+                <LinearLayout
+                    android:id="@+id/footer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@id/bookImageSubmitProposalBtn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/second_line">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/open_sans_light"
+                        android:text="Communities"
+                        android:textColor="@color/lessGray"
+                        android:textSize="14sp" />
+
+                    <HorizontalScrollView
+                        android:id="@+id/bookItemCategoryHolder"
+                        android:layout_width="wrap_content"
+                        android:scrollbars="none"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:gravity="center_vertical"
+                                android:id="@+id/bookImageDetailFirstCategory"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"></LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center_vertical"
+                                android:id="@+id/bookImageDetailSecondCategory"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:orientation="horizontal"></LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center_vertical"
+                                android:id="@+id/bookImageDetailThirdCategory"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:orientation="horizontal"></LinearLayout>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</ScrollView>

@@ -10,6 +10,7 @@ public class Notification implements Serializable {
     public String proposal_id;
     public String read_at;
     public String platform;
+    public String notification_id;
 
     public Notification(){
 
@@ -21,6 +22,14 @@ public class Notification implements Serializable {
         this.proposal_id = proposal_id;
         this.read_at = "";
         this.platform = platform;
+    }
+
+    public String getNotification_id() {
+        return notification_id;
+    }
+
+    public void setNotification_id(String notification_id) {
+        this.notification_id = notification_id;
     }
 
     public String getCreated_at() {

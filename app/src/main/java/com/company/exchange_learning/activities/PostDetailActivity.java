@@ -33,6 +33,7 @@ import com.company.exchange_learning.R;
 import com.company.exchange_learning.model.Notification;
 import com.company.exchange_learning.model.PostModel;
 import com.company.exchange_learning.model.Proposal;
+import com.company.exchange_learning.model.Report;
 import com.company.exchange_learning.model.UserProfile;
 import com.company.exchange_learning.utils.DateTimeUtils;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +51,7 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostDetailActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+    private static final String TAG = "PostDetailActivity";
 
     Toolbar toolbar;
     CircleImageView userImage;
@@ -670,14 +672,62 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
         setContentView(R.layout.loading_layout);
     }
 
+    private void reportProposal(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.report_layout, null, false);
+        builder.setView(view);
+        builder.setCancelable(true);
+        final AlertDialog dialog = builder.show();
+        TextView msg = view.findViewById(R.id.msg);
+        msg.setText("Are you sure you want to report this post");
+        AVLoadingIndicatorView loader = view.findViewById(R.id.report_loader);
+        CardView send = view.findViewById(R.id.report_dialog_button);
+        TextView cancel = view.findViewById(R.id.report_dialog_cancel);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send.setVisibility(View.GONE);
+                cancel.setVisibility(View.GONE);
+                loader.setVisibility(View.VISIBLE);
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref;
+                ref = database.getReference("Reports").child("post_report").child("exchangelearning");
+                Report report = new Report(post.getUser_id(),Constants.uid,post.getPost_id());
+                ref.push().setValue(report, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null){
+                            Toast.makeText(PostDetailActivity.this, "Reported Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        else{
+                            Toast.makeText(PostDetailActivity.this, "Unexpected error while reporting", Toast.LENGTH_SHORT).show();
+                            send.setVisibility(View.VISIBLE);
+                            cancel.setVisibility(View.VISIBLE);
+                            loader.setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.report:
-                Toast.makeText(this, "Reporting", Toast.LENGTH_SHORT).show();
+                reportProposal();
                 return true;
             default:
                 return false;
         }
     }
 }
+
+

@@ -34,6 +34,7 @@ import com.company.exchange_learning.activities.CreateImagePostActivity;
 import com.company.exchange_learning.activities.CreateNoImagePostActivity;
 import com.company.exchange_learning.activities.PostDetailActivity;
 import com.company.exchange_learning.adapters.PostsAdapter;
+import com.company.exchange_learning.bookCity.BookCityMain;
 import com.company.exchange_learning.listeners.OnPostClickListener;
 import com.company.exchange_learning.listeners.OnPostUserImageClickListener;
 import com.company.exchange_learning.loginsignup.loginActivity;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
     List<Notification> notifications;
 
     PostsAdapter mAdapter;
-    LinearLayout goToProfile, logout, goToMyPosts, goToNotif,goToSettings;
+    LinearLayout goToProfile, logout, goToMyPosts, goToNotif,goToSettings,goToBookCity;
 
     LinearLayout emptyMsgLayout, createPostBtn, uploadImgBtn;
 
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         goToMyPosts = findViewById(R.id.drawer_myPosts);
         goToNotif = findViewById(R.id.drawer_notif);
         goToSettings = findViewById(R.id.drawer_settings);
+        goToBookCity = findViewById(R.id.drawer_bookcity);
         logout = findViewById(R.id.drawer_logout);
         mainHeader = findViewById(R.id.main_header);
         postSwitchBtn = findViewById(R.id.postSelectorLayout);
@@ -156,6 +158,13 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             }
         });
 
+        goToBookCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, BookCityMain.class));
+            }
+        });
+
         goToProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,12 +174,12 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             }
         });
 
+
+
         goToSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-                i.putExtra("uid", "jgT7EMrWNFOdEx54tBpxUKwABOf2");
-                startActivity(i);
+                startActivity(new Intent(MainActivity.this,Settings.class));
             }
         });
 
@@ -410,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         } else {
             mPosts.clear();
             mPosts.addAll(mAllPosts);
-            mPosts.remove(mPosts.size() - 1);
+            mPosts.remove(0);
             mAllPosts.clear();
             mTempPosts.clear();
             toolbarExhangeTxt.setText("EXCHANGE");
@@ -450,7 +459,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                     postSwitchBtn.setVisibility(View.VISIBLE);
                 } else {
                     PostModel post = new PostModel(null, null, null, null, "NoMorePost", null, null, null, null, null, null, null);
-                    mPosts.add(0,post);
+                    mPosts.add(0, post);
                     recyclerView.setVisibility(View.VISIBLE);
                     emptyMsgLayout.setVisibility(View.GONE);
                     postSwitchBtn.setVisibility(View.VISIBLE);
@@ -461,7 +470,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                 if (!mPosts.isEmpty()) {
                     showProgressBar();
                     mTempPosts.addAll(mPosts);
-                    mTempPosts.remove(mTempPosts.size() - 1);
+                    mTempPosts.remove(0);
                     mPosts.clear();
                     for (PostModel post : mTempPosts) {
                         if (!post.getPost_type().equalsIgnoreCase("NoMorePost")) {
@@ -490,7 +499,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                 if (!mAllPosts.isEmpty()) {
                     mTempPosts.clear();
                     mTempPosts.addAll(mAllPosts);
-                    mTempPosts.remove(mTempPosts.size() - 1);
+                    mTempPosts.remove(0);
                     mPosts.clear();
                     for (PostModel post : mTempPosts) {
                         if (!post.getPost_type().equalsIgnoreCase("NoMorePost")) {
@@ -517,7 +526,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                 if (!mAllPosts.isEmpty()) {
                     showProgressBar();
                     mTempPosts.addAll(mAllPosts);
-                    mTempPosts.remove(mTempPosts.size() - 1);
+                    mTempPosts.remove(0);
                     mPosts.clear();
                     for (PostModel post : mTempPosts) {
                         if (!post.getPost_type().equalsIgnoreCase("NoMorePost")) {
@@ -601,23 +610,29 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     if (dataSnapshot.hasChildren()) {
+                        boolean flag = true;
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             Notification notif = dsp.getValue(Notification.class);
                             Log.i("NotificationTest",notif.toString());
                             try {
                                 if (notif.getRead_at().equals("")) {
                                     notifIndicator.setVisibility(View.VISIBLE);
+                                    flag = false;
+                                    break;
+                                }else{
                                 }
                             }catch (Exception e){
 
                             }
+                        }
+                        if (flag){
+                            notifIndicator.setVisibility(View.INVISIBLE);
                         }
                     }
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }

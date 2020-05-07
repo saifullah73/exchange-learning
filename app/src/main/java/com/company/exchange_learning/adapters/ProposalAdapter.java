@@ -2,6 +2,7 @@ package com.company.exchange_learning.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import com.company.exchange_learning.Profile.ProfileActivity;
+import com.company.exchange_learning.Proposals.ProposalListActivity;
 import com.company.exchange_learning.Proposals.ViewProposalActivity;
 import com.company.exchange_learning.R;
 import com.company.exchange_learning.model.Proposal;
@@ -87,11 +89,18 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (proposals.get(position).getNotif().getRead_at().equals("")){
+                    holder.usernameview.setTypeface(holder.usernameview.getTypeface(), Typeface.BOLD);
+                    holder.dataView.setTextColor(context.getColor(R.color.black));
+                }
                 holder.usernameview.setText(dataSnapshot.getValue(String.class));
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                if (proposals.get(position).getNotif().getRead_at().equals("")){
+                    holder.usernameview.setTypeface(holder.usernameview.getTypeface(), Typeface.BOLD);
+                    holder.dataView.setTextColor(context.getColor(R.color.black));
+                }
                 holder.usernameview.setText(proposals.get(position).getSubmitter_id());
             }
         });
@@ -116,6 +125,8 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.usernameview.setTypeface(Typeface.DEFAULT);
+                holder.dataView.setTextColor(context.getColor(R.color.darkGray));
                 Intent i = new Intent(context, ViewProposalActivity.class);
                 i.putExtra("proposal", proposals.get(position));
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

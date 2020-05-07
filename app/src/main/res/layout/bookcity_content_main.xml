@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbarlayout"
+        layout="@layout/layout_bookcity" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarlayout">
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:layout_centerInParent="true"
+        android:id="@+id/avi"
+        android:elevation="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicatorName="BallClipRotateMultipleIndicator"
+        app:indicatorColor="@color/hamburger"
+        android:visibility="visible"
+        style="@style/AVLoadingIndicatorView" />
+
+    <androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E8E3E3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/main_header"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:elevation="16dp"
+                android:focusable="true"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/pic_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="130dp"
+                            android:background="@color/black"
+                            android:src = "@drawable/book_city_logo">
+                        </ImageView>
+                    </LinearLayout>
+                    
+
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.2dp"
+                        android:layout_below="@id/pic_text"
+                        android:background="@color/lessGray" />
+
+                    <RelativeLayout
+                        android:background="#A9000000"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/view1">
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="0.2dp"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/lessGray" />
+
+                        <LinearLayout
+                            android:id="@+id/bookcity_main_upload_book"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toStartOf="@id/view2"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:scaleType="fitCenter"
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/upload_book" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:text="Upload Books"
+                                android:textColor="@color/whiteTextColor" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/bookcity_main_go_to_my_book"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@id/view2"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/icons8_book_64" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:text="My Books"
+                                android:textColor="@color/whiteTextColor" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:gravity="center_horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/empty_msg"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:alpha="0.7"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/icons8_book_64" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/lessGray"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Nothing to show here!" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/emptyMsgUploadBook"
+                            android:textStyle="bold"
+                            android:clickable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:focusable="true"
+                            android:textColor="@color/hamburger"
+                            android:textSize="17sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Upload Book" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginBottom="48dp"
+                    android:id="@+id/bookcity_recylerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+    
+
+
+</RelativeLayout>

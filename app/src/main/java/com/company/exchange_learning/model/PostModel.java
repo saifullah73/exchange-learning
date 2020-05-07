@@ -22,6 +22,7 @@ public class PostModel implements Serializable {
     }
 
 
+
     public PostModel(String post_body, String post_date, List<String> tagged_communities, String post_title, String post_type, String show_skills, String user_id, String post_id, String post_image, String post_image_info, String post_user_posted_image, String post_user_posted_name) {
         this.post_body = post_body;
         this.post_date = post_date;
