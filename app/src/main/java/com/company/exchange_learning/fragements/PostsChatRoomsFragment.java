@@ -89,13 +89,13 @@ public class PostsChatRoomsFragment extends Fragment implements OnChatRoomMainLa
                     if (dataSnapshot.hasChildren()) {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             String chatRoomId = dsp.getKey();
-                            if (chatRoomId.contains(Constants.uid)) {
+                            if (chatRoomId.contains(Constants.getConstantUid())) {
                                 String lastMsg = "";
                                 int unSeenCount = 0;
                                 boolean isWelcomeMsg = false;
                                 for (DataSnapshot dsp2 : dsp.getChildren()) {
                                     lastMsg = dsp2.child("message").getValue().toString();
-                                    if (dsp2.child("status").getValue().toString().equalsIgnoreCase("unseen") && !dsp2.child("sender_id").getValue().toString().equalsIgnoreCase(Constants.uid)) {
+                                    if (dsp2.child("status").getValue().toString().equalsIgnoreCase("unseen") && !dsp2.child("sender_id").getValue().toString().equalsIgnoreCase(Constants.getConstantUid())) {
                                         unSeenCount++;
                                     }
                                     isWelcomeMsg = dsp2.child("date").getValue().toString().equalsIgnoreCase("welcome");
@@ -143,7 +143,7 @@ public class PostsChatRoomsFragment extends Fragment implements OnChatRoomMainLa
         final int[] userFetched = {0};
         String userId = "";
         for (final ChatRoomModel room : mChatRooms) {
-            userId = room.getChatRoomId().replace(Constants.uid, "");
+            userId = room.getChatRoomId().replace(Constants.getConstantUid(), "");
             chatsRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -172,7 +172,7 @@ public class PostsChatRoomsFragment extends Fragment implements OnChatRoomMainLa
         storageRef = FirebaseStorage.getInstance().getReference();
         String userId = "";
         for (int i = 0; i < mChatRooms.size(); i++) {
-            userId = mChatRooms.get(i).getChatRoomId().replace(Constants.uid, "");
+            userId = mChatRooms.get(i).getChatRoomId().replace(Constants.getConstantUid(), "");
             final int finalI = i;
             storageRef.child("profileImages/" + userId).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override

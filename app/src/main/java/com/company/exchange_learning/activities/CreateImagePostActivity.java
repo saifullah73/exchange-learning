@@ -224,7 +224,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                     if (mSelectedCommunities != null && mSelectedCommunities.size() != 0) {
                         if (imgInfo.length() > 20) {
                             showProgress();
-                            storageRef = FirebaseStorage.getInstance().getReference().child("post-images/").child(Constants.uid + "/" + Constants.uid + "_image" + DateTimeUtils.getCurrentDateTime());
+                            storageRef = FirebaseStorage.getInstance().getReference().child("post-images/").child(Constants.getConstantUid() + "/" + Constants.getConstantUid() + "_image" + DateTimeUtils.getCurrentDateTime());
                             storageRef.putFile(uri,DBOperations.getmetaData()).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                 @Override
                                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -242,7 +242,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                                         post.setPost_image_info(imgInfo);
                                         post.setPost_image(downUri.toString());
                                         post.setPost_date(getTimeDate());
-                                        post.setUser_id(Constants.uid);
+                                        post.setUser_id(Constants.getConstantUid());
                                         post.getTagged_communities().addAll(mSelectedCommunities);
                                         post.setShow_skills(showSkill);
                                         post.setPost_type(postType);
@@ -283,7 +283,7 @@ public class CreateImagePostActivity extends AppCompatActivity {
                             if (mSelectedCommunities != null && mSelectedCommunities.size() != 0) {
                                 if (imgInfo.length() >  20) {
                                     showProgress();
-                                    storageRef = FirebaseStorage.getInstance().getReference().child("post-images/").child(Constants.uid + "/" + Constants.uid + "_image" + DateTimeUtils.getCurrentDateTime());
+                                    storageRef = FirebaseStorage.getInstance().getReference().child("post-images/").child(Constants.getConstantUid() + "/" + Constants.getConstantUid() + "_image" + DateTimeUtils.getCurrentDateTime());
                                     storageRef.putFile(uri,DBOperations.getmetaData()).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                         @Override
                                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {

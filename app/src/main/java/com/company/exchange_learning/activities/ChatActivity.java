@@ -133,7 +133,7 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
     private void updateMessageStatus() {
         if (!mMessages.isEmpty()) {
             ChatMessageModel msg = mMessages.get(mMessages.size() - 1);
-            if (!msg.getSender_id().equalsIgnoreCase(Constants.uid)) {
+            if (!msg.getSender_id().equalsIgnoreCase(Constants.getConstantUid())) {
                 if (msg.getStatus().equalsIgnoreCase("unseen")) {
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("date", msg.getDate());
@@ -211,14 +211,14 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
                 String name = WordUtils.capitalize(dataSnapshot.child("name").getValue().toString());
                 toolbarTxt.setText(name);
                 String finalID = uId;
-                if (finalID.compareTo(Constants.uid) > 0) {
-                    finalID = Constants.uid + finalID;
+                if (finalID.compareTo(Constants.getConstantUid()) > 0) {
+                    finalID = Constants.getConstantUid() + finalID;
                 } else {
-                    finalID = finalID + Constants.uid;
+                    finalID = finalID + Constants.getConstantUid();
                 }
                 if (type.equalsIgnoreCase("post")) {
                     chatRef = FirebaseDatabase.getInstance().getReference("Chats_Table").child("Posts_Chats").child(finalID);
-                    ChatMessageModel welcomeMsg = new ChatMessageModel("welcome", name + "_" + Constants.uName, Constants.uid, "unseen");
+                    ChatMessageModel welcomeMsg = new ChatMessageModel("welcome", name + "_" + Constants.getuName(), Constants.getConstantUid(), "unseen");
                     final String finalID1 = finalID;
                     chatRef.push().setValue(welcomeMsg).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -230,7 +230,7 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
                     });
                 } else {
                     chatRef = FirebaseDatabase.getInstance().getReference("Chats_Table").child("Books_Chats").child(finalID);
-                    ChatMessageModel welcomeMsg = new ChatMessageModel("welcome", name + "_" + Constants.uName, Constants.uid, "unseen");
+                    ChatMessageModel welcomeMsg = new ChatMessageModel("welcome", name + "_" + Constants.getuName(), Constants.getConstantUid(), "unseen");
                     final String finalID1 = finalID;
                     chatRef.push().setValue(welcomeMsg).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -253,7 +253,7 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
         if (msgEditText.getText() != null) {
             if (msgEditText.getText().length() != 0) {
                 String key = chatRef.push().getKey();
-                ChatMessageModel message = new ChatMessageModel(getTimeDate(), msgEditText.getText().toString().trim(), Constants.uid, "unseen");
+                ChatMessageModel message = new ChatMessageModel(getTimeDate(), msgEditText.getText().toString().trim(), Constants.getConstantUid(), "unseen");
                 chatRef.child(key).setValue(message);
                 msgEditText.getText().clear();
             }
@@ -347,7 +347,7 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
             }
         });
         CardView reportBtn = view.findViewById(R.id.reportMsgBtn);
-        reportBtn.setVisibility(msg.getSender_id().equalsIgnoreCase(Constants.uid) ? View.GONE : View.VISIBLE);
+        reportBtn.setVisibility(msg.getSender_id().equalsIgnoreCase(Constants.getConstantUid()) ? View.GONE : View.VISIBLE);
         reportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -381,8 +381,8 @@ public class ChatActivity extends AppCompatActivity implements OnMsgLayoutLongCl
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref;
                 ref = database.getReference("Reports").child("message_report").child(platform);
-                String userId = uID.replace(Constants.uid, "");
-                Report report = new Report(userId, Constants.uid, msgId);
+                String userId = uID.replace(Constants.getConstantUid(), "");
+                Report report = new Report(userId, Constants.getConstantUid(), msgId);
                 ref.push().setValue(report, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@com.google.firebase.database.annotations.Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

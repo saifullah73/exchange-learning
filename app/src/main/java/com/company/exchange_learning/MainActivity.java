@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-                i.putExtra("uid", Constants.uid);
+                i.putExtra("uid", Constants.getConstantUid());
                 startActivity(i);
             }
         });
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, ProposalListActivity.class);
                 i.putExtra("mode","Notifications");
-                i.putExtra("id",Constants.uid);
+                i.putExtra("id",Constants.getConstantUid());
                 startActivity(i);
             }
         });
@@ -329,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
 
 
     private void loadLoggedInUserDetails() {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.uid);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.getConstantUid());
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -351,12 +351,12 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
             }
         });
 
-        if (Constants.uName == null || Constants.uName.equalsIgnoreCase("N/A")) {
+        if (Constants.getuName() == null || Constants.getuName().equalsIgnoreCase("N/A")) {
             drawerUserName.setText("Welcome!");
             mainWelcomeMsg.setText("Welcome!");
         } else {
-            drawerUserName.setText(WordUtils.capitalize(Constants.uName));
-            mainWelcomeMsg.setText(WordUtils.capitalize("Welcome, " + Constants.uName + "!"));
+            drawerUserName.setText(WordUtils.capitalize(Constants.getuName()));
+            mainWelcomeMsg.setText(WordUtils.capitalize("Welcome, " + Constants.getuName() + "!"));
         }
 
         if (Constants.uCommunity == null) {
@@ -515,7 +515,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                     mPosts.clear();
                     for (PostModel post : mTempPosts) {
                         if (!post.getPost_type().equalsIgnoreCase("NoMorePost")) {
-                            if (post.getUser_id().equalsIgnoreCase(Constants.uid)) {
+                            if (post.getUser_id().equalsIgnoreCase(Constants.getConstantUid())) {
                                 mPosts.add(post);
                             }
                         }
@@ -542,7 +542,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                     mPosts.clear();
                     for (PostModel post : mTempPosts) {
                         if (!post.getPost_type().equalsIgnoreCase("NoMorePost")) {
-                            if (checkIfPostCommunityEqualsMyCommunity(post) && post.getUser_id().equalsIgnoreCase(Constants.uid)) {
+                            if (checkIfPostCommunityEqualsMyCommunity(post) && post.getUser_id().equalsIgnoreCase(Constants.getConstantUid())) {
                                 mPosts.add(post);
                             }
                         }
@@ -616,7 +616,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         }else{
             notifications.clear();
         }
-        notifDataRef = FirebaseDatabase.getInstance().getReference("Notification_Table/Proposal/"+Constants.uid);
+        notifDataRef = FirebaseDatabase.getInstance().getReference("Notification_Table/Proposal/"+Constants.getConstantUid());
         notifDataRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

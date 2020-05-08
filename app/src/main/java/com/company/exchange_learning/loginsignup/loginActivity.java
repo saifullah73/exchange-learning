@@ -116,7 +116,7 @@ public class loginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Constants.uid = user.getUid();
+                            Constants.uid= user.getUid();
                             getUserInformation();
                         } else {
                             setViews();
@@ -147,7 +147,7 @@ public class loginActivity extends AppCompatActivity {
             }
         };
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("User_Information").child(Constants.uid);
+        DatabaseReference myRef = database.getReference("User_Information").child(Constants.getConstantUid());
         myRef.addListenerForSingleValueEvent(listener);
     }
 

@@ -131,7 +131,7 @@ public class BookCityMain extends AppCompatActivity {
                             Book book = dsp.getValue(Book.class);
                             book.setBook_id(dsp.getKey());
                             books.add(book);
-                            if (book.getUser_id().equalsIgnoreCase(Constants.uid)) {
+                            if (book.getUser_id().equalsIgnoreCase(Constants.getConstantUid())) {
                                 myBooks.add(book);
                             }
                             if (books.size() == totalBooks) {

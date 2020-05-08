@@ -118,7 +118,7 @@ public class ProposalListActivity extends AppCompatActivity {
         notifications = new ArrayList<>();
         allProposals = new ArrayList<>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("Notification_Table/Proposal").child(Constants.uid);
+        final DatabaseReference myRef = database.getReference("Notification_Table/Proposal").child(Constants.getConstantUid());
         Log.i(TAG,"Starting Read");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -216,7 +216,7 @@ public class ProposalListActivity extends AppCompatActivity {
         notifications = new ArrayList<>();
         allProposals = new ArrayList<>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("Notification_Table/Proposal").child(Constants.uid);
+        final DatabaseReference myRef = database.getReference("Notification_Table/Proposal").child(Constants.getConstantUid());
         Log.i(TAG,"Starting Read");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -36,9 +36,9 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemViewType(int position) {
         ChatMessageModel message = mMessages.get(position);
-        if (message.getSender_id().equalsIgnoreCase(Constants.uid) && !message.getDate().equalsIgnoreCase("welcome")) {
+        if (message.getSender_id().equalsIgnoreCase(Constants.getConstantUid()) && !message.getDate().equalsIgnoreCase("welcome")) {
             return SENT_MESSAGE_TYPE;
-        } else if (!message.getSender_id().equalsIgnoreCase(Constants.uid) && !message.getDate().equalsIgnoreCase("welcome")) {
+        } else if (!message.getSender_id().equalsIgnoreCase(Constants.getConstantUid()) && !message.getDate().equalsIgnoreCase("welcome")) {
             return RECEIVED_MESSAGE_TYPE;
         } else if (message.getDate().equalsIgnoreCase("welcome")) {
             return WELCOME_MESSAGE_TYPE;
@@ -92,7 +92,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void handleWelcomeMessage(ViewHolder holder, ChatMessageModel message) {
         String msg = "";
         String[] names = message.getMessage().split("_");
-        if (message.getSender_id().equalsIgnoreCase(Constants.uid)) {
+        if (message.getSender_id().equalsIgnoreCase(Constants.getConstantUid())) {
             msg = "You Accepted " + WordUtils.capitalize(names[0]) + "\'s proposal. Send a message to start conversation";
         } else {
             msg = WordUtils.capitalize(names[1]) + " accepted your proposal. Send a message to start conversation";

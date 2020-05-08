@@ -120,7 +120,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
     }
 
     private void checkProposalStatus(final PostModel post) {
-        if (!post.getUser_id().equals(Constants.uid)) {
+        if (!post.getUser_id().equals(Constants.getConstantUid())) {
             shouldHideEditBtn = true;
             invalidateOptionsMenu();
             mProposalRef = FirebaseDatabase.getInstance().getReference("Post_Proposal_Table");
@@ -132,7 +132,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                             boolean isProposalSubmitted = false;
                             for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                                 String sId = dsp.child("submitter_id").getValue().toString();
-                                if (sId.equals(Constants.uid)) {
+                                if (sId.equals(Constants.getConstantUid())) {
                                     isProposalSubmitted = true;
                                     break;
                                 }
@@ -364,7 +364,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                     progress.show();
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("Post_Proposal_Table").child(post.getPost_id());
-                    Proposal proposal = new Proposal(m_Text,getTimeDate(),Constants.uid);
+                    Proposal proposal = new Proposal(m_Text,getTimeDate(),Constants.getConstantUid());
                     myRef.push().setValue(proposal, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -692,7 +692,7 @@ public class PostDetailActivity extends AppCompatActivity implements PopupMenu.O
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref;
                 ref = database.getReference("Reports").child("post_report").child("exchangelearning");
-                Report report = new Report(post.getUser_id(),Constants.uid,post.getPost_id());
+                Report report = new Report(post.getUser_id(),Constants.getConstantUid(),post.getPost_id());
                 ref.push().setValue(report, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

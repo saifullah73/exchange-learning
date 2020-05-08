@@ -197,7 +197,7 @@ public class ViewProposalActivity extends AppCompatActivity {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref;
                 ref = database.getReference("Reports").child("proposal_report").child(proposal.getNotif().getPlatform());
-                Report report = new Report(proposal.getSubmitter_id(),Constants.uid,proposal.getNotif().getProposal_id());
+                Report report = new Report(proposal.getSubmitter_id(),Constants.getConstantUid(),proposal.getNotif().getProposal_id());
                 ref.push().setValue(report, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -269,7 +269,7 @@ public class ViewProposalActivity extends AppCompatActivity {
     private void markAsRead(){
         Log.i(TAG,"Notif id "+  proposal.getNotif().getNotification_id());
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("Notification_Table/Proposal").child(Constants.uid).child(proposal.getNotif().getNotification_id()).child("read_at");
+        DatabaseReference ref = database.getReference("Notification_Table/Proposal").child(Constants.getConstantUid()).child(proposal.getNotif().getNotification_id()).child("read_at");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

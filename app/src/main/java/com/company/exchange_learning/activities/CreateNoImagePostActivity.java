@@ -205,7 +205,7 @@ public class CreateNoImagePostActivity extends AppCompatActivity {
                             post.setPost_body(postBody);
                             post.setPost_type(postType);
                             post.setShow_skills(skillShow);
-                            post.setUser_id(Constants.uid);
+                            post.setUser_id(Constants.getConstantUid());
                             post.setPost_date(getTimeDate());
                             post.getTagged_communities().addAll(mSelectedCommunities);
 

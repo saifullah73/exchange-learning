@@ -54,7 +54,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivityTAG";
-    private String uid = Constants.uid;
+    private String uid = Constants.getConstantUid();
     private boolean mode = true;
     private UserProfile profile = null;
     private BasicUser basicUser = null;
@@ -83,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
         loadViews();
         if (getIntent() != null && getIntent().getStringExtra("uid") != null) {
             uid = getIntent().getStringExtra("uid");
-            if (!uid.equals(Constants.uid)) {
+            if (!uid.equals(Constants.getConstantUid())) {
                 mode = false;
             }
         }
@@ -371,7 +371,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void followerAdded(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+        DatabaseReference myRef = database.getReference("Followers").child(Constants.getConstantUid()).child("following");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -382,7 +382,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }
                 following.add(uid);
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                DatabaseReference myRef = database.getReference("Followers").child(Constants.getConstantUid()).child("following");
                 myRef.setValue(following, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -417,7 +417,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if (following == null){
                     following = new ArrayList();
                 }
-                following.add(Constants.uid);
+                following.add(Constants.getConstantUid());
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Followers").child(uid).child("followers");
                 myRef.setValue(following, new DatabaseReference.CompletionListener() {
@@ -454,7 +454,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                DatabaseReference myRef = database.getReference("Followers").child(Constants.getConstantUid()).child("following");
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -463,7 +463,7 @@ public class ProfileActivity extends AppCompatActivity {
                         if (following != null) {
                             following.remove(uid);
                             final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+                            DatabaseReference myRef = database.getReference("Followers").child(Constants.getConstantUid()).child("following");
                             myRef.setValue(following, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -498,7 +498,7 @@ public class ProfileActivity extends AppCompatActivity {
                         GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
                         List following = dataSnapshot.getValue(t);
                         if (following != null) {
-                            following.remove(Constants.uid);
+                            following.remove(Constants.getConstantUid());
                             final FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference myRef = database.getReference("Followers").child(uid).child("followers");
                             myRef.setValue(following, new DatabaseReference.CompletionListener() {
@@ -533,7 +533,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void setFollowButtonText(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Followers").child(Constants.uid).child("following");
+        DatabaseReference myRef = database.getReference("Followers").child(Constants.getConstantUid()).child("following");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

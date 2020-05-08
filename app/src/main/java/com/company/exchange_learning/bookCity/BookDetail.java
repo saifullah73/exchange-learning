@@ -98,7 +98,7 @@ public class BookDetail extends AppCompatActivity implements PopupMenu.OnMenuIte
 
 
     private void checkProposalStatus(final Book book) {
-        if (!book.getUser_id().equals(Constants.uid)) {
+        if (!book.getUser_id().equals(Constants.getConstantUid())) {
             shouldHideEditBtn = true;
             invalidateOptionsMenu();
             mProposalRef = FirebaseDatabase.getInstance().getReference("Book_Proposal_Table");
@@ -110,7 +110,7 @@ public class BookDetail extends AppCompatActivity implements PopupMenu.OnMenuIte
                             boolean isProposalSubmitted = false;
                             for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                                 String sId = dsp.child("submitter_id").getValue().toString();
-                                if (sId.equals(Constants.uid)) {
+                                if (sId.equals(Constants.getConstantUid())) {
                                     isProposalSubmitted = true;
                                     break;
                                 }
@@ -275,7 +275,7 @@ public class BookDetail extends AppCompatActivity implements PopupMenu.OnMenuIte
                     progress.show();
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("Book_Proposal_Table").child(book.getBook_id());
-                    Proposal proposal = new Proposal(m_Text,getTimeDate(),Constants.uid);
+                    Proposal proposal = new Proposal(m_Text,getTimeDate(),Constants.getConstantUid());
                     myRef.push().setValue(proposal, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -503,7 +503,7 @@ public class BookDetail extends AppCompatActivity implements PopupMenu.OnMenuIte
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref;
                 ref = database.getReference("Reports").child("post_report").child("bookcity");
-                Report report = new Report(book.getUser_id(), Constants.uid,book.getBook_id());
+                Report report = new Report(book.getUser_id(), Constants.getConstantUid(),book.getBook_id());
                 ref.push().setValue(report, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

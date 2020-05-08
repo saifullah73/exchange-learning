@@ -295,7 +295,7 @@ public class EditProfile extends AppCompatActivity {
         }
 
         if (isProfileImgChanged) {
-            dbRef = FirebaseDatabase.getInstance().getReference("Profile_Information").child(Constants.uid);
+            dbRef = FirebaseDatabase.getInstance().getReference("Profile_Information").child(Constants.getConstantUid());
             Map<String, Object> updates = new HashMap<>();
             updates.put("my_title", title);
             updates.put("my_department", dpt);
@@ -314,7 +314,7 @@ public class EditProfile extends AppCompatActivity {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     if (databaseError == null) {
-                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("User_Information").child(Constants.uid);
+                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("User_Information").child(Constants.getConstantUid());
                         Map<String, Object> updates = new HashMap<>();
                         updates.put("community", community_spinner.getSelectedItem().toString());
                         myRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
@@ -345,7 +345,7 @@ public class EditProfile extends AppCompatActivity {
                 hideProgress();
             } else {
                 if (overviewView.getText().length() > 30) {
-                    dbRef = FirebaseDatabase.getInstance().getReference("Profile_Information").child(Constants.uid);
+                    dbRef = FirebaseDatabase.getInstance().getReference("Profile_Information").child(Constants.getConstantUid());
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("my_title", titleView.getText().toString().trim());
                     updates.put("my_department", departmentView.getText().toString().trim());
@@ -365,7 +365,7 @@ public class EditProfile extends AppCompatActivity {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                             if (databaseError == null) {
-                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("User_Information").child(Constants.uid);
+                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("User_Information").child(Constants.getConstantUid());
                                 Map<String, Object> updates = new HashMap<>();
                                 updates.put("community", community_spinner.getSelectedItem().toString());
                                 myRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
@@ -401,7 +401,7 @@ public class EditProfile extends AppCompatActivity {
         showProgress();
         if (isProfileImgChanged) {
             if (filePath != null) {
-                storageRef = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.uid);
+                storageRef = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.getConstantUid());
                 storageRef.putFile(filePath, DBOperations.getmetaData()).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -431,7 +431,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     private void loadImage() {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.uid);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profileImages/" + Constants.getConstantUid());
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

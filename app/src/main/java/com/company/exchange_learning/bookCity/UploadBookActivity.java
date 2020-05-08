@@ -232,7 +232,7 @@ public class UploadBookActivity extends AppCompatActivity {
                     if (mSelectedCommunities != null && mSelectedCommunities.size() != 0) {
                         if (book_title.length() > 4 && book_desc.length() > 4 && book_price.length() > 0 && book_addr.length() > 4) {
                             showProgress();
-                            storageRef = FirebaseStorage.getInstance().getReference().child("book-images/").child(Constants.uid + "/" + Constants.uid + "_image" + DateTimeUtils.getCurrentDateTime());
+                            storageRef = FirebaseStorage.getInstance().getReference().child("book-images/").child(Constants.getConstantUid() + "/" + Constants.getConstantUid() + "_image" + DateTimeUtils.getCurrentDateTime());
                             storageRef.putFile(uri, DBOperations.getmetaData()).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                 @Override
                                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -249,7 +249,7 @@ public class UploadBookActivity extends AppCompatActivity {
                                         book = new Book(new ArrayList<String>());
                                         book.setCover_photo(downUri.toString());
                                         book.setBook_title(book_title);
-                                        book.setUser_id(Constants.uid);
+                                        book.setUser_id(Constants.getConstantUid());
                                         book.setBook_address(book_addr);
                                         book.setBook_description(book_desc);
                                         if (Integer.valueOf(book_price) != 0) {
@@ -297,7 +297,7 @@ public class UploadBookActivity extends AppCompatActivity {
                             if (mSelectedCommunities != null && mSelectedCommunities.size() != 0) {
                                 if (book_title.length() > 4 && book_addr.length() > 4 && book_desc.length() > 4 && book_price.length() > 0) {
                                     showProgress();
-                                    storageRef = FirebaseStorage.getInstance().getReference().child("book-images/").child(Constants.uid + "/" + Constants.uid + "_image" + DateTimeUtils.getCurrentDateTime());
+                                    storageRef = FirebaseStorage.getInstance().getReference().child("book-images/").child(Constants.getConstantUid() + "/" + Constants.getConstantUid() + "_image" + DateTimeUtils.getCurrentDateTime());
                                     storageRef.putFile(uri,DBOperations.getmetaData()).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                         @Override
                                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
