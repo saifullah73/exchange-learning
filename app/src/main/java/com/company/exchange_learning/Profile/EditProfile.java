@@ -273,13 +273,26 @@ public class EditProfile extends AppCompatActivity {
         updateProfileBtn.setEnabled(true);
     }
 
+    private boolean check(String title,String dpt, String addr, String uni , String overview, String skill){
+        if (title.length() == 0 || dpt.length() == 0 || addr.length() ==0 || uni.length() == 0 || skill.length() ==0 || overview.length() == 0){
+            return false;
+        }
+        return true;
+    }
+
     private void updateData(Uri imageURL) {
-        String title = WordUtils.capitalize(titleView.getText().toString());
-        String dpt = WordUtils.capitalize(departmentView.getText().toString());
-        String addr = WordUtils.capitalize(addressView.getText().toString());
-        String uni = WordUtils.capitalize(universityView.getText().toString());
-        String overview = overviewView.getText().toString();
+        String title = WordUtils.capitalize(titleView.getText().toString().trim());
+        String dpt = WordUtils.capitalize(departmentView.getText().toString().trim());
+        String addr = WordUtils.capitalize(addressView.getText().toString().trim());
+        String uni = WordUtils.capitalize(universityView.getText().toString().trim());
+        String overview = overviewView.getText().toString().trim();
         List<String> skills = Arrays.asList(skillsView.getText().toString().trim().split(","));
+
+        if(!check(title,dpt,addr,uni,overview,skillsView.getText().toString().trim())){
+            Toast.makeText(EditProfile.this,"Please fill all fields", Toast.LENGTH_SHORT).show();
+            hideProgress();
+            return;
+        }
 
         if (isProfileImgChanged) {
             dbRef = FirebaseDatabase.getInstance().getReference("Profile_Information").child(Constants.uid);
