@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.SearchActivity"></activity>
         <activity
             android:name=".activities.ChatActivity"
             android:parentActivityName=".activities.ChatRoomsActivity" />
@@ -22,9 +23,11 @@
         <activity android:name=".activities.CreateImagePostActivity" />
         <activity
             android:name=".activities.ChatRoomsActivity"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".Settings" android:theme="@style/FollowersTheme"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Settings"
+            android:theme="@style/FollowersTheme" />
         <activity
             android:name=".bookCity.BookDetail"
             android:parentActivityName=".bookCity.BookCityMain" />
@@ -36,8 +39,9 @@
         <activity
             android:name=".Proposals.ProposalListActivity"
             android:theme="@style/FollowersTheme" />
-        <activity android:name=".Proposals.ViewProposalActivity"
-            android:theme="@style/FollowersTheme"/>
+        <activity
+            android:name=".Proposals.ViewProposalActivity"
+            android:theme="@style/FollowersTheme" />
         <activity
             android:name=".activities.PostDetailActivity"
             android:parentActivityName=".MainActivity" />

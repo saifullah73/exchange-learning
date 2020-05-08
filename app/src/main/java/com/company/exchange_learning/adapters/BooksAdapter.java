@@ -62,7 +62,7 @@ public class BooksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.context = context;
     }
 
-    public void setDataset(List<Book> ss){
+    public void setDataSet(List<Book> ss) {
         books = ss;
     }
 
