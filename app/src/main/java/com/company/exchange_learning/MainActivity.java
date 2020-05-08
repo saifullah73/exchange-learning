@@ -29,12 +29,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.company.exchange_learning.Profile.ProfileActivity;
-import com.company.exchange_learning.activities.ChatActivity;
-import com.company.exchange_learning.activities.ChatRoomsActivity;
 import com.company.exchange_learning.Proposals.ProposalListActivity;
+import com.company.exchange_learning.activities.ChatRoomsActivity;
 import com.company.exchange_learning.activities.CreateImagePostActivity;
 import com.company.exchange_learning.activities.CreateNoImagePostActivity;
 import com.company.exchange_learning.activities.PostDetailActivity;
+import com.company.exchange_learning.activities.SearchActivity;
 import com.company.exchange_learning.adapters.PostsAdapter;
 import com.company.exchange_learning.bookCity.BookCityMain;
 import com.company.exchange_learning.listeners.OnPostClickListener;
@@ -58,7 +58,7 @@ import com.wang.avi.AVLoadingIndicatorView;
 
 import org.apache.commons.text.WordUtils;
 
-import java.security.spec.ECField;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
     boolean mToolBarNavigationListenerIsRegistered = false;
     boolean ifInPublicMode = true;
     boolean ifShowingMyPosts = false;
+    boolean isViewingBook = false;
 
 
     @Override
@@ -761,10 +762,15 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search:
+                gotoSearchActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void gotoSearchActivity() {
+        startActivity(new Intent(MainActivity.this, SearchActivity.class).putExtra("type", "post").putExtra("posts", (Serializable) mPosts));
     }
 
     @Override

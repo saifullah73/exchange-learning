@@ -1,5 +1,15 @@
 package com.company.exchange_learning.bookCity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,16 +18,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.company.exchange_learning.Constants;
 import com.company.exchange_learning.R;
+import com.company.exchange_learning.activities.SearchActivity;
 import com.company.exchange_learning.adapters.BooksAdapter;
 import com.company.exchange_learning.model.Book;
 import com.google.firebase.database.DataSnapshot;
@@ -25,9 +28,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -216,7 +219,7 @@ public class BookCityMain extends AppCompatActivity {
                 Log.i(TAG,"Setting Book Data");
                 recyclerView.setVisibility(View.VISIBLE);
                 emptyMsgLayout.setVisibility(View.GONE);
-                mAdapter.setDataset(books);
+                mAdapter.setDataSet(books);
                 mAdapter.notifyDataSetChanged();
             }
         }else{
@@ -232,10 +235,31 @@ public class BookCityMain extends AppCompatActivity {
                 Log.i(TAG,"Setting MyBook Data");
                 recyclerView.setVisibility(View.VISIBLE);
                 emptyMsgLayout.setVisibility(View.GONE);
-                mAdapter.setDataset(myBooks);
+                mAdapter.setDataSet(myBooks);
                 mAdapter.notifyDataSetChanged();
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search:
+                gotoSearchActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void gotoSearchActivity() {
+        startActivity(new Intent(BookCityMain.this, SearchActivity.class).putExtra("type", "book").putExtra("books", (Serializable) books));
     }
 
     private void showProgressBar() {

@@ -345,6 +345,11 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    public void setDataSet(List<PostModel> posts) {
+        this.mPostsList = posts;
+        notifyDataSetChanged();
+    }
+
     public void notifyImageLoaded(int pos) {
         notifyItemChanged(pos);
     }

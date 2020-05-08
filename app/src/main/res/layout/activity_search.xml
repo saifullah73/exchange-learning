@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SearchActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/searchToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            android:background="?attr/colorPrimary"
+            app:theme="@style/MainActivityToolbarTheme">
+
+            <LinearLayout
+                android:id="@+id/appTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/search_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/basic"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:text="Post or Book Search"
+                    android:textColor="@color/hamburger"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/emptyIcon"
+            android:layout_marginTop="12dp"
+            android:id="@+id/emptyMsg"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nothing to show here" />
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/emptyIcon"
+            android:layout_centerInParent="true"
+            android:src="@drawable/main_post_no_more_post_icon" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/seachEditTxtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <EditText
+                android:id="@+id/searchEditTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/fullwhite"
+                android:fontFamily="@font/open_sans_light"
+                android:hint="Search Post or Book"
+                android:text=""
+                android:inputType="textMultiLine"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/darkGray"
+                android:textColorHint="@color/drawerMenuGray"
+                android:textSize="18sp"
+                android:theme="@style/LoginEditTextStyle" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/typeLayout"
+            android:layout_width="match_parent"
+            android:layout_below="@id/seachEditTxtLayout"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:theme="@style/mySpinnerItemStyle"
+                    android:id="@+id/searchTypeSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/criteriaLayout"
+            android:layout_width="match_parent"
+            android:layout_below="@id/typeLayout"
+            android:foreground="@drawable/background_rectangle_ouline"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:theme="@style/mySpinnerItemStyle"
+                    android:id="@+id/searchCriteriaSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/searchRecyclerView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/criteriaLayout" />
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_centerInParent="true"
+            android:id="@+id/searchAvi"
+            android:elevation="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorName="BallClipRotateMultipleIndicator"
+            app:indicatorColor="@color/hamburger"
+            android:visibility="gone"
+            style="@style/AVLoadingIndicatorView" />
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
