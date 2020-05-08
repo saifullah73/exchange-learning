@@ -93,4 +93,8 @@ public class Book implements Serializable {
     public String getCover_photo() {
         return cover_photo;
     }
+
+    public String toString(){
+        return book_title+ "  "+ book_price+ "  "+book_type+ "  "+book_description;
+    }
 }

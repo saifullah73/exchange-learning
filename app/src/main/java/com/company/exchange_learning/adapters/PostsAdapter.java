@@ -94,6 +94,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private void handlePostWithNoImage(RecyclerView.ViewHolder holder, final PostModel post) {
+        ((PostsWithNoImageViewHolder) holder).setIsRecyclable(false);
         ((PostsWithNoImageViewHolder) holder).postItemBody.setText(post.getPost_body());
         ((PostsWithNoImageViewHolder) holder).postItemTitle.setText(post.getPost_title());
         ((PostsWithNoImageViewHolder) holder).postItemType.setText(post.getPost_type());
@@ -217,6 +218,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private void handlePostWithImage(final RecyclerView.ViewHolder holder, final PostModel post) {
+        ((PostsWithImageViewHolder) holder).setIsRecyclable(false);
         ((PostsWithImageViewHolder) holder).postImageItemImageInfo.setText(post.getPost_image_info());
         ((PostsWithImageViewHolder) holder).postImageItemType.setText(post.getPost_type());
         ((PostsWithImageViewHolder) holder).postImageItemDate.setText(post.getPost_date());

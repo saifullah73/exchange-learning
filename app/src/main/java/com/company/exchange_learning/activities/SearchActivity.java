@@ -562,6 +562,7 @@ public class SearchActivity extends AppCompatActivity implements OnPostClickList
                 }
             }
         }
+        mBookAdapter.notifyDataSetChanged();
     }
 
     private void resetSearch() {

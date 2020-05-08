@@ -91,7 +91,9 @@ public class BooksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        holder.setIsRecyclable(false);
         if (holder.getItemViewType() == BOOK_MORE) {
+            //Log.i("BookAdapter","Setting Item "+ books.get(position).toString());
             ((BooksAdapter.BookViewHolder) holder).descView.setText(books.get(position).getBook_description());
             ((BooksAdapter.BookViewHolder) holder).titleView.setText(books.get(position).getBook_title());
             ((BooksAdapter.BookViewHolder) holder).typeView.setText(books.get(position).getBook_type());
