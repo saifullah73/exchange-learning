@@ -461,6 +461,18 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
         return false;
     }
 
+    private void changeDisplayedItems(){
+        recyclerView.setAdapter(null);
+        recyclerView.setLayoutManager(null);
+        recyclerView.setAdapter(mAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        mAdapter.notifyDataSetChanged();
+    }
+
     private void prepareRecyclerView(boolean showOnlyPublicPosts, boolean showOnlyUserPosts) {
         hideProgressBar();
         if (!showOnlyUserPosts) {
@@ -475,7 +487,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                     recyclerView.setVisibility(View.VISIBLE);
                     emptyMsgLayout.setVisibility(View.GONE);
                     postSwitchBtn.setVisibility(View.VISIBLE);
-                    mAdapter.notifyDataSetChanged();
+                    changeDisplayedItems();
                 }
                 mTempPosts.clear();
             } else {
@@ -501,7 +513,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                         recyclerView.setVisibility(View.VISIBLE);
                         emptyMsgLayout.setVisibility(View.GONE);
                         postSwitchBtn.setVisibility(View.VISIBLE);
-                        mAdapter.notifyDataSetChanged();
+                        changeDisplayedItems();
                     }
                     hideProgressBar();
                 }
@@ -530,7 +542,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                         recyclerView.setVisibility(View.VISIBLE);
                         emptyMsgLayout.setVisibility(View.GONE);
                         postSwitchBtn.setVisibility(View.VISIBLE);
-                        mAdapter.notifyDataSetChanged();
+                        changeDisplayedItems();
                     }
                     mTempPosts.clear();
                 }
@@ -557,7 +569,7 @@ public class MainActivity extends AppCompatActivity implements OnPostClickListen
                         recyclerView.setVisibility(View.VISIBLE);
                         emptyMsgLayout.setVisibility(View.GONE);
                         postSwitchBtn.setVisibility(View.VISIBLE);
-                        mAdapter.notifyDataSetChanged();
+                        changeDisplayedItems();
                     }
                     mTempPosts.clear();
                     hideProgressBar();
