@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.HashMap;
@@ -117,6 +118,7 @@ public class loginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Constants.uid= user.getUid();
+                            setToken(user.getUid());
                             getUserInformation();
                         } else {
                             setViews();
@@ -194,6 +196,7 @@ public class loginActivity extends AppCompatActivity {
                                     editor.apply();
                                 }
                                 Constants.uid = user.getUid();
+                                setToken(user.getUid());
                                 getUserInformation();
                                 progressBar.hide();
                             } else {
@@ -298,6 +301,15 @@ public class loginActivity extends AppCompatActivity {
                     Toast.makeText(loginActivity.this, "Please Enter an email", Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+    }
+
+    private void setToken(String uid){
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult -> {
+            String token = instanceIdResult.getToken();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("User_Information").child(uid).child("android_device_token");
+            myRef.setValue(token);
         });
     }
 
