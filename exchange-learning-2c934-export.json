@@ -1,0 +1,761 @@
+{
+  "Book_Proposal_Table" : {
+    "-M6fbfBX-qD1_177Vygz" : {
+      "-M6ix9brvz2FOgztZjGN" : {
+        "accepted" : false,
+        "proposal_data" : "Wqdqqe1eqe1eqe1e1e1e1e1e1r1e1e1r1r1r1r1r1r1e1r1e1r1e1e1e131e1r",
+        "proposal_date" : "2020-5-7 16:45:45",
+        "reported" : true,
+        "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+      }
+    },
+    "-M6jzwnM7FdvYDXQN_zV" : {
+      "-M6kHz_vielMjcaflROL" : {
+        "accepted" : true,
+        "proposal_data" : "bhbybxh hs hbstbushyshy sh svyvwinsyvnisby dubvstvusnibydnd dybybsybusbyndbsbysbydby dd sbybybd",
+        "proposal_date" : "2020-5-7 23:0:44",
+        "reported" : false,
+        "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+      }
+    },
+    "-M6pM2w0RfIRi01wJ5xb" : {
+      "-M7-vqlUEjDcY-WTRDS7" : {
+        "accepted" : true,
+        "proposal_data" : "okay i m willong ti accept the offer i have this booked named programming for dummies basic, we can exchaange the books if ur willing",
+        "proposal_date" : "2020-5-11 4:33:10",
+        "reported" : false,
+        "submitter_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1"
+      }
+    }
+  },
+  "Books_City" : {
+    "-M6fbfBX-qD1_177Vygz" : {
+      "book_address" : "Aaaaaaafjfjrjrhrhfjfhfhfhfhfhdhrhdhdh",
+      "book_description" : "Random",
+      "book_title" : "Book Title 1",
+      "book_type" : "@Exchange",
+      "cover_photo" : "https://firebasestorage.googleapis.com/v0/b/exchange-learning-2c934.appspot.com/o/book-images%2FgscLpE4AmnbD6bfJrjB365z16fC3%2FgscLpE4AmnbD6bfJrjB365z16fC3_image2020-05-07T01%3A12%3A52.982?alt=media&token=0cf82002-55b3-4188-a1e0-a346c13208b8",
+      "tagged_communities" : [ "Computer Science", "Department of Biotechnology" ],
+      "user_id" : "gscLpE4AmnbD6bfJrjB365z16fC3"
+    },
+    "-M6irJlPXBoeLH0-vypR" : {
+      "book_address" : "House number 123, server road 2, lahore, Pakistan",
+      "book_description" : "A great novel set in a great era of war and bloodlust",
+      "book_price" : "130",
+      "book_title" : "The horizon of Kevin Peter",
+      "book_type" : "@Sell",
+      "cover_photo" : "https://firebasestorage.googleapis.com/v0/b/exchange-learning-2c934.appspot.com/o/book-images%2F41xqgvIIXnhh3CA2HUl9V3e3Ogu2%2F41xqgvIIXnhh3CA2HUl9V3e3Ogu2_image2020-05-07T16%3A20%3A02.686?alt=media&token=4ffc0c2d-6de2-4c37-8687-65a775019444",
+      "tagged_communities" : [ "Development Studies", "Economics" ],
+      "user_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+    },
+    "-M6o50f7xq2V1PBziVOS" : {
+      "book_address" : "768 house",
+      "book_description" : "Selling this book",
+      "book_price" : "120",
+      "book_title" : "Seelo",
+      "book_type" : "@Sell",
+      "cover_photo" : "https://firebasestorage.googleapis.com/v0/b/exchange-learning-2c934.appspot.com/o/book-images%2FgscLpE4AmnbD6bfJrjB365z16fC3%2FgscLpE4AmnbD6bfJrjB365z16fC3_image2020-05-08T16%3A42%3A30.414?alt=media&token=68ead2e1-5c3d-48d2-9171-36cbd2c6acb8",
+      "tagged_communities" : [ "Electrical and Computer Engineering" ],
+      "user_id" : "gscLpE4AmnbD6bfJrjB365z16fC3"
+    },
+    "-M6oDmuCb9638X2n0tqP" : {
+      "book_address" : "312 house",
+      "book_description" : "Abcdefg",
+      "book_title" : "Donate 2",
+      "book_type" : "@Donate",
+      "cover_photo" : "https://firebasestorage.googleapis.com/v0/b/exchange-learning-2c934.appspot.com/o/book-images%2FgscLpE4AmnbD6bfJrjB365z16fC3%2FgscLpE4AmnbD6bfJrjB365z16fC3_image2020-05-08T17%3A20%3A33.986?alt=media&token=0246e97d-7f7f-4532-9a12-0f416e7ca1f3",
+      "tagged_communities" : [ "Architecture" ],
+      "user_id" : "gscLpE4AmnbD6bfJrjB365z16fC3"
+    },
+    "-M6pM2w0RfIRi01wJ5xb" : {
+      "book_address" : "mianwalli Address",
+      "book_description" : "This is a book of Mathematics ,Nc applied methods, i am willing to exchange this with computer Science book",
+      "book_title" : "Numerical Computation",
+      "book_type" : "@Exchange",
+      "cover_photo" : "https://firebasestorage.googleapis.com/v0/b/exchange-learning-2c934.appspot.com/o/book-images%2FJtUm0O8ITYXrM8TG6DNhTGFiA243%2FJtUm0O8ITYXrM8TG6DNhTGFiA243_image2020-05-10T20%3A27%3A16.862?alt=media&token=3f73bb1b-4e73-4469-9b0e-7efd3b196fc6",
+      "tagged_communities" : [ "Computer Science" ],
+      "user_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243"
+    }
+  },
+  "Chats_Table" : {
+    "Books_Chats" : {
+      "41xqgvIIXnhh3CA2HUl9V3e3Ogu2gscLpE4AmnbD6bfJrjB365z16fC3" : {
+        "-M6kI7LbZQKJfwEuTS07" : {
+          "date" : "welcome",
+          "message" : "Saif Ullah_Saif Ullah",
+          "sender_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "status" : "seen"
+        },
+        "-M6kI8G6TybWSELGvfAo" : {
+          "date" : "2020-5-7 23:1:23",
+          "message" : "Hi",
+          "sender_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "status" : "seen"
+        },
+        "-M6kIAZ5LrQIFELE0a7G" : {
+          "date" : "2020-5-7 23:1:33",
+          "message" : "Bye",
+          "sender_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2",
+          "status" : "seen"
+        },
+        "-M6kICAY4N9pJ-gz5v5d" : {
+          "date" : "2020-5-7 23:1:39",
+          "message" : "Good ha",
+          "sender_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "status" : "seen"
+        }
+      },
+      "8MX78OT5RoXQ6ILk0bOb3Eizy4w1JtUm0O8ITYXrM8TG6DNhTGFiA243" : {
+        "-M7-wW9KAEWtnI8Vanys" : {
+          "date" : "welcome",
+          "message" : "Arslan Tahir_Usama Khan",
+          "sender_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243",
+          "status" : "unseen"
+        },
+        "-M7-wd49Yg8JVsnsSuqp" : {
+          "date" : "2020-5-11 4:36:36",
+          "message" : "Ok im willing heres my number 03114256164 , call me",
+          "sender_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243",
+          "status" : "unseen"
+        }
+      }
+    },
+    "Posts_Chats" : {
+      "41xqgvIIXnhh3CA2HUl9V3e3Ogu2gscLpE4AmnbD6bfJrjB365z16fC3" : {
+        "-M6kI2C_HhYB0CfGfuGi" : {
+          "date" : "welcome",
+          "message" : "Saif Ullah_Saif Ullah",
+          "sender_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "status" : "seen"
+        },
+        "-M6kI3M0O42Ont90qOm8" : {
+          "date" : "2020-5-7 23:1:3",
+          "message" : "Hello",
+          "sender_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "status" : "seen"
+        },
+        "-M6kICYGVgpMZ1bk2lX_" : {
+          "date" : "2020-5-7 23:1:41",
+          "message" : "Hfuufud",
+          "sender_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2",
+          "status" : "seen"
+        },
+        "-M6kkeVLG5B9ju4CgR2A" : {
+          "date" : "welcome",
+          "message" : "Saif Ullah_Saif Ullah",
+          "sender_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "status" : "unseen"
+        },
+        "-M6sRrpsURSjhSipOUZv" : {
+          "date" : "2020-5-9 13:0:51",
+          "message" : "😂",
+          "sender_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "status" : "unseen"
+        }
+      },
+      "8MX78OT5RoXQ6ILk0bOb3Eizy4w1IWOOcHaURfT9aS9NHXrSWWwKQiz2" : {
+        "-M70r11rwDEoXv_4dFgQ" : {
+          "date" : "welcome",
+          "message" : "Ushna Tahir_Arslan Tahir",
+          "sender_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1",
+          "status" : "unseen"
+        },
+        "-M70rPK4g-vr19GJmDGW" : {
+          "date" : "2020-5-10 20:53:20",
+          "message" : "Yes i am wiiling to set a price i need my mathethetacial anaylysis done , Im willing to pay Rs 3000 for some numerical Computation.",
+          "sender_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1",
+          "status" : "unseen"
+        }
+      },
+      "8MX78OT5RoXQ6ILk0bOb3Eizy4w1JtUm0O8ITYXrM8TG6DNhTGFiA243" : {
+        "-M6pLPflGEnxTnmyRUoX" : {
+          "date" : "welcome",
+          "message" : "Arslan Tahir_Usama Khan",
+          "sender_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243",
+          "status" : "seen"
+        },
+        "-M6pLRx4psCMAZmhANxW" : {
+          "date" : "2020-5-8 10:33:25",
+          "message" : "Hi friend",
+          "sender_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243",
+          "status" : "seen"
+        },
+        "-M6pLViw0wSAn7zb3XyV" : {
+          "date" : "2020-5-8 10:33:40",
+          "message" : "Okay i agree with the exchange",
+          "sender_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243",
+          "status" : "seen"
+        },
+        "-M6pMSU2PckuFgGF_K0Q" : {
+          "date" : "2020-5-8 10:37:49",
+          "message" : "Great ill get started on it",
+          "sender_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1",
+          "status" : "unseen"
+        }
+      },
+      "8MX78OT5RoXQ6ILk0bOb3Eizy4w1gscLpE4AmnbD6bfJrjB365z16fC3" : {
+        "-M6sgNsulkftNDhGpMg9" : {
+          "date" : "welcome",
+          "message" : "Saif Ullah_Arslan Tahir",
+          "sender_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1",
+          "status" : "seen"
+        },
+        "-M6sgYyoYija_m9hOIYE" : {
+          "date" : "2020-5-9 14:9:24",
+          "message" : "Hi",
+          "sender_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "status" : "seen"
+        }
+      }
+    }
+  },
+  "Followers" : {
+    "41xqgvIIXnhh3CA2HUl9V3e3Ogu2" : {
+      "following" : [ "YeQ7PE5EyJekCGy9jmfRXafM2OS2", "jgT7EMrWNFOdEx54tBpxUKwABOf2" ]
+    },
+    "8MX78OT5RoXQ6ILk0bOb3Eizy4w1" : {
+      "followers" : [ "XvfldYAaPsMHuhUv26y4Eg1Z5tk1" ],
+      "following" : [ "XvfldYAaPsMHuhUv26y4Eg1Z5tk1", "JtUm0O8ITYXrM8TG6DNhTGFiA243" ]
+    },
+    "JtUm0O8ITYXrM8TG6DNhTGFiA243" : {
+      "followers" : [ "8MX78OT5RoXQ6ILk0bOb3Eizy4w1", "XvfldYAaPsMHuhUv26y4Eg1Z5tk1" ],
+      "following" : [ "XvfldYAaPsMHuhUv26y4Eg1Z5tk1", "jgT7EMrWNFOdEx54tBpxUKwABOf2", "jgT7EMrWNFOdEx54tBpxUKwABOf2" ]
+    },
+    "XvfldYAaPsMHuhUv26y4Eg1Z5tk1" : {
+      "followers" : [ "JtUm0O8ITYXrM8TG6DNhTGFiA243", "8MX78OT5RoXQ6ILk0bOb3Eizy4w1" ],
+      "following" : [ "8MX78OT5RoXQ6ILk0bOb3Eizy4w1", "gscLpE4AmnbD6bfJrjB365z16fC3", "JtUm0O8ITYXrM8TG6DNhTGFiA243" ]
+    },
+    "gscLpE4AmnbD6bfJrjB365z16fC3" : {
+      "followers" : [ "XvfldYAaPsMHuhUv26y4Eg1Z5tk1" ]
+    },
+    "jgT7EMrWNFOdEx54tBpxUKwABOf2" : {
+      "followers" : [ "YeQ7PE5EyJekCGy9jmfRXafM2OS2", "YeQ7PE5EyJekCGy9jmfRXafM2OS2", "41xqgvIIXnhh3CA2HUl9V3e3Ogu2", "JtUm0O8ITYXrM8TG6DNhTGFiA243", "JtUm0O8ITYXrM8TG6DNhTGFiA243" ]
+    }
+  },
+  "Notification_Table" : {
+    "Proposal" : {
+      "8MX78OT5RoXQ6ILk0bOb3Eizy4w1" : {
+        "-M6sgBVmHWF9ScoZw2Md" : {
+          "created_at" : "2020-5-9 14:7:47",
+          "platform" : "exchangelearning",
+          "post_id" : "-M6cUnGp3J9RdyHPnoXm",
+          "proposal_id" : "-M6sgBNpOkPg41RCl0cL",
+          "read_at" : "2020-5-9 2:8:7"
+        },
+        "-M7-qUfbJWKCeWoAxLnW" : {
+          "created_at" : "2020-5-11 4:9:44",
+          "platform" : "exchangelearning",
+          "post_id" : "-M7-pTNJr1RGieOv49F1",
+          "proposal_id" : "-M7-qU94a04ZxEq5qsIq",
+          "read_at" : "2020-5-10 20:49:35"
+        }
+      },
+      "JtUm0O8ITYXrM8TG6DNhTGFiA243" : {
+        "-M6pL0hRHPnH_TcrMs9G" : {
+          "created_at" : "2020-5-8 10:31:33",
+          "platform" : "exchangelearning",
+          "post_id" : "-M6cRz4DrkFVJifuxO5T",
+          "proposal_id" : "-M6pL-xnYAPkpTm8vnvK",
+          "read_at" : "2020-5-8 10:33:7"
+        },
+        "-M7-vqqKYJXRMm3Ljc2K" : {
+          "created_at" : "2020-5-11 4:33:10",
+          "platform" : "bookcity",
+          "post_id" : "-M6pM2w0RfIRi01wJ5xb",
+          "proposal_id" : "-M7-vqlUEjDcY-WTRDS7",
+          "read_at" : "2020-5-11 4:35:55"
+        }
+      },
+      "XvfldYAaPsMHuhUv26y4Eg1Z5tk1" : {
+        "-M6b5XQXtCOKAM4XqUci" : {
+          "created_at" : "2020-05-05 23:09:41",
+          "platform" : "exchangelearning",
+          "post_id" : "-M6b4_68KCmdsqJSBG39",
+          "proposal_id" : "-M6b5X-DlghbecvZiwC2",
+          "read_at" : "2020-05-05 23:11:15"
+        }
+      },
+      "gscLpE4AmnbD6bfJrjB365z16fC3" : {
+        "-M6ix5KRY62Elb23cQrs" : {
+          "created_at" : "2020-5-7 16:45:27",
+          "platform" : "bookcity",
+          "post_id" : "-M6fcBdGGLVRhEGRXlM0",
+          "proposal_id" : "-M6ix5FJE8_raNl2YZL9",
+          "read_at" : "2020-5-7 16:47:56"
+        },
+        "-M6ix9ihYPIr_9612Zft" : {
+          "created_at" : "2020-5-7 16:45:45",
+          "platform" : "bookcity",
+          "post_id" : "-M6fbfBX-qD1_177Vygz",
+          "proposal_id" : "-M6ix9brvz2FOgztZjGN",
+          "read_at" : "2020-5-7 16:47:4"
+        },
+        "-M6ixFAYvdYf2alf2wUS" : {
+          "created_at" : "2020-5-7 16:46:7",
+          "platform" : "exchangelearning",
+          "post_id" : "-M6dO_ZX99Oneqm7vxVv",
+          "proposal_id" : "-M6ixF3a-0KSZLaD2ZRT",
+          "read_at" : "2020-5-7 16:48:15"
+        },
+        "-M6k1MhQBULCQMXgytqJ" : {
+          "created_at" : "2020-5-7 21:48:6",
+          "platform" : "exchangelearning",
+          "post_id" : "-M6dO_ZX99Oneqm7vxVv",
+          "proposal_id" : "-M6k1MaJH75Kw0eFnbtb",
+          "read_at" : "2020-5-7 22:49:27"
+        },
+        "-M6k1XknzwNl2LmHSTDT" : {
+          "created_at" : "2020-5-7 21:48:51",
+          "platform" : "bookcity",
+          "post_id" : "-M6jzwnM7FdvYDXQN_zV",
+          "proposal_id" : "-M6k1XfY-LVakrB3491D",
+          "read_at" : "2020-5-7 22:48:46"
+        },
+        "-M6kH8ezjZ2ln1WfCNKp" : {
+          "created_at" : "2020-5-7 22:57:3",
+          "platform" : "exchangelearning",
+          "post_id" : "-M6k2QICLSKqVgyVaZEp",
+          "proposal_id" : "-M6kH8WVOuOe3YeccxXw",
+          "read_at" : "2020-5-7 22:57:18"
+        },
+        "-M6kHmHsUYyHDuZlKex2" : {
+          "created_at" : "2020-5-7 22:59:50",
+          "platform" : "exchangelearning",
+          "post_id" : "-M6k2QICLSKqVgyVaZEp",
+          "proposal_id" : "-M6kHm085Blu0rbir_Bz",
+          "read_at" : "2020-5-7 22:59:55"
+        },
+        "-M6kHzf6M36iKkL5cHXh" : {
+          "created_at" : "2020-5-7 23:0:45",
+          "platform" : "bookcity",
+          "post_id" : "-M6jzwnM7FdvYDXQN_zV",
+          "proposal_id" : "-M6kHz_vielMjcaflROL",
+          "read_at" : "2020-5-7 23:1:6"
+        },
+        "-M6kkT3utlfaD_2ivKys" : {
+          "created_at" : "2020-5-8 1:9:30",
+          "platform" : "exchangelearning",
+          "post_id" : "-M6dO_ZX99Oneqm7vxVv",
+          "proposal_id" : "-M6kkSz8G-m_Q1Mkekkj",
+          "read_at" : "2020-5-8 1:10:14"
+        }
+      }
+    }
+  },
+  "Post_Proposal_Table" : {
+    "-M6b4_68KCmdsqJSBG39" : {
+      "-M6b5X-DlghbecvZiwC2" : {
+        "accepted" : false,
+        "proposal_data" : "Hi, I would like to work with you.",
+        "proposal_date" : "2020-05-05 23:09:39",
+        "reported" : false,
+        "submitter_id" : "lOcPvObaUGf9eE8z0xjJWpyOBBl2"
+      }
+    },
+    "-M6cRz4DrkFVJifuxO5T" : {
+      "-M6pL-xnYAPkpTm8vnvK" : {
+        "accepted" : true,
+        "proposal_data" : "I can help you with the Economical analysis, i have experience in economics over 20 years in the field and can do help you in exchange of your specified computer Science Skills",
+        "proposal_date" : "2020-5-8 10:31:30",
+        "reported" : false,
+        "submitter_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1"
+      }
+    },
+    "-M6cUnGp3J9RdyHPnoXm" : {
+      "-M6sgBNpOkPg41RCl0cL" : {
+        "accepted" : true,
+        "proposal_data" : "Hi, i want to work with you on this, please accept my proposal",
+        "proposal_date" : "2020-5-9 14:7:47",
+        "reported" : false,
+        "submitter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3"
+      }
+    },
+    "-M6dO_ZX99Oneqm7vxVv" : {
+      "-M6kkSz8G-m_Q1Mkekkj" : {
+        "accepted" : true,
+        "proposal_data" : "Xhshdhdhsjjxjxjxjdjxjdjsjskskskwkdkckcjcjskdjdjdjjsjxjcjdjdjdjxjcjdn",
+        "proposal_date" : "2020-5-8 1:9:30",
+        "reported" : false,
+        "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+      }
+    },
+    "-M6k2QICLSKqVgyVaZEp" : {
+      "-M6kHm085Blu0rbir_Bz" : {
+        "accepted" : true,
+        "proposal_data" : "h hdhudhhsh6sb tsbybs6bydb5ggg5g g5g5hsbgwgbwhbysbg gtvsvgaggsyyxg gtgyvdybxjyhebxtgxhh g5gsgybsubusb6shd",
+        "proposal_date" : "2020-5-7 22:59:49",
+        "reported" : false,
+        "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+      }
+    },
+    "-M7-pTNJr1RGieOv49F1" : {
+      "-M7-qU94a04ZxEq5qsIq" : {
+        "accepted" : true,
+        "proposal_data" : "yes i can help you with numerical computational stuff, i have full grip on mathematics , if ur willing set a price",
+        "proposal_date" : "2020-5-11 4:9:42",
+        "reported" : false,
+        "submitter_id" : "IWOOcHaURfT9aS9NHXrSWWwKQiz2"
+      }
+    }
+  },
+  "Posts_Table" : {
+    "-M6b4_68KCmdsqJSBG39" : {
+      "post_date" : "2020-05-05 23:05:29",
+      "post_image" : "https://storage.googleapis.com/exchange-learning-2c934.appspot.com/post-images/XvfldYAaPsMHuhUv26y4Eg1Z5tk1/XvfldYAaPsMHuhUv26y4Eg1Z5tk1_1588719927",
+      "post_image_info" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "post_type" : "@Exchange",
+      "show_skills" : "no",
+      "tagged_communities" : [ "Computer Science" ],
+      "user_id" : "XvfldYAaPsMHuhUv26y4Eg1Z5tk1"
+    },
+    "-M6cLiASuBpoILuYBh7r" : {
+      "post_body" : "Anybody here who can resolve problem of Gradle failure?\nAnybody here who can resolve problem of Gradle failure?\nAnybody here who can resolve problem of Gradle failure?",
+      "post_date" : "2020-5-6 9:59:33",
+      "post_title" : "Android Gradle Problem",
+      "post_type" : "@Help",
+      "show_skills" : "Yes",
+      "tagged_communities" : [ "Computer Science" ],
+      "user_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243"
+    },
+    "-M6cRF5jFhThicEMxbF0" : {
+      "post_body" : "Im looking for a computer science person , a developer who can help me build my app on probabilities analytics",
+      "post_date" : "2020-5-5 22:23:14",
+      "post_title" : "App development",
+      "post_type" : "@Price",
+      "show_skills" : "No",
+      "tagged_communities" : [ "Computer Science" ],
+      "user_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1"
+    },
+    "-M6cRMWpeOEtkeSLW5rk" : {
+      "post_body" : "I am android developer.\nI am android developer.\nI am android developer.",
+      "post_date" : "2020-5-6 10:24:41",
+      "post_title" : "#Title of That Post",
+      "post_type" : "@Exchange",
+      "show_skills" : "No",
+      "tagged_communities" : [ "Architecture" ],
+      "user_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243"
+    },
+    "-M6cRz4DrkFVJifuxO5T" : {
+      "post_body" : "Hello i am a student of Economic.\nAnd i like my study because it \nteaches me best skills of entrepreneurship.",
+      "post_date" : "2020-5-6 10:27:23",
+      "post_title" : "post of the day",
+      "post_type" : "@Exchange",
+      "show_skills" : "No",
+      "tagged_communities" : [ "Economics" ],
+      "user_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243"
+    },
+    "-M6d2RCFc414yy9YF-QM" : {
+      "post_body" : "hjbhjbjnnjask",
+      "post_date" : "2020-05-06 08:15:23",
+      "post_title" : "kjbnkjns",
+      "post_type" : "@Exchange",
+      "show_skills" : "no",
+      "tagged_communities" : [ "Computer Science", "Department of Biotechnology", "Economics" ],
+      "user_id" : "XvfldYAaPsMHuhUv26y4Eg1Z5tk1"
+    },
+    "-M6d5oZhX3oRfLhMXTBb" : {
+      "post_body" : "im looking for a web eveloper to build my business site ghjfjhvjhhjcjg\nbhghjgjhgjhvhj\nvvjhvhjvjhjhvgj\nvbjvjhbvjhbnvbjvjhbjh\nvhbvjhvbjvjbvnbvjbhvjhvh",
+      "post_date" : "2020-5-6 1:29:13",
+      "post_title" : "DEVELOPER of web required",
+      "post_type" : "@Help",
+      "show_skills" : "Yes",
+      "tagged_communities" : [ "Civil Engineering", "Economics", "Electrical and Computer Engineering" ],
+      "user_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243"
+    },
+    "-M6f2oLb1OGc3wOF3dxK" : {
+      "post_date" : "2020-05-06 17:36:15",
+      "post_image" : "https://storage.googleapis.com/exchange-learning-2c934.appspot.com/post-images/XvfldYAaPsMHuhUv26y4Eg1Z5tk1/XvfldYAaPsMHuhUv26y4Eg1Z5tk1_1588786572",
+      "post_image_info" : "Hi, I need a web developer.",
+      "post_type" : "@Exchange",
+      "show_skills" : "no",
+      "tagged_communities" : [ "Chemical Engineering" ],
+      "user_id" : "XvfldYAaPsMHuhUv26y4Eg1Z5tk1"
+    },
+    "-M7-oLdjsqVl1UHWDGSx" : {
+      "post_body" : "i am a adapt mathematician ,if any one needs my expertise send propsal, willing tio work on any mathematical project",
+      "post_date" : "2020-5-11 4:0:22",
+      "post_title" : "Mathematician for hire",
+      "post_type" : "@Price",
+      "show_skills" : "Yes",
+      "tagged_communities" : [ "Chemical Engineering", "Computer Science", "Mathematics", "Statistics" ],
+      "user_id" : "IWOOcHaURfT9aS9NHXrSWWwKQiz2"
+    },
+    "-M7-pTNJr1RGieOv49F1" : {
+      "post_body" : "im looking for a mathmetician for numerical analysis , send proposals",
+      "post_date" : "2020-5-11 4:5:16",
+      "post_title" : "needa mathmetician",
+      "post_type" : "@Price",
+      "show_skills" : "Yes",
+      "tagged_communities" : [ "Mathematics" ],
+      "user_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1"
+    },
+    "-M702qaXbRKEcal_hEeD" : {
+      "post_body" : "i want to make an app for Medicines. It will be telling the users if you are not feeling well , set in your symptoms and you will be prescribed adequate medicine and guideline to improve your health .So i need some one with relevant experience of medicines and Patient care. Imwilling to pay for this project , send proposal",
+      "post_date" : "2020-5-10 17:8:5",
+      "post_title" : "Pharmicist or Doctor required",
+      "post_type" : "@Price",
+      "show_skills" : "No",
+      "tagged_communities" : [ "Health Informatics", "Pharmacy" ],
+      "user_id" : "JtUm0O8ITYXrM8TG6DNhTGFiA243"
+    },
+    "-M70Hv7yOPfM_l-vM6JQ" : {
+      "post_body" : "gyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+      "post_date" : "2020-05-11 01:13:56",
+      "post_title" : "bhhhhhhhhh",
+      "post_type" : "@Exchange",
+      "show_skills" : "no",
+      "tagged_communities" : [ "Department of Biotechnology" ],
+      "user_id" : "XvfldYAaPsMHuhUv26y4Eg1Z5tk1"
+    },
+    "-M70IfeWFbX1DdqlRbbm" : {
+      "post_body" : "nb    bxszhjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+      "post_date" : "2020-05-11 01:17:15",
+      "post_title" : "bn n n jk",
+      "post_type" : "@Exchange",
+      "show_skills" : "no",
+      "tagged_communities" : [ "Department of Biotechnology" ],
+      "user_id" : "XvfldYAaPsMHuhUv26y4Eg1Z5tk1"
+    }
+  },
+  "Profile_Information" : {
+    "41xqgvIIXnhh3CA2HUl9V3e3Ogu2" : {
+      "my_address" : "Abcd",
+      "my_department" : "Tghgg",
+      "my_overview" : "Hello, this is a test post only beware okokokook",
+      "my_skills" : [ "Java", "  Python" ],
+      "my_title" : "Hello",
+      "my_university" : "Nust"
+    },
+    "5v4PiMWVd9gGFuy7SURWxqnWIYA2" : {
+      "my_address" : "425 2 Street Kabul",
+      "my_department" : "Pharmicist",
+      "my_overview" : "Im a Pharmicist , i have all knowledge of Medicines and how they are liscensed ,i know what medicine does wht and wht to prescribe ,follow me",
+      "my_skills" : [ "Medicine" ],
+      "my_title" : "Pharmacist Medicine",
+      "my_university" : "Ucp"
+    },
+    "8MX78OT5RoXQ6ILk0bOb3Eizy4w1" : {
+      "my_address" : "226 Sarwar Road Lahore Cantt",
+      "my_department" : "Economics",
+      "my_overview" : "Hi , my Name is Arslan i am a Market Economist .I am good at Market Anaysis , shares and being a broker for my clients .Im working at engros.",
+      "my_skills" : [ "Market shares ", " Economical Analysis" ],
+      "my_title" : "Arslan Tahir",
+      "my_university" : "Comsats University"
+    },
+    "IWOOcHaURfT9aS9NHXrSWWwKQiz2" : {
+      "my_address" : "310 Cantt Lahore Canty",
+      "my_department" : "Mathematics",
+      "my_overview" : "I am Ushna i am a mathematician. i have understanding of complex mathematical analysis.i have specialization in Double Maths ..My interests are   numerical applied methods, Integrations and differentials , if you want to ask or collaborate dm me.",
+      "my_skills" : [ "linear algebra ", "    numerical computation" ],
+      "my_title" : "MS Mathematics",
+      "my_university" : "Bahria University"
+    },
+    "JtUm0O8ITYXrM8TG6DNhTGFiA243" : {
+      "my_address" : "Mianwali Punjab Pakistan",
+      "my_department" : "CS",
+      "my_overview" : "I'm software engineer. I also like to writing novels and video editing.",
+      "my_skills" : [ "Web", " Android", " YouTube", " Graphics" ],
+      "my_title" : "Software Engineer",
+      "my_university" : "Comsats University Lahore"
+    },
+    "XvfldYAaPsMHuhUv26y4Eg1Z5tk1" : {
+      "my_department" : "Department of Computer Science",
+      "my_overview" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "my_skills" : [ "Java", " C", " Python" ],
+      "my_title" : "Software Engineer",
+      "my_university" : "COMSATS University Islamabad, Lahore Campus"
+    },
+    "gscLpE4AmnbD6bfJrjB365z16fC3" : {
+      "my_address" : "Xbzbzb",
+      "my_department" : "Xhzhzhzhzbz",
+      "my_overview" : "Hzhshsjshdjdhdhdhdhsjdxhshdhdjdjsjdjdjdjdjdjdjdjdjdjdjdjxjdjdjjd",
+      "my_skills" : [ "Java", " Python" ],
+      "my_title" : "Dhs",
+      "my_university" : "Ghahdhxhjs"
+    },
+    "jgT7EMrWNFOdEx54tBpxUKwABOf2" : {
+      "my_department" : "Sbzbxhzh",
+      "my_title" : "Okok",
+      "my_university" : "dsjdskdj"
+    },
+    "lOcPvObaUGf9eE8z0xjJWpyOBBl2" : {
+      "my_department" : "Department of Electrical Engineering",
+      "my_overview" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "my_skills" : [ "Java", " C", " Python" ],
+      "my_title" : "Electrical Engineer",
+      "my_university" : "UET Lahore"
+    }
+  },
+  "Reports" : {
+    "message_report" : {
+      "bookcity" : {
+        "-M6kPMd7KxvqD1u-1rsN" : {
+          "post_id" : "-M6kICAY4N9pJ-gz5v5d",
+          "reporter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2",
+          "submitter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3"
+        }
+      },
+      "exchangelearning" : {
+        "-M6kPFc9rgAkAOXEE7hr" : {
+          "post_id" : "-M6kI3M0O42Ont90qOm8",
+          "reporter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2",
+          "submitter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3"
+        }
+      }
+    },
+    "post_report" : {
+      "bookcity" : {
+        "-M6is5PKMuQhTLZNE9S-" : {
+          "post_id" : "-M6fcBdGGLVRhEGRXlM0",
+          "reporter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2",
+          "submitter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3"
+        }
+      },
+      "exchangelearning" : {
+        "-M6eki29oM2QIbNGTAdZ" : {
+          "post_id" : "-M6cUnGp3J9RdyHPnoXm",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "8MX78OT5RoXQ6ILk0bOb3Eizy4w1"
+        }
+      }
+    },
+    "proposal_report" : {
+      "bookcity" : {
+        "-M6iuU8iJsaSJiucIHtM" : {
+          "post_id" : "-M6isRDqp80q__sYoMN4",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        },
+        "-M6ixVTOIxwnzRuGIWks" : {
+          "post_id" : "-M6ix9brvz2FOgztZjGN",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        }
+      },
+      "exchangelearning" : {
+        "-M6drjA4ir_Y0tmrlfgA" : {
+          "post_id" : "-M6dpdzkJE_ELwL_1oph",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        },
+        "-M6dxA1RUGAE6Ta80gu9" : {
+          "post_id" : "-M6dpYnUSfUjDDGJ58_g",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        },
+        "-M6dxCLEk3y3b0W3gOw2" : {
+          "post_id" : "-M6dpNvZq2-BcfuWRn_X",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        },
+        "-M6dy0_H2OCzJqlNVPk2" : {
+          "post_id" : "-M6dpdzkJE_ELwL_1oph",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        },
+        "-M6dzxxpG-HEU2tNcJD8" : {
+          "post_id" : "-M6dpdzkJE_ELwL_1oph",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        },
+        "-M6dzzD7fYuqH_n8E9c7" : {
+          "post_id" : "-M6dpNvZq2-BcfuWRn_X",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        },
+        "-M6e-0AckjLLOjRDFnQ4" : {
+          "post_id" : "-M6dpYnUSfUjDDGJ58_g",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        },
+        "-M6e47uQrGiA-_42mVad" : {
+          "post_id" : "-M6dpdzkJE_ELwL_1oph",
+          "reporter_id" : "gscLpE4AmnbD6bfJrjB365z16fC3",
+          "submitter_id" : "41xqgvIIXnhh3CA2HUl9V3e3Ogu2"
+        }
+      }
+    }
+  },
+  "User_Information" : {
+    "41xqgvIIXnhh3CA2HUl9V3e3Ogu2" : {
+      "android_device_token" : "none",
+      "city_name" : "Islamabad",
+      "community" : "Earth Sciences",
+      "country_name" : "Anguilla",
+      "email" : "saifullahnust@gmail.com",
+      "gender" : "Male",
+      "name" : "Saif Ullah"
+    },
+    "5v4PiMWVd9gGFuy7SURWxqnWIYA2" : {
+      "android_device_token" : "none",
+      "city_name" : "Kabul",
+      "community" : "Pharmacy",
+      "country_name" : "Afghanistan",
+      "email" : "catchme9866@gmail.com",
+      "gender" : "Male",
+      "name" : "Hamid Afzal"
+    },
+    "8MX78OT5RoXQ6ILk0bOb3Eizy4w1" : {
+      "android_device_token" : "none",
+      "city_name" : "Melborn",
+      "community" : "Economics",
+      "country_name" : "Australia",
+      "email" : "tahirarslan900@gmail.com",
+      "gender" : "Male",
+      "name" : "Arslan Tahir"
+    },
+    "IWOOcHaURfT9aS9NHXrSWWwKQiz2" : {
+      "android_device_token" : "none",
+      "city_name" : "Lahore",
+      "community" : "Mathematics",
+      "country_name" : "Pakistan",
+      "email" : "ushnatahir1992@gmail.com",
+      "gender" : "Female",
+      "name" : "Ushna Tahir"
+    },
+    "JtUm0O8ITYXrM8TG6DNhTGFiA243" : {
+      "android_device_token" : "none",
+      "city_name" : "Mianwali",
+      "community" : "Computer Science",
+      "country_name" : "Pakistan",
+      "email" : "ukndom7@gmail.com",
+      "gender" : "Male",
+      "name" : "Usama Khan"
+    },
+    "XvfldYAaPsMHuhUv26y4Eg1Z5tk1" : {
+      "city_name" : "Lahore",
+      "community" : "Computer Science",
+      "country_name" : "Pakistan",
+      "email" : "jutthassan30@gmail.com",
+      "gender" : "Male",
+      "name" : "Hassan Rehan",
+      "web_device_token" : "fuuceSVi7WMi3OT4Hcn6Wk:APA91bFZGaP-dUZo8H9UKABnbeI0iAQVJUk9lEIpgLAMFkH19aPawsN4xMwNwPSidUT6T1V9Yzn-IMttv947i3d3s4MAE-HQixg93wa0IFD1-ywWybtrDDvZGPSn4UoWhmlvGLacXox1"
+    },
+    "gscLpE4AmnbD6bfJrjB365z16fC3" : {
+      "android_device_token" : "none",
+      "city_name" : "Islamabad",
+      "community" : "Architecture",
+      "country_name" : "Afghanistan",
+      "email" : "saifullahkhaliq@gmail.com",
+      "gender" : "Male",
+      "name" : "Saif Ullah"
+    },
+    "jgT7EMrWNFOdEx54tBpxUKwABOf2" : {
+      "android_device_token" : "none",
+      "city_name" : "Islamabad",
+      "community" : "Civil Engineering",
+      "country_name" : "Antarctica",
+      "email" : "abdulhafeez176@gmail.com",
+      "gender" : "Male",
+      "name" : "fname lname"
+    },
+    "lOcPvObaUGf9eE8z0xjJWpyOBBl2" : {
+      "city_name" : "Lahore",
+      "community" : "Electrical and Computer Engineering",
+      "country_name" : "Pakistan",
+      "email" : "dmascrafts@gmail.com",
+      "gender" : "Male",
+      "name" : "Ali Rehan"
+    }
+  }
+}
