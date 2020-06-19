@@ -20,3 +20,14 @@ The app uses Firebase realtime database, storage and authentication to support i
 13. A Books marketplace (no payment interface integrated)  
 
 ## Screenshots
+Login            |  Signup | Empty View
+:-------------------------:|:-------------------------:|:-------------------------:
+![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/login.jpg?raw=true)  |  ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/signup.jpg?raw=true) | ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/proposal.jpg?raw=true)     
+
+Post            |  Post | Post
+:-------------------------:|:-------------------------:|:-------------------------:
+![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post.jpg?raw=true)  |  ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post2.jpg?raw=true) | ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post3.jpg?raw=true)  
+
+Drawer           |  Profile | Update Profile
+:-------------------------:|:-------------------------:|:-------------------------:
+![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/drawer.jpg?raw=true)  |  ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/profile.jpg?raw=true) | ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/update.jpg?raw=true)  
