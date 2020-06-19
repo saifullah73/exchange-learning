@@ -26,7 +26,7 @@ Login            |  Signup | Empty View
 
 Post            |  Post | Post
 :-------------------------:|:-------------------------:|:-------------------------:
-![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post.jpg?raw=true)  |  ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post2.jpg?raw=true) | ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post3.jpg?raw=true)  
+![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post.jpg?raw=true)  |  ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post_2.jpg?raw=true) | ![alt text](https://github.com/saifullah73/exchange-learning/blob/master/screenshots/post3.jpg?raw=true)  
 
 Drawer           |  Profile | Update Profile
 :-------------------------:|:-------------------------:|:-------------------------:
